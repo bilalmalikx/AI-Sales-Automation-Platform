@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  frontend:
+    name: Frontend build & test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install frontend dependencies
+        working-directory: frontend
+        run: |
+          npm ci --no-audit --prefer-offline || npm install
+
+      - name: Build frontend
+        working-directory: frontend
+        run: npm run build --if-present
+
+      - name: Run frontend tests
+        working-directory: frontend
+        run: npm test --if-present
+
+  backend:
+    name: Backend checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install backend requirements (if present)
+        run: |
+          if [ -f backend/requirements.txt ]; then
+            python -m pip install --upgrade pip
+            pip install -r backend/requirements.txt
+          else
+            echo "No backend/requirements.txt found — skipping install"
+          fi
+
+      - name: Run backend tests (if present)
+        run: |
+          if [ -d backend/tests ]; then
+            pytest -q
+          else
+            echo "No backend/tests folder found — skipping tests"
+          fi

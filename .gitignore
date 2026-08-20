@@ -5,3 +5,34 @@ __pycache__/
 .DS_Store
 .idea/
 .vscode/
+
+# Python
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# Tests & coverage
+.pytest_cache/
+htmlcov/
+.coverage
+coverage.xml
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# Logs
+*.log
+logs/
+
+# Node / Angular
+node_modules/
+frontend/dist/
+frontend/.angular/
+
+# Docker
+*.dockerignore

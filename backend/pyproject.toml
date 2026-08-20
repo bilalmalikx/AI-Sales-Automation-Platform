@@ -1,0 +1,66 @@
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "session"
+addopts = [
+    "-v",
+    "--tb=short",
+    "--cov=app",
+    "--cov-report=term-missing",
+    "--cov-report=html:htmlcov",
+    "--cov-fail-under=70",
+]
+env = [
+    "APP_ENV=development",
+    "LOG_FORMAT=console",
+    "LOG_LEVEL=WARNING",
+    "SECRET_KEY=test-secret-key-minimum-32-chars-long-for-testing",
+    "DATABASE_URL=postgresql+asyncpg://postgres:postgres@localhost:5432/salesautomation_test",
+    "REDIS_URL=redis://localhost:6379/15",
+]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+src = ["app", "tests"]
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # isort
+    "B",    # flake8-bugbear
+    "C4",   # flake8-comprehensions
+    "UP",   # pyupgrade
+    "N",    # pep8-naming
+    "S",    # flake8-bandit (security)
+    "T20",  # flake8-print
+    "RUF",  # ruff-specific
+]
+ignore = [
+    "S101",  # assert statements in tests are fine
+    "B008",  # FastAPI Depends() in function defaults
+    "N805",  # cls first arg in validators (Pydantic)
+    "S105",  # possible hardcoded password — false positives in config
+    "S106",
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["app"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = false
+ignore_missing_imports = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+warn_return_any = false
+warn_unused_ignores = true
+no_implicit_reexport = true
+plugins = ["pydantic.mypy"]
+
+[[tool.mypy.overrides]]
+module = ["tests.*"]
+disallow_untyped_defs = false

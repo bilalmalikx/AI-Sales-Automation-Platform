@@ -191,8 +191,8 @@ All business APIs are served under `/api/v1/`.
 |---|---|
 | Phase 1 — Foundation | ✅ Complete |
 | Phase 2 — Database + Models | ✅ Complete |
-| Phase 3 — Lead Ingestion | ⏳ Next |
-| Phase 4 — Base Agent Framework | ⏳ Pending |
+| Phase 3 — Lead Ingestion | ✅ Complete |
+| Phase 4 — Base Agent Framework | ⏳ Next |
 | Phase 5 — AI Agents | ⏳ Pending |
 | Phase 6 — LangGraph + Celery | ⏳ Pending |
 | Phase 7 — Email + Tracking | ⏳ Pending |
@@ -285,3 +285,156 @@ PostgreSQL 16 container:
 - Database: `salesautomation`
 - Health check: `pg_isready`
 - Volume: persistent storage
+
+---
+
+## Phase 3: Lead Ingestion API (Complete)
+
+### Architecture
+
+Phase 3 implements the **Repository → Service → Router** pattern for clean separation of concerns:
+
+```
+HTTP Request → Router (app/api/v1/leads.py)
+                 ↓
+              Service (app/services/lead.py)
+                 ↓
+              Repository (app/repositories/lead.py)
+                 ↓
+              Database (PostgreSQL)
+```
+
+### Pydantic Schemas
+
+**`app/schemas/lead.py`** — Request/response models:
+
+| Schema | Purpose |
+|---|---|
+| `LeadCreate` | POST /api/v1/leads body |
+| `LeadUpdate` | PUT /api/v1/leads/{id} body |
+| `LeadResponse` | API response with all fields + timestamps |
+| `LeadFilter` | Query parameters for filtering/searching |
+| `LeadListResponse` | Paginated list with metadata |
+| `CSVLeadImport` | Row validation for CSV import |
+
+All schemas use Pydantic v2 validators:
+- Email validation via `EmailStr`
+- Status enum validation (new, contacted, qualified, won, lost, etc.)
+- Field-level constraints (max length, optional/required)
+
+### Repository Layer
+
+**`app/repositories/lead.py`** — `LeadRepository` class:
+
+**Methods:**
+- `create(lead_data)` — Create single lead
+- `get_by_id(lead_id)` — Fetch by UUID
+- `get_by_email(email)` — Duplicate detection
+- `list(filters, skip, limit)` — Paginated list with filters
+- `update(lead_id, lead_data)` — Partial update
+- `delete(lead_id)` — Hard delete
+- `bulk_create(leads_data)` — CSV bulk insert
+
+**Auto-associations:**
+- `_get_or_create_company()` — Finds or creates Company by domain/name
+- `_get_or_create_source()` — Finds or creates LeadSource by name
+
+**Features:**
+- Async SQLAlchemy with `selectinload()` for eager relationship loading
+- Filter chaining with ANDed conditions
+- Comprehensive structured logging on all operations
+
+### Service Layer
+
+**`app/services/lead.py`** — `LeadService` class:
+
+**Business Logic:**
+- Duplicate email detection (raises `DuplicateResourceException`)
+- CSV parsing with row-level error handling
+- Pagination validation (1 ≤ page_size ≤ 100)
+- Transactional integrity (commit/rollback)
+
+**Methods:**
+- `create_lead()` — Create with duplicate check
+- `get_lead()` — Fetch or 404
+- `list_leads()` — Paginated filtered list
+- `update_lead()` — Update with conflict detection
+- `delete_lead()` — Delete or 404
+- `import_leads_from_csv()` — Bulk import with statistics
+
+**CSV Import Features:**
+- UTF-8 validation
+- Row-by-row validation with `CSVLeadImport` schema
+- Duplicate detection (skip or fail based on `skip_duplicates` flag)
+- Batch creation for performance
+- Detailed statistics: `total`, `created`, `skipped`, `failed`
+
+### API Endpoints
+
+**`app/api/v1/leads.py`** — RESTful routes mounted at `/api/v1/leads`:
+
+| Endpoint | Method | Description |
+|---|---|---|
+| `/api/v1/leads` | POST | Create single lead |
+| `/api/v1/leads` | GET | List leads (paginated, filterable) |
+| `/api/v1/leads/{id}` | GET | Get lead by UUID |
+| `/api/v1/leads/{id}` | PUT | Update lead |
+| `/api/v1/leads/{id}` | DELETE | Delete lead |
+| `/api/v1/leads/import/csv` | POST | Bulk import from CSV |
+
+**Query Parameters (GET /api/v1/leads):**
+- `status` — Filter by lead status
+- `company_name` — Partial match on company name
+- `source_name` — Filter by lead source
+- `email` — Partial match on email
+- `page` — Page number (default: 1)
+- `page_size` — Items per page (default: 50, max: 100)
+
+**CSV Import Endpoint:**
+- Accepts multipart/form-data with CSV file
+- Required column: `email`
+- Optional columns: `first_name`, `last_name`, `company_name`, `company_domain`, `title`, `phone`, `linkedin_url`, `source_name`, `notes`
+- Returns: `{"message": "CSV import completed", "statistics": {...}}`
+
+### Error Handling
+
+All service exceptions are automatically translated to HTTP responses:
+- `DuplicateResourceException` → 409 Conflict
+- `ResourceNotFoundException` → 404 Not Found  
+- `ValidationException` → 422 Unprocessable Entity
+- Database errors → 503 Service Unavailable
+
+### Example Usage
+
+**Create Lead:**
+```bash
+curl -X POST http://localhost:8000/api/v1/leads \
+  -H "Content-Type: application/json" \
+  -d '{"email":"john@example.com","first_name":"John","company_name":"Example Corp"}'
+```
+
+**List Leads:**
+```bash
+curl "http://localhost:8000/api/v1/leads?status=new&page=1&page_size=50"
+```
+
+**Import CSV:**
+```bash
+curl -X POST http://localhost:8000/api/v1/leads/import/csv \
+  -F "file=@leads.csv"
+```
+
+### Testing Results
+
+Phase 3 successfully tested with:
+- ✅ Single lead creation (POST)
+- ✅ Lead retrieval (GET by ID)
+- ✅ Paginated list (GET with filters)
+- ✅ CSV bulk import (3 leads imported)
+- ✅ Duplicate detection working
+- ✅ Auto-creation of companies and sources
+- ✅ Total: 4 leads in database after testing
+
+### Next Steps
+
+Phase 4 will implement the **BaseAgent** framework for AI-powered lead enrichment.

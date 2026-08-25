@@ -44,6 +44,27 @@ class NotFoundException(AppBaseException):
     message = "Resource not found"
 
 
+class ResourceNotFoundException(NotFoundException):
+    """Exception for when a specific resource is not found."""
+
+    def __init__(
+        self,
+        message: str | None = None,
+        resource_type: str | None = None,
+        resource_id: str | None = None,
+        details: Any = None,
+    ) -> None:
+        self.resource_type = resource_type
+        self.resource_id = resource_id
+        super().__init__(
+            message=message,
+            details=details or {
+                "resource_type": resource_type,
+                "resource_id": resource_id,
+            },
+        )
+
+
 class ValidationException(AppBaseException):
     status_code = status.HTTP_422_UNPROCESSABLE_ENTITY
     error_code = "VALIDATION_ERROR"
@@ -54,6 +75,24 @@ class ConflictException(AppBaseException):
     status_code = status.HTTP_409_CONFLICT
     error_code = "CONFLICT"
     message = "Resource already exists"
+
+
+class DuplicateResourceException(ConflictException):
+    """Exception for when a resource with unique constraints already exists."""
+
+    error_code = "DUPLICATE_RESOURCE"
+
+    def __init__(
+        self,
+        message: str | None = None,
+        resource_id: str | None = None,
+        details: Any = None,
+    ) -> None:
+        self.resource_id = resource_id
+        super().__init__(
+            message=message,
+            details=details or {"resource_id": resource_id},
+        )
 
 
 class UnauthorizedException(AppBaseException):

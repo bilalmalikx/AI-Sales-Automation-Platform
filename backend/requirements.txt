@@ -25,7 +25,7 @@ aiofiles==24.1.0
 # ── Authentication & Security ──────────────────────────────────────────────────
 python-jose[cryptography]==3.3.0
 passlib[bcrypt]==1.7.4
-python-multipart==0.0.20
+python-multipart==0.0.32
 
 # ── AI / LangChain / LangGraph (Phase 5+) ─────────────────────────────────────
 langchain==0.3.14

@@ -5,7 +5,7 @@ All ORM models inherit from Base.
 """
 
 import uuid
-from datetime import UTC, datetime
+from datetime import datetime
 
 from sqlalchemy import func
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
@@ -23,14 +23,14 @@ class TimestampMixin:
     """Mixin adding created_at and updated_at columns."""
 
     created_at: Mapped[datetime] = mapped_column(
-        default=lambda: datetime.now(UTC),
+        default=datetime.utcnow,
         server_default=func.now(),
         nullable=False,
     )
     updated_at: Mapped[datetime] = mapped_column(
-        default=lambda: datetime.now(UTC),
+        default=datetime.utcnow,
         server_default=func.now(),
-        onupdate=lambda: datetime.now(UTC),
+        onupdate=datetime.utcnow,
         server_onupdate=func.now(),
         nullable=False,
     )

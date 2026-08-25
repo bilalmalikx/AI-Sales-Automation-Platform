@@ -107,6 +107,8 @@ class Lead(Base, UUIDPrimaryKeyMixin, TimestampMixin):
     last_name: Mapped[str | None] = mapped_column(String(100), nullable=True)
     email: Mapped[str | None] = mapped_column(String(255), nullable=True, index=True)
     phone: Mapped[str | None] = mapped_column(String(50), nullable=True)
+    linkedin_url: Mapped[str | None] = mapped_column(String(500), nullable=True)
+    notes: Mapped[str | None] = mapped_column(Text, nullable=True)
     
     # Notes
     notes: Mapped[str | None] = mapped_column(Text, nullable=True)

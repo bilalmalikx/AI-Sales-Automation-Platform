@@ -16,6 +16,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.v1.health import router as health_router
+from app.api.v1.leads import router as leads_router
 from app.core.config import settings
 from app.core.exceptions import register_exception_handlers
 from app.core.logging import get_logger, setup_logging
@@ -91,8 +92,7 @@ def create_app() -> FastAPI:
 
     # ── Routers ───────────────────────────────────────────────────────────────
     app.include_router(health_router)
-    # Future routers are added here, e.g.:
-    # app.include_router(leads_router, prefix=settings.API_V1_PREFIX)
+    app.include_router(leads_router, prefix=settings.API_V1_PREFIX)
 
     return app
 

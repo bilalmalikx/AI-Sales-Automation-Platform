@@ -190,8 +190,8 @@ All business APIs are served under `/api/v1/`.
 | Phase | Status |
 |---|---|
 | Phase 1 — Foundation | ✅ Complete |
-| Phase 2 — Database + Models | ⏳ Next |
-| Phase 3 — Lead Ingestion | ⏳ Pending |
+| Phase 2 — Database + Models | ✅ Complete |
+| Phase 3 — Lead Ingestion | ⏳ Next |
 | Phase 4 — Base Agent Framework | ⏳ Pending |
 | Phase 5 — AI Agents | ⏳ Pending |
 | Phase 6 — LangGraph + Celery | ⏳ Pending |
@@ -199,3 +199,89 @@ All business APIs are served under `/api/v1/`.
 | Phase 8 — Reply + Booking + CRM | ⏳ Pending |
 | Phase 9 — Follow-up + Analytics | ⏳ Pending |
 | Phase 10 — Testing + Docker + AWS | ⏳ Pending |
+
+---
+
+## Phase 2: Database Layer (Complete)
+
+### Database Engine
+
+**`app/db/engine.py`** — async SQLAlchemy 2.0 engine with connection pooling:
+- Initialized at application startup (`init_db()`)
+- Disposed at shutdown (`dispose_db()`)
+- Pool size: 10, max overflow: 20, pre-ping enabled
+- Credentials hidden in logs
+
+### Session Management
+
+**`app/db/session.py`** — async session factory:
+- `get_db()` FastAPI dependency yields sessions
+- Auto-close on exit
+- `expire_on_commit=False` for detached model access
+
+Usage:
+```python
+@router.get("/leads")
+async def get_leads(db: AsyncSession = Depends(get_db)):
+    result = await db.execute(select(Lead))
+    return result.scalars().all()
+```
+
+### Base Model + Mixins
+
+**`app/db/base.py`**:
+- `Base` — declarative base for all models
+- `UUIDPrimaryKeyMixin` — UUID primary keys
+- `TimestampMixin` — `created_at`, `updated_at` (auto-managed)
+- `repr_helper()` — clean `__repr__` for models
+
+### Domain Models
+
+**`app/models/domain.py`**:
+
+| Model | Description |
+|---|---|
+| `LeadSource` | Where leads came from (CSV, API, etc.) |
+| `Company` | Organization / business — enriched by agents |
+| `Lead` | Sales opportunity — progresses through CRM lifecycle |
+| `Contact` | Decision maker at a company |
+
+All models have:
+- UUID primary key
+- `created_at` / `updated_at` timestamps
+- Relationships (e.g., `Company.leads`, `Lead.company`)
+- Indexes on foreign keys and frequently queried fields
+
+### Migrations
+
+**Alembic** configured for async SQLAlchemy:
+- `alembic/env.py` — imports all models, uses settings.DATABASE_URL
+- Initial migration `001_initial_schema.py` creates all 4 tables
+- Migration applied via Docker exec (manual SQL due to env loading issue)
+
+### Database Schema
+
+```
+lead_sources (id, name, description, timestamps)
+    ↓
+companies (id, name, domain, website, industry, contact info, timestamps)
+    ↓
+leads (id, company_id, source_id, status, contact details, timestamps)
+contacts (id, company_id, name, email, title, linkedin, confidence, timestamps)
+```
+
+### Health Check
+
+`/health/ready` now checks database connectivity:
+- Executes `SELECT 1` to verify connection
+- Returns `database: "ok"` or `database: "failed"`
+- Overall status: `ready` (all ok) or `degraded` (DB or Redis down)
+
+### Docker Compose
+
+PostgreSQL 16 container:
+- Image: `postgres:16-alpine`
+- Port: 5432
+- Database: `salesautomation`
+- Health check: `pg_isready`
+- Volume: persistent storage

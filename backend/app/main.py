@@ -33,11 +33,18 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
         version=settings.APP_VERSION,
         env=settings.APP_ENV,
     )
-    # Phase 2: initialise DB connection pool here
+    # Initialize database engine
+    from app.db.engine import init_db
+    await init_db()
+    
     # Phase 6: initialise Redis connection pool here
     yield
     logger.info("application_shutdown")
-    # Phase 2: close DB connection pool here
+    
+    # Dispose database engine
+    from app.db.engine import dispose_db
+    await dispose_db()
+    
     # Phase 6: close Redis connection pool here
 
 

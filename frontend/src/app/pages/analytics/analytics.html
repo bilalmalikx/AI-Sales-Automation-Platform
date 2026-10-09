@@ -1,0 +1,56 @@
+<app-page-header
+  title="Understand your momentum."
+  description="Look beyond activity. Find the conversations that move your business forward."
+  eyebrow="ANALYTICS"
+  ><button (click)="analytics.export()">Export report ↓</button></app-page-header
+><app-metric-grid [items]="metrics()" />
+<div class="grid2">
+  <section class="card">
+    <div class="card-head">
+      <h2>Weekly activity</h2>
+      <app-badge text="Illustrative" />
+    </div>
+    <app-activity-chart />
+  </section>
+  <section class="card">
+    <h2>Your local activity</h2>
+    @for (a of store.state().activity.slice(0, 8); track $index) {
+      <div class="activity">
+        <span class="dot"></span>
+        <div>
+          <p>{{ a.text }}</p>
+          <small>{{ a.time }}</small>
+        </div>
+      </div>
+    } @empty {
+      <p>No local actions yet. Prepare a draft or add a lead to start your activity history.</p>
+    }
+  </section>
+</div>
+<section class="card">
+  <h2>Campaign performance</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Campaign</th>
+          <th>Leads</th>
+          <th>Demo sends</th>
+          <th>Replies received</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (c of store.state().campaigns; track c.id) {
+          <tr>
+            <td>{{ c.name }}</td>
+            <td>{{ c.ids.length }}</td>
+            <td>{{ c.sent }}</td>
+            <td>{{ c.replies }}</td>
+            <td><app-badge [text]="c.status" /></td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</section>

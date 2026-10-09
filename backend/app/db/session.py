@@ -27,7 +27,7 @@ SessionLocal: async_sessionmaker[AsyncSession] = async_sessionmaker(
 async def get_db() -> AsyncGenerator[AsyncSession, None]:
     """
     Dependency for FastAPI routes. Yields an async session, ensures it closes.
-    
+
     Usage:
         async def my_route(db: AsyncSession = Depends(get_db)):
             ...
@@ -37,5 +37,8 @@ async def get_db() -> AsyncGenerator[AsyncSession, None]:
     async with SessionLocal() as session:
         try:
             yield session
+        except Exception:
+            await session.rollback()
+            raise
         finally:
             await session.close()

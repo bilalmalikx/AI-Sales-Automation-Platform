@@ -1,0 +1,27 @@
+# Local private live-provider override. Credentials are loaded only by containers.
+services:
+  api:
+    env_file: .env
+    environment:
+      AI_PROVIDER: openai
+      EMAIL_PROVIDER: smtp
+      LIVE_DELIVERY_ENABLED: "false"
+      CORS_ORIGINS: '["http://localhost:4202","http://localhost:4173"]'
+  worker:
+    env_file: .env
+    environment:
+      AI_PROVIDER: openai
+      EMAIL_PROVIDER: smtp
+      LIVE_DELIVERY_ENABLED: "false"
+  beat:
+    env_file: .env
+    environment:
+      AI_PROVIDER: openai
+      EMAIL_PROVIDER: smtp
+      LIVE_DELIVERY_ENABLED: "false"
+  migrate:
+    env_file: .env
+    environment:
+      AI_PROVIDER: openai
+      EMAIL_PROVIDER: smtp
+      LIVE_DELIVERY_ENABLED: "false"

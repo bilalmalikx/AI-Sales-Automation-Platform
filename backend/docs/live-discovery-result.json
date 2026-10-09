@@ -1,0 +1,1339 @@
+{
+  "summary": {
+    "runs": 4,
+    "business_records": 20,
+    "statuses": {
+      "needs_review": 3,
+      "inspection_failed": 8,
+      "missing_email": 5,
+      "missing_website": 4
+    },
+    "records_with_public_email": 3,
+    "promoted_contacts": 0,
+    "reported_apify_usd": 0.1158,
+    "delivery_enabled": false
+  },
+  "runs": [
+    {
+      "id": "4cab1604-6777-4d82-83c7-6d4170a04482",
+      "created_at": "2026-10-09T21:29:31.627706Z",
+      "updated_at": "2026-10-09T21:32:15.563405Z",
+      "parameters": {
+        "industry": "restaurant",
+        "location": "Manchester",
+        "country": "GB",
+        "limit": 5,
+        "mode": "fresh",
+        "generate_drafts": true
+      },
+      "status": "completed_with_errors",
+      "stage": "complete",
+      "total": 5,
+      "processed": 5,
+      "ai_calls": 3,
+      "provider_run_id": "g0laK571T1GDFkZmM",
+      "dataset_id": "JVVBNEuBh2jqYFMlh",
+      "provider_cost": 0.030199999999999998,
+      "error": null
+    },
+    {
+      "id": "471e4863-be26-4baf-9c22-2ce49eb4fb80",
+      "created_at": "2026-10-09T21:28:19.238765Z",
+      "updated_at": "2026-10-09T21:28:56.530633Z",
+      "parameters": {
+        "industry": "hand car wash",
+        "location": "Manchester",
+        "country": "GB",
+        "limit": 5,
+        "mode": "fresh",
+        "generate_drafts": true
+      },
+      "status": "completed_with_errors",
+      "stage": "complete",
+      "total": 5,
+      "processed": 5,
+      "ai_calls": 1,
+      "provider_run_id": "10OQRo9cRPGKrIQCz",
+      "dataset_id": "gqCZTVNtL6QPBjNWc",
+      "provider_cost": 0.030199999999999998,
+      "error": null
+    },
+    {
+      "id": "eedc99bc-5fd9-4940-b9e9-c3aa28150d0d",
+      "created_at": "2026-10-09T21:24:16.348510Z",
+      "updated_at": "2026-10-09T21:25:15.140001Z",
+      "parameters": {
+        "industry": "car wash",
+        "location": "London",
+        "country": "GB",
+        "limit": 5,
+        "mode": "fresh",
+        "generate_drafts": true
+      },
+      "status": "completed_with_errors",
+      "stage": "complete",
+      "total": 5,
+      "processed": 5,
+      "ai_calls": 2,
+      "provider_run_id": "nUdL3v5PaFsQvPQfA",
+      "dataset_id": "fd5etz3xlKyYKf0sj",
+      "provider_cost": 0.030199999999999998,
+      "error": null
+    },
+    {
+      "id": "e2d7e093-1f77-4843-a9bd-b6fbc17d2d76",
+      "created_at": "2026-10-09T21:14:32.652580Z",
+      "updated_at": "2026-10-09T21:24:25.560119Z",
+      "parameters": {
+        "industry": "car wash",
+        "location": "London",
+        "country": "GB",
+        "limit": 5,
+        "mode": "fresh",
+        "generate_drafts": true
+      },
+      "status": "completed",
+      "stage": "complete",
+      "total": 5,
+      "processed": 5,
+      "ai_calls": 2,
+      "provider_run_id": "2v33mPfTXoqpZuY8D",
+      "dataset_id": "Fbh4FVn7iThRewlbV",
+      "provider_cost": 0.0252,
+      "error": null
+    }
+  ],
+  "prospects": [
+    {
+      "id": "c276deca-a7c7-4d05-973f-c25bbeff126b",
+      "created_at": "2026-10-09T21:29:55.698525Z",
+      "updated_at": "2026-10-09T21:30:13.110510Z",
+      "run_id": "4cab1604-6777-4d82-83c7-6d4170a04482",
+      "company": "Olive & Thyme",
+      "website": "http://www.oliveandthyme.uk/",
+      "country": "GB",
+      "city": "Manchester",
+      "phone": "+44 161 881 6695",
+      "status": "needs_review",
+      "stage": "complete",
+      "emails": [
+        {
+          "email": "info@oliveandthyme.uk",
+          "source_url": "https://www.oliveandthyme.uk/booking-policy"
+        }
+      ],
+      "app_status": "uncertain",
+      "score": 35,
+      "evidence": {
+        "maps": {
+          "url": "https://www.google.com/maps/search/?api=1&query=Olive%20%26%20Thyme&query_place_id=ChIJaf-6Ne6te0gRaU4jXRsPHIo",
+          "place_id": "ChIJaf-6Ne6te0gRaU4jXRsPHIo",
+          "address": "416-418 Barlow Moor Rd, Chorlton-cum-Hardy, Manchester M21 8AD, United Kingdom",
+          "country_inferred_from_query": false
+        },
+        "checked_at": "2026-10-09T21:29:55.698157Z",
+        "website": {
+          "pages": [
+            {
+              "url": "https://www.oliveandthyme.uk/",
+              "excerpt": "Olive & Thyme 0 Skip to Content Menu Drinks Gallery Gift Cards BOOK A TABLE Open Menu Close Menu BOOK A TABLE Menu Drinks Gallery Gift Cards Open Menu Close Menu Menu Drinks Gallery Gift Cards BOOK A TABLE EAT DRINK BOOK 416-418 Barlow Moor Road - Chorlton - Manchester Book a table at Olive & Thyme for an elevated dining experience. Enjoy a warm ambiance and a menu of seasonal, high-quality dishes. Complement your meal with selections from our extensive wine list. Our friendly staff ensures a memorable visit. The Olive & Thyme Restaurant Reflecting the rich and vibrant Mediterranean food culture, complimentary lavash bread is served with flavourful garlic butter, setting the stage for you to enjoy the chefs' latest and most innovative creations. During lunch hours, a delightful variety of delicious wraps and home-made burgers are available. You can also indulge in our carefully curated assortment of selected coffees, specialty teas, wines, spirits, draught beers, and traditional desserts while you take advantage of our free wifi. The establishment benefits from its inviting south-facing terrace, allowing an abundance of natural sunlight to stream in, whether you are comfortably seated inside next to the warmth of the wood-burning stove or watching the world go by in the heated glassed seating area. Opening Times Mon\u2013Thu 12\u201310:30 Fri\u2013Sat 12\u201311 Sun 12\u201310:30 (The kitchen closes one hour before the restaurant\u2019s closing time.) Amneties Disabled access Free Wifi Baby Changing Facilities Capacities Main Dining Area: Up to 72 guests seated Heated Terrace: Up to 16 guests seated Par"
+            },
+            {
+              "url": "https://www.oliveandthyme.uk/booking-policy",
+              "excerpt": "Booking Policy \u2014 Olive & Thyme 0 Skip to Content Menu Drinks Gallery Gift Cards BOOK A TABLE Open Menu Close Menu BOOK A TABLE Menu Drinks Gallery Gift Cards Open Menu Close Menu Menu Drinks Gallery Gift Cards BOOK A TABLE Dining/Booking Policy Reservations To reserve your table, please select a time and let us know whether you\u2019d like to be seated in the main dining area or our heated enclosed terrace. Dress Code Smart casual attire is requested. Please, no joggers or shorts. Large Bookings Bookings of six or more require a deposit to secure your reservation. A 10% service charge is mandatory for all parties of six or more. Pre-orders are required for parties of 10 or more. Customers part of a group booking (6 or more) can only pay separately by scanning the Sunday QR code provided on their table. Pets We kindly ask that dogs are not brought into the restaurant or terrace. Registered Assistance Dogs are, of course, always welcome. Cancellations We have a 24-hour cancellation policy. Please notify us if your plans change. Respectful Environment We are committed to providing a welcoming and enjoyable experience for all our guests. Rudeness or abusive behavior toward our staff will not be tolerated , and we reserve the right to refuse service to anyone who behaves in this way. Additional Notes We strive to provide a welcoming and enjoyable experience for all guests. Thank you for helping us maintain a comfortable and attentive dining environment. Contact Olive & Thyme 416-418 Barlow Moor Road Chorlton, Manchester, M21 8AD info@oliveandthyme.uk 0161 881 6695 Hours Mon\u2013Thu 12\u201310"
+            }
+          ],
+          "emails": [
+            {
+              "email": "info@oliveandthyme.uk",
+              "source_url": "https://www.oliveandthyme.uk/booking-policy"
+            }
+          ],
+          "app_links": [],
+          "text": "Olive & Thyme 0 Skip to Content Menu Drinks Gallery Gift Cards BOOK A TABLE Open Menu Close Menu BOOK A TABLE Menu Drinks Gallery Gift Cards Open Menu Close Menu Menu Drinks Gallery Gift Cards BOOK A TABLE EAT DRINK BOOK 416-418 Barlow Moor Road - Chorlton - Manchester Book a table at Olive & Thyme for an elevated dining experience. Enjoy a warm ambiance and a menu of seasonal, high-quality dishes. Complement your meal with selections from our extensive wine list. Our friendly staff ensures a memorable visit. The Olive & Thyme Restaurant Reflecting the rich and vibrant Mediterranean food culture, complimentary lavash bread is served with flavourful garlic butter, setting the stage for you to enjoy the chefs' latest and most innovative creations. During lunch hours, a delightful variety of delicious wraps and home-made burgers are available. You can also indulge in our carefully curated assortment of selected coffees, specialty teas, wines, spirits, draught beers, and traditional desserts while you take advantage of our free wifi. The establishment benefits from its inviting south-facing terrace, allowing an abundance of natural sunlight to stream in, whether you are comfortably seated inside next to the warmth of the wood-burning stove or watching the world go by in the heated glassed seating area. Opening Times Mon\u2013Thu 12\u201310:30 Fri\u2013Sat 12\u201311 Sun 12\u201310:30 (The kitchen closes one hour before the restaurant\u2019s closing time.) Amneties Disabled access Free Wifi Baby Changing Facilities Capacities Main Dining Area: Up to 72 guests seated Heated Terrace: Up to 16 guests seated Parking The Square Shopping Centre Car Park, Chorlton-cum-Hardy, Manchester, M21 9AS Contact Olive & Thyme 416-418 Barlow Moor Road Chorlton, Manchester, M21 8AD info@oliveandthyme.uk 0161 881 6695 Hours Mon\u2013Thu 12\u201310:30 Fri\u2013Sat 12\u201311 Sun 12\u201310:30 Make a Reservation Booking Policy DINE WITH US \u00a9 2026 Olive & Thyme. All Rights Reserved.\nBooking Policy \u2014 Olive & Thyme 0 Skip to Content Menu Drinks Gallery Gift Cards BOOK A TABLE Open Menu Close Menu BOOK A TABLE Menu Drinks Gallery Gift Cards Open Menu Close Menu Menu Drinks Gallery Gift Cards BOOK A TABLE Dining/Booking Policy Reservations To reserve your table, please select a time and let us know whether you\u2019d like to be seated in the main dining area or our heated enclosed terrace. Dress Code Smart casual attire is requested. Please, no joggers or shorts. Large Bookings Bookings of six or more require a deposit to secure your reservation. A 10% service charge is mandatory for all parties of six or more. Pre-orders are required for parties of 10 or more. Customers part of a group booking (6 or more) can only pay separately by scanning the Sunday QR code provided on their table. Pets We kindly ask that dogs are not brought into the restaurant or terrace. Registered Assistance Dogs are, of course, always welcome. Cancellations We have a 24-hour cancellation policy. Please notify us if your plans change. Respectful Environment We are committed to providing a welcoming and enjoyable experience for all our guests. Rudeness or abusive behavior toward our staff will not be tolerated , and we reserve the right to refuse service to anyone who behaves in this way. Additional Notes We strive to provide a welcoming and enjoyable experience for all guests. Thank you for helping us maintain a comfortable and attentive dining environment. Contact Olive & Thyme 416-418 Barlow Moor Road Chorlton, Manchester, M21 8AD info@oliveandthyme.uk 0161 881 6695 Hours Mon\u2013Thu 12\u201310:30 Fri\u2013Sat 12\u201311 Sun 12\u201310:30 Make a Reservation Booking Policy DINE WITH US \u00a9 2026 Olive & Thyme. All Rights Reserved.",
+          "error": null
+        },
+        "app": {
+          "status": "uncertain",
+          "matches": [],
+          "candidates": [
+            {
+              "name": "Beef Olive",
+              "url": "https://apps.apple.com/gb/app/beef-olive/id1506741309?uo=4",
+              "verified": false
+            },
+            {
+              "name": "The Olive Garden Durham",
+              "url": "https://apps.apple.com/gb/app/the-olive-garden-durham/id1323959506?uo=4",
+              "verified": false
+            },
+            {
+              "name": "The Tortoise Table Plant DB",
+              "url": "https://apps.apple.com/gb/app/the-tortoise-table-plant-db/id1577194476?uo=4",
+              "verified": false
+            },
+            {
+              "name": "Seeds of Thyme",
+              "url": "https://apps.apple.com/gb/app/seeds-of-thyme/id6450909951?uo=4",
+              "verified": false
+            }
+          ],
+          "checks": [
+            "Apple App Store search"
+          ],
+          "limitations": [
+            "Google Play search unavailable",
+            "No matching app found is not proof that no app exists"
+          ]
+        }
+      },
+      "analysis": {
+        "summary": "Olive & Thyme is a restaurant that offers table booking via its website but no confirmed mobile app presence. The business has no evidence of an existing app, and the app verification status is uncertain. The opportunity for a mobile app lies mainly in enhancing table booking, loyalty, and ordering features, but the current lack of an app and limited digital engagement reduce the immediate value.",
+        "opportunity": "Develop a dedicated mobile app to streamline table reservations, enable digital menus, loyalty programs, and potentially online ordering for take\u2011away or delivery.",
+        "score": 35,
+        "reasons": [
+          "Website shows only web\u2011based booking, no app link or QR code for app download",
+          "App verification found no matching app, status uncertain",
+          "Business is a single restaurant location, limiting large scale app adoption",
+          "Potential value lies in improving booking convenience and loyalty, but current digital footprint is minimal"
+        ],
+        "suitable": false,
+        "provider": "api.groq.com",
+        "tokens": 1608
+      },
+      "reason": "Qualification requires review",
+      "lead_id": null,
+      "campaign_id": null
+    },
+    {
+      "id": "25a08926-a820-47cf-83dc-f84617cb255a",
+      "created_at": "2026-10-09T21:29:55.695440Z",
+      "updated_at": "2026-10-09T21:30:04.860689Z",
+      "run_id": "4cab1604-6777-4d82-83c7-6d4170a04482",
+      "company": "Zara Mediterranean Restaurant",
+      "website": "http://www.zaramediterranean.co.uk/",
+      "country": "GB",
+      "city": "Manchester",
+      "phone": "+44 161 217 9503",
+      "status": "inspection_failed",
+      "stage": "complete",
+      "emails": [],
+      "app_status": "not_checked",
+      "score": 0,
+      "evidence": {
+        "maps": {
+          "url": "https://www.google.com/maps/search/?api=1&query=Zara%20Mediterranean%20Restaurant&query_place_id=ChIJucitZeexe0gRXFrYFutKnys",
+          "place_id": "ChIJucitZeexe0gRXFrYFutKnys",
+          "address": "97 Princess Rd, Manchester M14 4TH, United Kingdom",
+          "country_inferred_from_query": false
+        },
+        "checked_at": "2026-10-09T21:29:55.695157Z",
+        "website": {
+          "pages": [],
+          "emails": [],
+          "app_links": [],
+          "text": "",
+          "error": "No accessible public website pages"
+        }
+      },
+      "analysis": {},
+      "reason": "No accessible public website pages",
+      "lead_id": null,
+      "campaign_id": null
+    },
+    {
+      "id": "e45192f8-35de-4287-8d32-84e6629a7ebc",
+      "created_at": "2026-10-09T21:29:55.692554Z",
+      "updated_at": "2026-10-09T21:30:04.175574Z",
+      "run_id": "4cab1604-6777-4d82-83c7-6d4170a04482",
+      "company": "Baba Restaurant",
+      "website": "https://www.babacafegrill.co.uk/",
+      "country": "GB",
+      "city": "Manchester",
+      "phone": "+44 161 526 3557",
+      "status": "missing_email",
+      "stage": "complete",
+      "emails": [],
+      "app_status": "uncertain",
+      "score": 30,
+      "evidence": {
+        "maps": {
+          "url": "https://www.google.com/maps/search/?api=1&query=Baba%20Restaurant&query_place_id=ChIJRyJGUgCte0gRq52WOT3FNP0",
+          "place_id": "ChIJRyJGUgCte0gRq52WOT3FNP0",
+          "address": "579 Barlow Moor Rd, Chorlton-cum-Hardy, Manchester M21 8AE, United Kingdom",
+          "country_inferred_from_query": false
+        },
+        "checked_at": "2026-10-09T21:29:55.692219Z",
+        "website": {
+          "pages": [
+            {
+              "url": "https://www.babacafegrill.co.uk/",
+              "excerpt": "Baba | Authentic Persian Flavours in Manchester Our Story Food & Drink Our Location Book a Table Baba Authentic Persian\u00a0flavours crafted\u00a0with\u00a0love in\u00a0the\u00a0heart\u00a0of\u00a0Manchester Book a Table \u2b50 5 \u00b7 Rated on Google Reviews Scroll Down \u062f\u0627\u0633\u062a\u0627\u0646 \u0645\u0627 Our Story The word Baba means father\u2014a symbol of family, tradition, and generosity. Inspired by the warmth of Persian hospitality, Baba was created to bring people together over great food and memorable experiences. Our journey is rooted in a passion for sharing the rich flavours of Persian and Mediterranean cuisine. Drawing inspiration from recipes passed down through generations, we combine traditional ingredients, fresh produce, and modern cooking to create dishes that feel both familiar and exciting. At Baba, every guest is welcomed like family. Whether you\u2019re joining us for breakfast, brunch, lunch, or dinner, our goal is simple: to serve honest food, warm hospitality, and create a place where friends and families can gather, relax, and enjoy time together. Welcome to Baba \u2014 where every meal is served with heart. \u0645\u0646\u0648\u06cc \u0645\u0627 Explore Our Menu Browse our signatures \u2014 from charcoal grills to slow-cooked Persian classics. MEZZE MEZZE KEBABS STEWS DRINKS DESSERTS Explore Cold Mezze \u0645\u0632\u0647 \u0633\u0631\u062f View \u2192 Explore Hot Mezze \u0645\u0632\u0647 \u06af\u0631\u0645 View \u2192 Explore Kebabs \u06a9\u0628\u0627\u0628 View \u2192 Explore Stews \u062e\u0648\u0631\u0634 View \u2192 Explore Drinks \u0646\u0648\u0634\u06cc\u062f\u0646\u06cc View \u2192 Explore Desserts \u062f\u0633\u0631 View \u2192 Scroll to explore View Full Menu \u063a\u0630\u0627\u0647\u0627\u06cc \u0645\u062d\u0628\u0648\u0628 Signature Dishes A curated selection of our most beloved Persian classics. Chef's Favourite Koobideh Two skewers of finely minced lamb kebab, served with rice, naa"
+            },
+            {
+              "url": "https://www.babacafegrill.co.uk/contact",
+              "excerpt": "Contact & Location | Baba Cafe & Grill Our Story Food & Drink Our Location Book a Table \u062a\u0645\u0627\u0633 \u0628\u0627 \u0645\u0627 Get in Touch We\u2019d love to hear from you. Visit Us 579 Barlow Moor Rd, Chorlton-cum-Hardy, Manchester M21 8AE 0161 526 3557 food@dayarestaurant.com @babamcr Opening Hours Monday \u2013 Thursday 11am \u2013 10:30 pm Friday \u2013 Sunday 11am \u2013 11 pm Get Directions \u2192 Send a Message Name Email Message Send Message Baba Authentic Persian Cuisine. Manchester. \u0637\u0639\u0645 \u0627\u0635\u06cc\u0644 Quick Links Home Menu About Articles FAQ Contact Book a Table Find Us Tripadvisor 579 Barlow Moor Rd, Manchester M21 8AE DESIGN : Werk Studio \u00a9 2025 Baba Cafe & Grill. All rights reserved. Made with \u2665 in Manchester"
+            },
+            {
+              "url": "https://www.babacafegrill.co.uk/about",
+              "excerpt": "Our Story | Baba Cafe & Grill Our Story Food & Drink Our Location Book a Table \u062f\u0627\u0633\u062a\u0627\u0646 \u0645\u0627 Our Story Why \u2018Baba\u2019? In Persian, baba means father \u2014 the keeper of family recipes, the one who gathers everyone around the table. Our name is a tribute to that role: to the patience of slow cooking, the generosity of a shared meal, and the quiet pride of feeding the people you love. Every plate we serve is an attempt to recreate that feeling of being welcomed home. The Manchester Bee The worker bee has been Manchester\u2019s emblem for over a century \u2014 a symbol of industry, community and resilience. As a Persian kitchen rooted in Chorlton, we carry that spirit with pride. Baba is a meeting of two cultures: the warmth of Iranian hospitality and the hard-working heart of the city we now call home. Our Food Philosophy We believe authenticity is non-negotiable. Our saffron is sourced from the fields of Khorasan, our herbs are picked fresh each morning, and our kebabs are grilled over real charcoal \u2014 never shortcuts. Traditional techniques passed down through generations guide every khoresh that simmers for hours and every grain of rice steamed to a delicate tahdig crust. This is Persian cooking with nothing lost in translation. The Team Chef Reza Ahmadi Head Chef & Founder Leila Hosseini Pastry & Dessert Chef Darius Karimi Restaurant Manager Join us at the table Book a Table Baba Authentic Persian Cuisine. Manchester. \u0637\u0639\u0645 \u0627\u0635\u06cc\u0644 Quick Links Home Menu About Articles FAQ Contact Book a Table Find Us Tripadvisor 579 Barlow Moor Rd, Manchester M21 8AE DESIGN : Werk Studio \u00a9 2025 Baba Cafe & Grill. Al"
+            }
+          ],
+          "emails": [],
+          "app_links": [],
+          "text": "Baba | Authentic Persian Flavours in Manchester Our Story Food & Drink Our Location Book a Table Baba Authentic Persian\u00a0flavours crafted\u00a0with\u00a0love in\u00a0the\u00a0heart\u00a0of\u00a0Manchester Book a Table \u2b50 5 \u00b7 Rated on Google Reviews Scroll Down \u062f\u0627\u0633\u062a\u0627\u0646 \u0645\u0627 Our Story The word Baba means father\u2014a symbol of family, tradition, and generosity. Inspired by the warmth of Persian hospitality, Baba was created to bring people together over great food and memorable experiences. Our journey is rooted in a passion for sharing the rich flavours of Persian and Mediterranean cuisine. Drawing inspiration from recipes passed down through generations, we combine traditional ingredients, fresh produce, and modern cooking to create dishes that feel both familiar and exciting. At Baba, every guest is welcomed like family. Whether you\u2019re joining us for breakfast, brunch, lunch, or dinner, our goal is simple: to serve honest food, warm hospitality, and create a place where friends and families can gather, relax, and enjoy time together. Welcome to Baba \u2014 where every meal is served with heart. \u0645\u0646\u0648\u06cc \u0645\u0627 Explore Our Menu Browse our signatures \u2014 from charcoal grills to slow-cooked Persian classics. MEZZE MEZZE KEBABS STEWS DRINKS DESSERTS Explore Cold Mezze \u0645\u0632\u0647 \u0633\u0631\u062f View \u2192 Explore Hot Mezze \u0645\u0632\u0647 \u06af\u0631\u0645 View \u2192 Explore Kebabs \u06a9\u0628\u0627\u0628 View \u2192 Explore Stews \u062e\u0648\u0631\u0634 View \u2192 Explore Drinks \u0646\u0648\u0634\u06cc\u062f\u0646\u06cc View \u2192 Explore Desserts \u062f\u0633\u0631 View \u2192 Scroll to explore View Full Menu \u063a\u0630\u0627\u0647\u0627\u06cc \u0645\u062d\u0628\u0648\u0628 Signature Dishes A curated selection of our most beloved Persian classics. Chef's Favourite Koobideh Two skewers of finely minced lamb kebab, served with rice, naan or chips Chef's Favourite Koobideh Two skewers of finely minced lamb kebab, served with rice, naan or chips Traditional Ghormeh Sabzi Slow-braised herb and kidney bean stew, a cornerstone of Persian cuisine Traditional Ghormeh Sabzi Slow-braised herb and kidney bean stew, a cornerstone of Persian cuisine Grill Favourite Joojeh Kebab Succulent chicken breast marinated with saffron, charcoal-grilled to order Grill Favourite Joojeh Kebab Succulent chicken breast marinated with saffron, charcoal-grilled to order House Special Zereshk Polo Ba Morgh Saffron infused chicken thigh with barberry and saffron rice House Special Zereshk Polo Ba Morgh Saffron infused chicken thigh with barberry and saffron rice View Full Menu \u0646\u0638\u0631\u0627\u062a \u0645\u0647\u0645\u0627\u0646\u0627\u0646 What Our Guests Say \u201c An exceptional dining experience. Impeccable service, outstanding food, and a warm, inviting atmosphere. Every dish was beautifully crafted and bursting with flavour. Baba Restaurant is a fantastic addition to Chorlton and is highly recommended. Foad Seyedi Google Review \u201c Delicious, well-presented dessert with fresh fruit. Incredibly friendly and efficient staff and a wonderful atmosphere. Aruna Google Review \u201c Food is immaculate. The drinks are the cherry on top. Definitely recommend. Pouyan Nikkhah Google Review \u201c I had an amazing experience at this restaurant \u2014 the food was absolutely delicious, the service was excellent, and the atmosphere was warm and welcoming. Fatemeh Google Review See all reviews on Google \u067e\u06cc\u062f\u0627\u06cc\u0645\u0627\u0646 \u06a9\u0646\u06cc\u062f Checking Status... Opening Hours Monday \u2013 Thursday 11am \u2013 10:30 pm Friday \u2013 Sunday 11am \u2013 11 pm Book a Table Find Us Address 579 Barlow Moor Rd, Chorlton-cum-Hardy, Manchester M21 8AE Phone 0161 526 3557 Email food@dayarestaurant.com Get Directions \u2192 Baba Authentic Persian Cuisine. Manchester. \u0637\u0639\u0645 \u0627\u0635\u06cc\u0644 Quick Links Home Menu About Articles FAQ Contact Book a Table Find Us Tripadvisor 579 Barlow Moor Rd, Manchester M21 8AE DESIGN : Werk Studio \u00a9 2025 Baba Cafe & Grill. All rights reserved. Made with \u2665 in Manchester\nContact & Location | Baba Cafe & Grill Our Story Food & Drink Our Location Book a Table \u062a\u0645\u0627\u0633 \u0628\u0627 \u0645\u0627 Get in Touch We\u2019d love to hear from you. Visit Us 579 Barlow Moor Rd, Chorlton-cum-Hardy, Manchester M21 8AE 0161 526 3557 food@dayarestaurant.com @babamcr Opening Hours Monday \u2013 Thursday 11am \u2013 10:30 pm Friday \u2013 Sunday 11am \u2013 11 pm Get Directions \u2192 Send a Message Name Email Message Send Message Baba Authentic Persian Cuisine. Manchester. \u0637\u0639\u0645 \u0627\u0635\u06cc\u0644 Quick Links Home Menu About Articles FAQ Contact Book a Table Find Us Tripadvisor 579 Barlow Moor Rd, Manchester M21 8AE DESIGN : Werk Studio \u00a9 2025 Baba Cafe & Grill. All rights reserved. Made with \u2665 in Manchester\nOur Story | Baba Cafe & Grill Our Story Food & Drink Our Location Book a Table \u062f\u0627\u0633\u062a\u0627\u0646 \u0645\u0627 Our Story Why \u2018Baba\u2019? In Persian, baba means father \u2014 the keeper of family recipes, the one who gathers everyone around the table. Our name is a tribute to that role: to the patience of slow cooking, the generosity of a shared meal, and the quiet pride of feeding the people you love. Every plate we serve is an attempt to recreate that feeling of being welcomed home. The Manchester Bee The worker bee has been Manchester\u2019s emblem for over a century \u2014 a symbol of industry, community and resilience. As a Persian kitchen rooted in Chorlton, we carry that spirit with pride. Baba is a meeting of two cultures: the warmth of Iranian hospitality and the hard-working heart of the city we now call home. Our Food Philosophy We believe authenticity is non-negotiable. Our saffron is sourced from the fields of Khorasan, our herbs are picked fresh each morning, and our kebabs are grilled over real charcoal \u2014 never shortcuts. Traditional techniques passed down through generations guide every khoresh that simmers for hours and every grain of rice steamed to a delicate tahdig crust. This is Persian cooking with nothing lost in translation. The Team Chef Reza Ahmadi Head Chef & Founder Leila Hosseini Pastry & Dessert Chef Darius Karimi Restaurant Manager Join us at the table Book a Table Baba Authentic Persian Cuisine. Manchester. \u0637\u0639\u0645 \u0627\u0635\u06cc\u0644 Quick Links Home Menu About Articles FAQ Contact Book a Table Find Us Tripadvisor 579 Barlow Moor Rd, Manchester M21 8AE DESIGN : Werk Studio \u00a9 2025 Baba Cafe & Grill. All rights reserved. Made with \u2665 in Manchester",
+          "error": null
+        },
+        "app": {
+          "status": "uncertain",
+          "matches": [],
+          "candidates": [
+            {
+              "name": "Desi Downtown Restaurant",
+              "url": "https://apps.apple.com/gb/app/desi-downtown-restaurant/id6447078023?uo=4",
+              "verified": false
+            },
+            {
+              "name": "Ali Baba Kebab & Pizza Corby",
+              "url": "https://apps.apple.com/gb/app/ali-baba-kebab-pizza-corby/id6478563475?uo=4",
+              "verified": false
+            },
+            {
+              "name": "foodpanda: Food & Groceries",
+              "url": "https://apps.apple.com/gb/app/foodpanda-food-groceries/id758103884?uo=4",
+              "verified": false
+            },
+            {
+              "name": "Urbanspoon - Restaurant & Food Reviews",
+              "url": "https://apps.apple.com/gb/app/urbanspoon-restaurant-food-reviews/id284708449?uo=4",
+              "verified": false
+            },
+            {
+              "name": "Zomato: Food Delivery & Dining",
+              "url": "https://apps.apple.com/gb/app/zomato-food-delivery-dining/id434613896?uo=4",
+              "verified": false
+            }
+          ],
+          "checks": [
+            "Apple App Store search"
+          ],
+          "limitations": [
+            "Google Play search unavailable",
+            "No matching app found is not proof that no app exists"
+          ]
+        }
+      },
+      "analysis": {
+        "summary": "Baba Restaurant is a physical Persian dining establishment in Manchester with no confirmed mobile app presence. The website offers table booking but no dedicated app. Repeat\u2011customer value is moderate due to table booking and potential loyalty, but lack of an app limits digital engagement.",
+        "opportunity": "Low to moderate mobile app opportunity \u2013 could enhance booking, loyalty, and ordering but no existing app evidence.",
+        "score": 30,
+        "reasons": [
+          "Website shows only web booking, no app link",
+          "App verification status uncertain with no matching app found",
+          "No evidence of in\u2011app ordering or loyalty program",
+          "Physical restaurant may benefit from app but not proven"
+        ],
+        "suitable": false,
+        "provider": "api.groq.com",
+        "tokens": 2545
+      },
+      "reason": "No public business email found; outreach is blocked",
+      "lead_id": null,
+      "campaign_id": null
+    },
+    {
+      "id": "d6666888-8e6b-4eaa-83e2-c4fe34941213",
+      "created_at": "2026-10-09T21:29:55.687834Z",
+      "updated_at": "2026-10-09T21:32:15.551929Z",
+      "run_id": "4cab1604-6777-4d82-83c7-6d4170a04482",
+      "company": "Bar San Juan",
+      "website": "http://barsanjuan.com/",
+      "country": "GB",
+      "city": "Manchester",
+      "phone": "+44 7378 693594",
+      "status": "inspection_failed",
+      "stage": "complete",
+      "emails": [],
+      "app_status": "not_checked",
+      "score": 0,
+      "evidence": {
+        "maps": {
+          "url": "https://www.google.com/maps/search/?api=1&query=Bar%20San%20Juan&query_place_id=ChIJx_w9Beyte0gRKHz_zlJktDw",
+          "place_id": "ChIJx_w9Beyte0gRKHz_zlJktDw",
+          "address": "56 Beech Rd, Chorlton-cum-Hardy, Manchester M21 9EG, United Kingdom",
+          "country_inferred_from_query": false
+        },
+        "checked_at": "2026-10-09T21:29:55.687424Z",
+        "website": {
+          "pages": [],
+          "redirects": [],
+          "emails": [],
+          "app_links": [],
+          "text": "",
+          "error": "No accessible public website pages"
+        }
+      },
+      "analysis": {},
+      "reason": "No accessible public website pages",
+      "lead_id": null,
+      "campaign_id": null
+    },
+    {
+      "id": "25dcbdf0-6217-455c-8c87-34f651709d96",
+      "created_at": "2026-10-09T21:29:55.676856Z",
+      "updated_at": "2026-10-09T21:32:10.526422Z",
+      "run_id": "4cab1604-6777-4d82-83c7-6d4170a04482",
+      "company": "CASA DE MOOR - CHORLTON",
+      "website": "http://www.casademoor.co.uk/",
+      "country": "GB",
+      "city": "Manchester",
+      "phone": "+44 161 881 4588",
+      "status": "missing_email",
+      "stage": "complete",
+      "emails": [],
+      "app_status": "uncertain",
+      "score": 15,
+      "evidence": {
+        "maps": {
+          "url": "https://www.google.com/maps/search/?api=1&query=CASA%20DE%20MOOR%20-%20CHORLTON&query_place_id=ChIJs0TCs-Gte0gRnEAI7UPyWT4",
+          "place_id": "ChIJs0TCs-Gte0gRnEAI7UPyWT4",
+          "address": "133 Beech Rd, Chorlton-cum-Hardy, Manchester M21 9EQ, United Kingdom",
+          "country_inferred_from_query": false
+        },
+        "checked_at": "2026-10-09T21:29:55.675286Z",
+        "website": {
+          "pages": [
+            {
+              "url": "https://casademoor.com/",
+              "excerpt": "Casa de Moor \u2013 Bar & Restaurant, Heaton Moor, Stockport Casa De Moor CHORLTON 133 Beech Road, Chorlton M21 9EQ ENTER CHORLTON Close Menus Facebook Instagram TripAdvisor Google+ Casa De Moor \u00a9 2022 All rights reserved | Crafted with by COMPERA 60 Heaton Moor Road, Stockport SK4 4NZ 0161 432 9999 heatonmoor@casademoor.co.uk Close Search for: Search"
+            }
+          ],
+          "redirects": [
+            {
+              "source_url": "http://www.casademoor.co.uk/",
+              "canonical_url": "https://casademoor.com/"
+            }
+          ],
+          "emails": [],
+          "app_links": [],
+          "text": "Casa de Moor \u2013 Bar & Restaurant, Heaton Moor, Stockport Casa De Moor CHORLTON 133 Beech Road, Chorlton M21 9EQ ENTER CHORLTON Close Menus Facebook Instagram TripAdvisor Google+ Casa De Moor \u00a9 2022 All rights reserved | Crafted with by COMPERA 60 Heaton Moor Road, Stockport SK4 4NZ 0161 432 9999 heatonmoor@casademoor.co.uk Close Search for: Search",
+          "error": null
+        },
+        "app": {
+          "status": "uncertain",
+          "matches": [],
+          "candidates": [
+            {
+              "name": "Casa Fuzetta",
+              "url": "https://apps.apple.com/gb/app/casa-fuzetta/id6787899953?uo=4",
+              "verified": false
+            },
+            {
+              "name": "Le Figaro Properties",
+              "url": "https://apps.apple.com/gb/app/le-figaro-properties/id374048824?uo=4",
+              "verified": false
+            },
+            {
+              "name": "Casa Museo Amatller",
+              "url": "https://apps.apple.com/gb/app/casa-museo-amatller/id1475936175?uo=4",
+              "verified": false
+            }
+          ],
+          "checks": [
+            "Apple App Store search"
+          ],
+          "limitations": [
+            "Google Play search unavailable",
+            "No matching app found is not proof that no app exists"
+          ]
+        }
+      },
+      "analysis": {
+        "summary": "Casa de Moor \u2013 Chorlton is a local bar & restaurant with no confirmed mobile app presence. The available evidence shows only a website and social media links, and app store searches yielded unrelated results. Therefore, it is unlikely that the business currently offers a dedicated mobile app, making it unsuitable for a mobile\u2011app qualification opportunity.",
+        "opportunity": "No mobile app opportunity identified",
+        "score": 15,
+        "reasons": [
+          "Website content shows only web and social media presence, no app link or download button",
+          "Apple App Store search returned unrelated apps, none matching the business name",
+          "Google Play search unavailable, but lack of evidence suggests no app exists",
+          "No mention of loyalty program, ordering, or membership features that would benefit from an app"
+        ],
+        "suitable": false,
+        "provider": "api.groq.com",
+        "tokens": 805
+      },
+      "reason": "No public business email found; outreach is blocked",
+      "lead_id": null,
+      "campaign_id": null
+    },
+    {
+      "id": "01e768f2-b0b8-4835-84de-7728a46352e5",
+      "created_at": "2026-10-09T21:28:45.437305Z",
+      "updated_at": "2026-10-09T21:28:55.111062Z",
+      "run_id": "471e4863-be26-4baf-9c22-2ce49eb4fb80",
+      "company": "Diamond Carwash & Tyre Service",
+      "website": "https://en-gb.facebook.com/diamondhandcarwashmcr/",
+      "country": "GB",
+      "city": "Manchester",
+      "phone": "+44 7720 632752",
+      "status": "inspection_failed",
+      "stage": "complete",
+      "emails": [],
+      "app_status": "not_checked",
+      "score": 0,
+      "evidence": {
+        "maps": {
+          "url": "https://www.google.com/maps/search/?api=1&query=Diamond%20Carwash%20%26%20Tyre%20Service&query_place_id=ChIJf-JJEJyye0gRoJraNtaU9og",
+          "place_id": "ChIJf-JJEJyye0gRoJraNtaU9og",
+          "address": "Leestone Rd, Sharston, Wythenshawe, Manchester M22 4RB, United Kingdom",
+          "country_inferred_from_query": false
+        },
+        "checked_at": "2026-10-09T21:28:45.437046Z",
+        "website": {
+          "pages": [],
+          "emails": [],
+          "app_links": [],
+          "text": "",
+          "error": "No accessible public website pages"
+        }
+      },
+      "analysis": {},
+      "reason": "No accessible public website pages",
+      "lead_id": null,
+      "campaign_id": null
+    },
+    {
+      "id": "9973ebb6-6a74-446e-ba51-5074efc75d9b",
+      "created_at": "2026-10-09T21:28:45.434752Z",
+      "updated_at": "2026-10-09T21:28:54.567189Z",
+      "run_id": "471e4863-be26-4baf-9c22-2ce49eb4fb80",
+      "company": "R HAND CAR WASH",
+      "website": "https://instagram.com/r_hand_carwash?igshid=MmIzYWVlNDQ5Yg==",
+      "country": "GB",
+      "city": "Manchester",
+      "phone": "+44 7397 119894",
+      "status": "inspection_failed",
+      "stage": "complete",
+      "emails": [],
+      "app_status": "not_checked",
+      "score": 0,
+      "evidence": {
+        "maps": {
+          "url": "https://www.google.com/maps/search/?api=1&query=R%20HAND%20CAR%20WASH&query_place_id=ChIJi5vxzRixe0gRmP-INSt1ZfU",
+          "place_id": "ChIJi5vxzRixe0gRmP-INSt1ZfU",
+          "address": "150, 152 Moston Ln, Manchester M9 4HU, United Kingdom",
+          "country_inferred_from_query": false
+        },
+        "checked_at": "2026-10-09T21:28:45.434523Z",
+        "website": {
+          "pages": [],
+          "emails": [],
+          "app_links": [],
+          "text": "",
+          "error": "No accessible public website pages"
+        }
+      },
+      "analysis": {},
+      "reason": "No accessible public website pages",
+      "lead_id": null,
+      "campaign_id": null
+    },
+    {
+      "id": "3cf6702f-02e2-49b5-a8ac-7af99fb6f149",
+      "created_at": "2026-10-09T21:28:45.431932Z",
+      "updated_at": "2026-10-09T21:28:56.525385Z",
+      "run_id": "471e4863-be26-4baf-9c22-2ce49eb4fb80",
+      "company": "bp",
+      "website": "https://map.bp.com/en-GB/GB/petrol-station/fallowfield/princess-s-stn-fs607/4426",
+      "country": "GB",
+      "city": "Manchester",
+      "phone": "+44 161 388 6054",
+      "status": "missing_email",
+      "stage": "complete",
+      "emails": [],
+      "app_status": "uncertain",
+      "score": 20,
+      "evidence": {
+        "maps": {
+          "url": "https://www.google.com/maps/search/?api=1&query=bp&query_place_id=ChIJ-zdGFxGye0gRtMCZclTb5kc",
+          "place_id": "ChIJ-zdGFxGye0gRtMCZclTb5kc",
+          "address": "Princess Rd, Fallowfield, Manchester M14 7FS, United Kingdom",
+          "country_inferred_from_query": false
+        },
+        "checked_at": "2026-10-09T21:28:45.431599Z",
+        "website": {
+          "pages": [
+            {
+              "url": "https://map.bp.com/en-GB/GB/petrol-station/fallowfield/princess-s-stn-fs607/4426",
+              "excerpt": "PRINCESS S/STN - FS607 - BP"
+            }
+          ],
+          "emails": [],
+          "app_links": [],
+          "text": "PRINCESS S/STN - FS607 - BP",
+          "error": null
+        },
+        "app": {
+          "status": "uncertain",
+          "matches": [],
+          "candidates": [
+            {
+              "name": "BPme: Pay for Fuel in Your Car",
+              "url": "https://apps.apple.com/gb/app/bpme-pay-for-fuel-in-your-car/id1257725938?uo=4",
+              "verified": false
+            },
+            {
+              "name": "bp pulse",
+              "url": "https://apps.apple.com/gb/app/bp-pulse/id1515768723?uo=4",
+              "verified": false
+            },
+            {
+              "name": "Shell: Fuel, EV & Rewards",
+              "url": "https://apps.apple.com/gb/app/shell-fuel-ev-rewards/id1464649113?uo=4",
+              "verified": false
+            },
+            {
+              "name": "Esso: Pay for fuel, get points",
+              "url": "https://apps.apple.com/gb/app/esso-pay-for-fuel-get-points/id1140860553?uo=4",
+              "verified": false
+            },
+            {
+              "name": "BP Fuel & Charge",
+              "url": "https://apps.apple.com/gb/app/bp-fuel-charge/id1192209983?uo=4",
+              "verified": false
+            }
+          ],
+          "checks": [
+            "Apple App Store search"
+          ],
+          "limitations": [
+            "Google Play search unavailable",
+            "No matching app found is not proof that no app exists"
+          ]
+        }
+      },
+      "analysis": {
+        "summary": "The evidence indicates that the company \"bp\" operates a fuel station (e.g., \"PRINCESS S/STN - FS607 - BP\") and there is no direct indication of a dedicated mobile app for a hand car wash service. The app verification data lists several BP-related apps, but none are confirmed to provide hand car wash booking or loyalty features. Therefore, the opportunity for a mobile app tailored to hand car wash services is uncertain and likely not suitable.",
+        "opportunity": "No clear mobile app opportunity for hand car wash services",
+        "score": 20,
+        "reasons": [
+          "Website text references a fuel station, not a car wash",
+          "App candidates are fuel payment/loyalty apps, not car wash booking",
+          "No evidence of hand car wash booking or loyalty features in listed apps",
+          "Uncertain app status requires human review but no supporting data for car wash app"
+        ],
+        "suitable": false,
+        "provider": "api.groq.com",
+        "tokens": 868
+      },
+      "reason": "No public business email found; outreach is blocked",
+      "lead_id": null,
+      "campaign_id": null
+    },
+    {
+      "id": "2c419b90-98c9-4a19-a236-428cace95634",
+      "created_at": "2026-10-09T21:28:45.428858Z",
+      "updated_at": "2026-10-09T21:28:50.671731Z",
+      "run_id": "471e4863-be26-4baf-9c22-2ce49eb4fb80",
+      "company": "New York New York",
+      "website": "https://www.instagram.com/newyorkcarwash_chorlton/",
+      "country": "GB",
+      "city": "Manchester",
+      "phone": "+44 7903 988734",
+      "status": "inspection_failed",
+      "stage": "complete",
+      "emails": [],
+      "app_status": "not_checked",
+      "score": 0,
+      "evidence": {
+        "maps": {
+          "url": "https://www.google.com/maps/search/?api=1&query=New%20York%20New%20York&query_place_id=ChIJf2cxcOWte0gRXP7ULTTvuT4",
+          "place_id": "ChIJf2cxcOWte0gRXP7ULTTvuT4",
+          "address": "330 Brantingham Rd, Chorlton-cum-Hardy, Manchester M21 0BJ, United Kingdom",
+          "country_inferred_from_query": false
+        },
+        "checked_at": "2026-10-09T21:28:45.428392Z",
+        "website": {
+          "pages": [],
+          "emails": [],
+          "app_links": [],
+          "text": "",
+          "error": "No accessible public website pages"
+        }
+      },
+      "analysis": {},
+      "reason": "No accessible public website pages",
+      "lead_id": null,
+      "campaign_id": null
+    },
+    {
+      "id": "908cc71a-9cd7-4ef6-a72e-fd91b13288b6",
+      "created_at": "2026-10-09T21:28:45.422541Z",
+      "updated_at": "2026-10-09T21:28:53.457906Z",
+      "run_id": "471e4863-be26-4baf-9c22-2ce49eb4fb80",
+      "company": "Super Quick Shine",
+      "website": "http://www.sqscarwash.co.uk/",
+      "country": "GB",
+      "city": "Manchester",
+      "phone": "+44 161 860 0008",
+      "status": "inspection_failed",
+      "stage": "complete",
+      "emails": [],
+      "app_status": "not_checked",
+      "score": 0,
+      "evidence": {
+        "maps": {
+          "url": "https://www.google.com/maps/search/?api=1&query=Super%20Quick%20Shine&query_place_id=ChIJa8WwiPKte0gRZLKeNhbDyak",
+          "place_id": "ChIJa8WwiPKte0gRZLKeNhbDyak",
+          "address": "302 Barlow Moor Rd, Chorlton-cum-Hardy, Manchester M21 8AY, United Kingdom",
+          "country_inferred_from_query": false
+        },
+        "checked_at": "2026-10-09T21:28:45.421228Z",
+        "website": {
+          "pages": [],
+          "emails": [],
+          "app_links": [],
+          "text": "",
+          "error": "No accessible public website pages"
+        }
+      },
+      "analysis": {},
+      "reason": "No accessible public website pages",
+      "lead_id": null,
+      "campaign_id": null
+    },
+    {
+      "id": "42961c99-ddf2-44e8-b9ec-9740c1c1fbed",
+      "created_at": "2026-10-09T21:24:50.370127Z",
+      "updated_at": "2026-10-09T21:25:15.133032Z",
+      "run_id": "eedc99bc-5fd9-4940-b9e9-c3aa28150d0d",
+      "company": "MFG Car Wash Centre",
+      "website": "https://www.motorfuelgroup.com/",
+      "country": "GB",
+      "city": "Coulsdon",
+      "phone": "+44 1727 898890",
+      "status": "needs_review",
+      "stage": "complete",
+      "emails": [
+        {
+          "email": "customercare@motorfuelgroup.com",
+          "source_url": "https://www.motorfuelgroup.com/about-us/"
+        },
+        {
+          "email": "media@motorfuelgroup.com",
+          "source_url": "https://www.motorfuelgroup.com/about-us/"
+        },
+        {
+          "email": "investorrelations@motorfuelgroup.com",
+          "source_url": "https://www.motorfuelgroup.com/about-us/"
+        }
+      ],
+      "app_status": "uncertain",
+      "score": 10,
+      "evidence": {
+        "maps": {
+          "url": "https://www.google.com/maps/search/?api=1&query=MFG%20Car%20Wash%20Centre&query_place_id=ChIJFTqZ6_f9dUgRwXD8_Bx0_bk",
+          "place_id": "ChIJFTqZ6_f9dUgRwXD8_Bx0_bk",
+          "address": "189-191 Chipstead Valley Rd, Coulsdon CR5 3BR, United Kingdom",
+          "country_inferred_from_query": false
+        },
+        "checked_at": "2026-10-09T21:24:50.369932Z",
+        "website": {
+          "pages": [
+            {
+              "url": "https://www.motorfuelgroup.com/",
+              "excerpt": "Motor Fuel Group - UK\u2019s Largest Independent Forecourt Operator Station Finder VAT Receipt Contact Us Home About Us Leadership Team Partners & Brands Reports & Publications Investors Charity Partner News ESG Sustainability Fuel a Greener World Fuel a More Diverse World Fuel a Safer World Fuel a Better World Governance Sustainability Reporting EV Power HSE Roberts Garages Business Opportunities Contract Management Become a Murco Dealer Careers Current Opportunities Working at MFG Station Finder Home About Us Leadership Team Partners & Brands Reports & Publications Investors Charity Partner News ESG Sustainability Fuel a Greener World Fuel a More Diverse World Fuel a Safer World Fuel a Better World Governance Sustainability Reporting EV Power HSE Roberts Garages Business Opportunities Contract Management Become a Murco Dealer Careers Current Opportunities Working at MFG VAT Receipt Contact Us Fuel Shopping EV Power Valeting Food to Go The Largest Independent Forecourt Operator In The UK Motor Fuel Group (MFG) is the UK\u2019s largest independent forecourt operator. With more than 1200 sites spread over its MFG and Morrisons forecourt networks, customers have access to a growing dual-fuel strategy, a versatile valeting offer and a convenient retail and \u2018food to go\u2019 portfolio. Learn more Partners & Brands MFG works with a number of carefully selected partners and brands to provide customers with a unique fuel, expanding ultra-rapid electric vehicle (EV) charging and convenient forecourt shop and \u2018food to go\u2019 experience. Learn more We Power The Future MFG forecourts will be the place "
+            },
+            {
+              "url": "https://www.motorfuelgroup.com/contact-us/",
+              "excerpt": "Contact Us - Motor Fuel Group Station Finder VAT Receipt Contact Us Home About Us Leadership Team Partners & Brands Reports & Publications Investors Charity Partner News ESG Sustainability Fuel a Greener World Fuel a More Diverse World Fuel a Safer World Fuel a Better World Governance Sustainability Reporting EV Power HSE Roberts Garages Business Opportunities Contract Management Become a Murco Dealer Careers Current Opportunities Working at MFG Station Finder Home About Us Leadership Team Partners & Brands Reports & Publications Investors Charity Partner News ESG Sustainability Fuel a Greener World Fuel a More Diverse World Fuel a Safer World Fuel a Better World Governance Sustainability Reporting EV Power HSE Roberts Garages Business Opportunities Contract Management Become a Murco Dealer Careers Current Opportunities Working at MFG VAT Receipt Contact Us Contact Us Contact Us Name * Subject * Subject Crime EV Fuel Health & Safety Parking Staff Behaviour Transaction Valeting Vehicle Damage Other Email Address * Telephone Number * Message I have read and agree to the Privacy Policy * Send Message Customer Services Phone: +44 (0) 1727 898890 Email: customercare@motorfuelgroup.com EV Charging Support 0808 175 9030 Where to Find Us: Motor Fuel Limited 10 Bricket Road St Albans Hertfordshire AL1 3JX Google Maps Media Enquiries: Camarco Email: media@motorfuelgroup.com Investor Enquiries: Investor Relations Email: investorrelations@motorfuelgroup.com Contact us: Phone: +44 (0) 1727 898890 Email: customercare@motorfuelgroup.com Media Enquiries: Camarco Email: media@motorfuelgroup"
+            },
+            {
+              "url": "https://www.motorfuelgroup.com/about-us/",
+              "excerpt": "About Us - Motor Fuel Group Station Finder VAT Receipt Contact Us Home About Us Leadership Team Partners & Brands Reports & Publications Investors Charity Partner News ESG Sustainability Fuel a Greener World Fuel a More Diverse World Fuel a Safer World Fuel a Better World Governance Sustainability Reporting EV Power HSE Roberts Garages Business Opportunities Contract Management Become a Murco Dealer Careers Current Opportunities Working at MFG Station Finder Home About Us Leadership Team Partners & Brands Reports & Publications Investors Charity Partner News ESG Sustainability Fuel a Greener World Fuel a More Diverse World Fuel a Safer World Fuel a Better World Governance Sustainability Reporting EV Power HSE Roberts Garages Business Opportunities Contract Management Become a Murco Dealer Careers Current Opportunities Working at MFG VAT Receipt Contact Us About Us About MFG Motor Fuel Group (MFG) is the UK\u2019s largest independent forecourt operator. It has around 1200 sites spread over its MFG and Morrisons forecourt networks, offering customers a growing dual-fuel strategy, a leading valeting offer, convenient retail and \u2018food to go\u2019 portfolio, online delivery lockers and business break areas/facilities, MFG is reported to be the fifth largest retailer by number of stores in the country. MFG is dedicated to keeping UK motorists on the move and supporting our local communities. For drivers who find filling up or charging a challenge, MFG has partnered with the fuelService app to provide customers with assistance on the forecourt. This service enables disabled drivers to ask p"
+            },
+            {
+              "url": "https://www.motorfuelgroup.com/app/uploads/2026/07/MFG-Whistleblowing-Policy-2026-Final-June-2026.pdf",
+              "excerpt": "%PDF-1.6\r%\ufffd\ufffd\ufffd\ufffd\r\n212 0 obj < >\rendobj\r             \r\n232 0 obj < >/Filter/FlateDecode/ID[ < 14BA18CC86498444B8924A8A89DA78D2> < 4B61C4629B017340ABF5ECA0DA31E1BA>]/Index[212 30]/Info 211 0 R/Length 102/Prev 160420/Root 213 0 R/Size 242/Type/XRef/W[1 3 1]>>stream\r\nh\ufffdbbd`\u0010``b``\ufffd\u0002\"\u0019V\ufffdHFy\ufffd\ufffd\u0001\ufffdd\ufffd\b&\ufffd\ufffd\"z`YM\u0010\u0252\r&m@$\ufffd%X\ufffd$X\ufffd5\ufffdd\u0000\ufffd\ufffd\ufffdzMAd\ufffd+\ufffdd\\r\u0011\ufffdn\ufffd\f$\ufffd\ufffdOg`\u0002\u069e\f\ufffd\ufffd\ufffd\ufffd(\ufffd?\u0003\ufffd\ufffdO\ufffd\u0000\u0003\u0000\u0003\ufffd\u000f;\r\nendstream\rendobj\rstartxref\r\n0\r\n%%EOF\r\n    \r\n241 0 obj < >stream\r\nh\ufffdb```\u0002\ufffd%\f\ufffd\f\f\u0002\u0002\f\ufffd\f\b \ufffd\ufffd\u0002\u0014ea\ufffdhp`\ufffd\ufffd\u0664\ufffd\ufffd\ufffd\ufffd\ufffda\ufffdL\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\u0016'\ufffd\t\ufffdj\ufffd\u0004yZ\ufffd\u001f\n00pt400ut00D\u0000\u0019\f\u001d\u001dp=H@\b\ufffd\u0019\u0018\ufffd\u0019\ufffdZ\ufffd\u0004\u0019\ufffd\u0018\ufffd\u0019\ufffd\u0019\ufffd\ufffd}\ufffde\ufffd\ufffd\ufffdV1\ufffdaz\u0234\ufffdQ,Wm\ufffd\ufffd+\ufffd\ufffd!\ufffd8\u0018\ufffd\ufffdALF\u0006\u0006\u0016\u001e \ufffd\ufffd\ufffd\u0014~\ufffd\u0001\ufffdt\ufffdKp\ufffdy\u0019\ufffd\n\ufffdCT1\ufffd\u0002\u0004\u0018\u0000b\t\"\ufffd\r\nendstream\rendobj\r213 0 obj < >/Metadata 11 0 R/Outlines 16 0 R/PageLayout/OneColumn/Pages 210 0 R/StructTreeRoot 49 0 R/Type/Catalog>>\rendobj\r214 0 obj < >>>/Rotate 0/StructParents 0/Tabs/S/Type/Page>>\rendobj\r215 0 obj < >stream\r\nh\u07b4Vmk\ufffd0\u0010\ufffd+\ufffd\ufffd1\ufffd\ufffdb\ufffd2\ufffdB\ufffd-\ufffd\ufffd\u058c&Y\ufffd\ufffd~\ufffdR\ufffd\u0018\u001c\ufffd\ufffd.[\ufffd}\ufffdd;\ufffd\ufffd\ufffdi\u0003C\u001c\ufffdu\ufffd\ufffd\ufffd{\u0014.\u0004\ufffd\ufffd\u000b\ufffdp\ufffd`\ufffdD\ufffd\u001afEBXs\u0011\u0010&BTh\u0094\ufffd\ufffd\ufffd0\ufffda\ufffd\u00077*99=\ufffdF\ufffd\u02a4%a\u0527\ufffdy\ufffd\ufffd\ufffd\ufffd\ufffdMI\ufffd\ufffd\ufffdGS\ufffdN\u0004\r\ufffdI\u0012\ufffd\u000b\"|o\ufffd\ufffd\ufffdx\ufffd\ufffd\ufffd=\ufffdJ[\u001d\ufffd\ufffd\rpg\ufffd\ufffdh\u001b'O\ufffd\ufffd\ufffd\ufffd\u0014\ufffd\ufffd\ufffd!W\ufffd6J\ufffdW\ufffd81\ufffdp\ufffd\ufffd\ufffd+\ufffds\u0019m\ufffd7\ufffd^\u070c.>X\u0017\ufffd\u000e?f\ufffd\ufffd\ufffdbV\ufffd\\m\ufffd\ufffd,\ufffdF\ufffd\ufffdZVU\ufffd\ufffdz_\ufffd(\ufffdW\ufffdt\ufffd\u0018B\ufffdYi\ufffd?\ufffd\ufffd\ufffd\ufffd\ufffd\ufffdXS >stream\r\nH\ufffd\\\ufffd\ufffdn\ufffd0\f\ufffd\ufffdy\n\u001f\ufffdC\u0005\u0004\ufffd\u0016\t!U\ufffd\ufffd8\ufffd\ufffd\ufffd\u000041\u001d\ufffd\bQ\ufffd\u0007\ufffd~1\ufffd:i\ufffd\ufffd_\ufffd\ufffd\u001c\ufffd\ufffd\ufffd\ufffdj\ufffd\ufffd\u0010\ufffd\ufffdQ78C\ufffd[\ufffdq\u001ao^#\\\ufffd\ufffd[\ufffdH0\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\u0589(\ufffd\ufffde\ufffdq\ufffdm7\ufffd\ufffd\ufffd\ufffd#\u0004\ufffd\ufffd/\ufffd9\ufffd\ufffd[\u0011\ufffdy\ufffd\ufffd\ufffdW\ufffd|U\ufffd\u0016\ufffd\ufffd\ufffd\ufffd\u000f\u000ehg\ufffd\ufffd,\ufffd`\u0017\u0012\ufffd\ufffd\ufffd\u001d\u0010\ufffd\u0576\ufffdM\ufffd\ufffd\ufffd\u000b\ufffd?\ufffd\ufffd\ufffd\u0010\ufffdO\ufffd\u0018=\u001a\ufffd\\\ufffd\u0477\ufffd\ufffd\ufffd\ufffd\ufffd*\ufffdx\u000e\ufffd\u0014h\u037f\ufffd\ufffdl\ufffdt\ufffd\ufffd\ufffd\ufffd\ufffd$\ufffd\ufffd\ufffd\t|f>\u0007N\ufffd < \ufffd\ufffd4aN\ufffd%\ufffd$N\ufffdS\ufffd9#\ufffd3\ufffd\u0015\ufffd\">0\u001f\ufffd\ufffd\ufffdG\ufffd9\u000f\ufffd\ufffd>#}vb>\u0005V\\\ufffd\ufffd\u001a\u0014\ufffdW\ufffd_\ufffdW\ufffdWU\ufffd\u00151\ufffdE\ufffd]\u000e\ufffd?\ufffd>'\ufffd\ufffd\ufffd\ufffds\ufffdr\ufffd\ufffd\ufffd\ufffdw\ufffdZ\u0016&\u000b\ufffdy\ufffd\ufffda\u0014\ufffd\ufffd\ufffd\u0019P\ufffd{\ufffd\ufffd?\u010d\u000e\ufffd\ufffd\u001e\ufffd+\ufffd\u00003\ufffd\ufffdf\r\nendstream\rendobj\r217 0 obj < >stream\r\nH\ufffd\\\ufffd\u074e\ufffd@\u0010\u0005\ufffd{\ufffd\ufffd/g.&(]]\ufffd\t1qt&\ufffdb\u007f\ufffd\ufffd>\u0000B\ub4ac@\u0010/|\ufffd\ufffd\u00d9\ufffd&k\ufffd\u001e\u0002]|U\ufffd\ufffdw\ufffd\ufffd\ufffdk'\ufffd\u007f\u001f\ufffd\ufffd\u0018'wn\ufffdf\ufffd\ufffd\ufffd>\ufffd\u045d\ufffd\ufffd\ufffde\u16b6\ufffd>\ufffd\ufffd\ufffd\ufffdZ\rY\ufffd\u0016\u001f\u001f\ufffd)^\u000f\u0779\ufffd\ufffd\ufffd\ufffd?\ufffd\ufffd\ufffd4>\ufffd\u04f6\ufffdO\ufffd9\u02ff\ufffdM\u001c\ufffd\ufffd\ufffd~\ufffd\ufffd.?\u0787\ufffdO\ufffd\ufffdnr\u000b\ufffd\u0678&\ufffdS\ufffd/\ufffd\ufffdF\ufffd\ufffd\ufffd^\u000eM:\ufffdN\ufffd\ufffd\ufffd\ufffd\ufffd\u0015?\u001fCt\ufffd|\ufffd$\ufffd\ufffd"
+            }
+          ],
+          "emails": [
+            {
+              "email": "customercare@motorfuelgroup.com",
+              "source_url": "https://www.motorfuelgroup.com/about-us/"
+            },
+            {
+              "email": "media@motorfuelgroup.com",
+              "source_url": "https://www.motorfuelgroup.com/about-us/"
+            },
+            {
+              "email": "investorrelations@motorfuelgroup.com",
+              "source_url": "https://www.motorfuelgroup.com/about-us/"
+            }
+          ],
+          "app_links": [],
+          "text": "Motor Fuel Group - UK\u2019s Largest Independent Forecourt Operator Station Finder VAT Receipt Contact Us Home About Us Leadership Team Partners & Brands Reports & Publications Investors Charity Partner News ESG Sustainability Fuel a Greener World Fuel a More Diverse World Fuel a Safer World Fuel a Better World Governance Sustainability Reporting EV Power HSE Roberts Garages Business Opportunities Contract Management Become a Murco Dealer Careers Current Opportunities Working at MFG Station Finder Home About Us Leadership Team Partners & Brands Reports & Publications Investors Charity Partner News ESG Sustainability Fuel a Greener World Fuel a More Diverse World Fuel a Safer World Fuel a Better World Governance Sustainability Reporting EV Power HSE Roberts Garages Business Opportunities Contract Management Become a Murco Dealer Careers Current Opportunities Working at MFG VAT Receipt Contact Us Fuel Shopping EV Power Valeting Food to Go The Largest Independent Forecourt Operator In The UK Motor Fuel Group (MFG) is the UK\u2019s largest independent forecourt operator. With more than 1200 sites spread over its MFG and Morrisons forecourt networks, customers have access to a growing dual-fuel strategy, a versatile valeting offer and a convenient retail and \u2018food to go\u2019 portfolio. Learn more Partners & Brands MFG works with a number of carefully selected partners and brands to provide customers with a unique fuel, expanding ultra-rapid electric vehicle (EV) charging and convenient forecourt shop and \u2018food to go\u2019 experience. Learn more We Power The Future MFG forecourts will be the place for high speed, ultra-rapid top-up charging alongside a convenient retail and \u2018food to go\u2019 offering. Learn more Serving Your Community Our key objective is to make all visits to our UK network of forecourts as pleasurable as possible by offering high levels of customer service, competitively priced fuels and a convenient shopping experience in the heart of our local communities. Learn more Run Your Own Retail Business MFG offers entrepreneurs the opportunity to run their own business and be involved in one of the fastest growing retail sectors around. Learn more Become A Murco Dealer Our Murco brand and dealer offer provides a great choice of fuel supply with a range of options that are extremely competitive, flexible and designed to help you grow your business. Learn more Latest News 25% saving for all EV Power Customers using the MFG Connect App MFG announces a 25% summer price drop on ultra-rapid electric vehicle (EV) charging across its entire network. Read More 1st Oct 2026 MFG EV Power slashes ultra-rapid charging prices at all sites by 25% for summer 2026 MFG announces a 25% summer price drop on ultra-rapid electric vehicle (EV) charging across its entire network. Read More 30th Jun 2026 Greggs trials new \u2018Greggs Express\u2019 concept on our network Greggs has commenced a trial of its first Greggs Express unit, their new self-service solution at our Glasgow Airport station in Paisley. Read More 28th May 2026 Local MP Opens Our New Chesterfield EV Hub Local MP Toby Perkins Opens Our New Chesterfield 8-bay EV Hub. Read More 14th May 2026 See all news posts Contact us: Phone: +44 (0) 1727 898890 Email: customercare@motorfuelgroup.com Media Enquiries: Camarco Email: media@motorfuelgroup.com Investor Enquiries: Investor Relations Email: investorrelations@motorfuelgroup.com Where to find us: Motor Fuel Limited 10 Bricket Road St Albans Hertfordshire AL1 3JX Google Maps Accreditations Helping Disabled Drivers Modern Slavery Statement Privacy Policy Notice of Injunction CMA Fuel Price Scheme HSE Whistleblowing Policy Fraud Policy \u00a9 Copyright Motor Fuel Limited 2026. All rights reserved. Registered in England & Wales Number: 05206547. VAT Number: 123 4141 61\nContact Us - Motor Fuel Group Station Finder VAT Receipt Contact Us Home About Us Leadership Team Partners & Brands Reports & Publications Investors Charity Partner News ESG Sustainability Fuel a Greener World Fuel a More Diverse World Fuel a Safer World Fuel a Better World Governance Sustainability Reporting EV Power HSE Roberts Garages Business Opportunities Contract Management Become a Murco Dealer Careers Current Opportunities Working at MFG Station Finder Home About Us Leadership Team Partners & Brands Reports & Publications Investors Charity Partner News ESG Sustainability Fuel a Greener World Fuel a More Diverse World Fuel a Safer World Fuel a Better World Governance Sustainability Reporting EV Power HSE Roberts Garages Business Opportunities Contract Management Become a Murco Dealer Careers Current Opportunities Working at MFG VAT Receipt Contact Us Contact Us Contact Us Name * Subject * Subject Crime EV Fuel Health & Safety Parking Staff Behaviour Transaction Valeting Vehicle Damage Other Email Address * Telephone Number * Message I have read and agree to the Privacy Policy * Send Message Customer Services Phone: +44 (0) 1727 898890 Email: customercare@motorfuelgroup.com EV Charging Support 0808 175 9030 Where to Find Us: Motor Fuel Limited 10 Bricket Road St Albans Hertfordshire AL1 3JX Google Maps Media Enquiries: Camarco Email: media@motorfuelgroup.com Investor Enquiries: Investor Relations Email: investorrelations@motorfuelgroup.com Contact us: Phone: +44 (0) 1727 898890 Email: customercare@motorfuelgroup.com Media Enquiries: Camarco Email: media@motorfuelgroup.com Investor Enquiries: Investor Relations Email: investorrelations@motorfuelgroup.com Where to find us: Motor Fuel Limited 10 Bricket Road St Albans Hertfordshire AL1 3JX Google Maps Accreditations Helping Disabled Drivers Modern Slavery Statement Privacy Policy Notice of Injunction CMA Fuel Price Scheme HSE Whistleblowing Policy Fraud Policy \u00a9 Copyright Motor Fuel Limited 2026. All rights reserved. Registered in England & Wales Number: 05206547. VAT Number: 123 4141 61\nAbout Us - Motor Fuel Group Station Finder VAT Receipt Contact Us Home About Us Leadership Team Partners & Brands Reports & Publications Investors Charity Partner News ESG Sustainability Fuel a Greener World Fuel a More Diverse World Fuel a Safer World Fuel a Better World Governance Sustainability Reporting EV Power HSE Roberts Garages Business Opportunities Contract Management Become a Murco Dealer Careers Current Opportunities Working at MFG Station Finder Home About Us Leadership Team Partners & Brands Reports & Publications Investors Charity Partner News ESG Sustainability Fuel a Greener World Fuel a More Diverse World Fuel a Safer World Fuel a Better World Governance Sustainability Reporting EV Power HSE Roberts Garages Business Opportunities Contract Management Become a Murco Dealer Careers Current Opportunities Working at MFG VAT Receipt Contact Us About Us About MFG Motor Fuel Group (MFG) is the UK\u2019s largest independent forecourt operator. It has around 1200 sites spread over its MFG and Morrisons forecourt networks, offering customers a growing dual-fuel strategy, a leading valeting offer, convenient retail and \u2018food to go\u2019 portfolio, online delivery lockers and business break areas/facilities, MFG is reported to be the fifth largest retailer by number of stores in the country. MFG is dedicated to keeping UK motorists on the move and supporting our local communities. For drivers who find filling up or charging a challenge, MFG has partnered with the fuelService app to provide customers with assistance on the forecourt. This service enables disabled drivers to ask participating service stations for help before they go, so they have the confidence of knowing someone will be available to assist them when they arrive. Learn more Five Key Points About MFG Supporting Local Communities MFG provides vital infrastructure and essential service that supports local communities, the economy and helps keep UK\u2019s motorists on the move. Locations Franchise Business Model MFG operates a franchise business model giving contract managers an opportunity to run their own businesses. Contract Management Proven Growth Strategy MFG has a proven growth strategy. Reports & Publications Low Carbon Future MFG is enabling Britain to transition to a lower carbon future by investing in an ultra-rapid electric vehicle charging infrastructure. Learn About EV Leadership Team MFG is led by a proven entrepreneurial management team and a well governed Board delivering for all stakeholders. Our Leadership A History Of Growth On the 22nd December 2011, one of the UK\u2019s leading independent forecourt operators, Motor Fuel Group (MFG), was acquired by a new management team headed by chief executive officer, William Bannister. William is joined by Jeremy Clarke as chief operating officer, Simon Lane as chief financial officer and Adam Wadlow as chief investment officer. All four directors have considerable experience of the forecourt and convenience sectors. The team is backed by committed investors and together they are focused on growing and developing the MFG business into one of the most dynamic and profitable independent forecourt operators in the UK. With the continued support of their investors and an unswerving drive to grow and improve the business, the MFG management team has an impressive acquisition track record. Our Purpose To be the UK\u2019s most dynamic and successful independent forecourt operator with a strong social conscience and serving local communities. Leading the UK\u2019s mobility energy transition for a sustainable future. Our Mission To provide customers with market leading local travel infrastructure hubs with convenience retail, food services and premium fuels including ultra-rapid electric charging facilities. We strive to be a valuable member of the local communities we serve. We want to provide a working environment for our employees and franchisees that encourages personal development, teamwork and rewards performance that is open to all. Our Ethos is to \u2018care\u2019 in what we do and for those around us and to enable each of us to be the \u2018best they can be\u2019. See MFG's History of Growth 2014 In October 2014, MFG completed the acquisition of the retail assets of Murco Petroleum ( www.murco.co.uk ). 2015 In April 2015, 90 Shell branded stations were acquired. In July 2015, MFG secured new investors Clayton, Dubilier & Rice (CD&R) in a transaction valued at approximately \u00a3500 million. 2016 2016 saw the acquisition of the north west based Synergie Holdings with 19 stations and the north-east based Roadside Group with 10 stations. 2017 In 2017, four stations each were acquired from FW Kerridge and Burns & Co., nine stations from Macclesfield-based Manor Service Stations and 14 stations from the Golden Cross Group. 2018 At the end of February 2018, MFG announced the \u00a31.2 billion acquisition of MRH, bringing nearly 500 stations into the network. In addition, the acquisition also brought a wholesale and retail fuel business in the Ch\n%PDF-1.6\r%\ufffd\ufffd\ufffd\ufffd\r\n212 0 obj < >\rendobj\r             \r\n232 0 obj < >/Filter/FlateDecode/ID[ < 14BA18CC86498444B8924A8A89DA78D2> < 4B61C4629B017340ABF5ECA0DA31E1BA>]/Index[212 30]/Info 211 0 R/Length 102/Prev 160420/Root 213 0 R/Size 242/Type/XRef/W[1 3 1]>>stream\r\nh\ufffdbbd`\u0010``b``\ufffd\u0002\"\u0019V\ufffdHFy\ufffd\ufffd\u0001\ufffdd\ufffd\b&\ufffd\ufffd\"z`YM\u0010\u0252\r&m@$\ufffd%X\ufffd$X\ufffd5\ufffdd\u0000\ufffd\ufffd\ufffdzMAd\ufffd+\ufffdd\\r\u0011\ufffdn\ufffd\f$\ufffd\ufffdOg`\u0002\u069e\f\ufffd\ufffd\ufffd\ufffd(\ufffd?\u0003\ufffd\ufffdO\ufffd\u0000\u0003\u0000\u0003\ufffd\u000f;\r\nendstream\rendobj\rstartxref\r\n0\r\n%%EOF\r\n    \r\n241 0 obj < >stream\r\nh\ufffdb```\u0002\ufffd%\f\ufffd\f\f\u0002\u0002\f\ufffd\f\b \ufffd\ufffd\u0002\u0014ea\ufffdhp`\ufffd\ufffd\u0664\ufffd\ufffd\ufffd\ufffd\ufffda\ufffdL\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\u0016'\ufffd\t\ufffdj\ufffd\u0004yZ\ufffd\u001f\n00pt400ut00D\u0000\u0019\f\u001d\u001dp=H@\b\ufffd\u0019\u0018\ufffd\u0019\ufffdZ\ufffd\u0004\u0019\ufffd\u0018\ufffd\u0019\ufffd\u0019\ufffd\ufffd}\ufffde\ufffd\ufffd\ufffdV1\ufffdaz\u0234\ufffdQ,Wm\ufffd\ufffd+\ufffd\ufffd!\ufffd8\u0018\ufffd\ufffdALF\u0006\u0006\u0016\u001e \ufffd\ufffd\ufffd\u0014~\ufffd\u0001\ufffdt\ufffdKp\ufffdy\u0019\ufffd\n\ufffdCT1\ufffd\u0002\u0004\u0018\u0000b\t\"\ufffd\r\nendstream\rendobj\r213 0 obj < >/Metadata 11 0 R/Outlines 16 0 R/PageLayout/OneColumn/Pages 210 0 R/StructTreeRoot 49 0 R/Type/Catalog>>\rendobj\r214 0 obj < >>>/Rotate 0/StructParents 0/Tabs/S/Type/Page>>\rendobj\r215 0 obj < >stream\r\nh\u07b4Vmk\ufffd0\u0010\ufffd+\ufffd\ufffd1\ufffd\ufffdb\ufffd2\ufffdB\ufffd-\ufffd\ufffd\u058c&Y\ufffd\ufffd~\ufffdR\ufffd\u0018\u001c\ufffd\ufffd.[\ufffd}\ufffdd;\ufffd\ufffd\ufffdi\u0003C\u001c\ufffdu\ufffd\ufffd\ufffd{\u0014.\u0004\ufffd\ufffd\u000b\ufffdp\ufffd`\ufffdD\ufffd\u001afEBXs\u0011\u0010&BTh\u0094\ufffd\ufffd\ufffd0\ufffda\ufffd\u00077*99=\ufffdF\ufffd\u02a4%a\u0527\ufffdy\ufffd\ufffd\ufffd\ufffd\ufffdMI\ufffd\ufffd\ufffdGS\ufffdN\u0004\r\ufffdI\u0012\ufffd\u000b\"|o\ufffd\ufffd\ufffdx\ufffd\ufffd\ufffd=\ufffdJ[\u001d\ufffd\ufffd\rpg\ufffd\ufffdh\u001b'O\ufffd\ufffd\ufffd\ufffd\u0014\ufffd\ufffd\ufffd!W\ufffd6J\ufffdW\ufffd81\ufffdp\ufffd\ufffd\ufffd+\ufffds\u0019m\ufffd7\ufffd^\u070c.>X\u0017\ufffd\u000e?f\ufffd\ufffd\ufffdbV\ufffd\\m\ufffd\ufffd,\ufffdF\ufffd\ufffdZVU\ufffd\ufffdz_\ufffd(\ufffdW\ufffdt\ufffd\u0018B\ufffdYi\ufffd?\ufffd\ufffd\ufffd\ufffd\ufffd\ufffdXS >stream\r\nH\ufffd\\\ufffd\ufffdn\ufffd0\f\ufffd\ufffdy\n\u001f\ufffdC\u0005\u0004\ufffd\u0016\t!U\ufffd\ufffd8\ufffd\ufffd\ufffd\u000041\u001d\ufffd\bQ\ufffd\u0007\ufffd~1\ufffd:i\ufffd\ufffd_\ufffd\ufffd\u001c\ufffd\ufffd\ufffd\ufffdj\ufffd\ufffd\u0010\ufffd\ufffdQ78C\ufffd[\ufffdq\u001ao^#\\\ufffd\ufffd[\ufffdH0\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\u0589(\ufffd\ufffde\ufffdq\ufffdm7\ufffd\ufffd\ufffd\ufffd#\u0004\ufffd\ufffd/\ufffd9\ufffd\ufffd[\u0011\ufffdy\ufffd\ufffd\ufffdW\ufffd|U\ufffd\u0016\ufffd\ufffd\ufffd\ufffd\u000f\u000ehg\ufffd\ufffd,\ufffd`\u0017\u0012\ufffd\ufffd\ufffd\u001d\u0010\ufffd\u0576\ufffdM\ufffd\ufffd\ufffd\u000b\ufffd?\ufffd\ufffd\ufffd\u0010\ufffdO\ufffd\u0018=\u001a\ufffd\\\ufffd\u0477\ufffd\ufffd\ufffd\ufffd\ufffd*\ufffdx\u000e\ufffd\u0014h\u037f\ufffd\ufffdl\ufffdt\ufffd\ufffd\ufffd\ufffd\ufffd$\ufffd\ufffd\ufffd\t|f>\u0007N\ufffd < \ufffd\ufffd4aN\ufffd%\ufffd$N\ufffdS\ufffd9#\ufffd3\ufffd\u0015\ufffd\">0\u001f\ufffd\ufffd\ufffdG\ufffd9\u000f\ufffd\ufffd>#}vb>\u0005V\\\ufffd\ufffd\u001a\u0014\ufffdW\ufffd_\ufffdW\ufffdWU\ufffd\u00151\ufffdE\ufffd]\u000e\ufffd?\ufffd>'\ufffd\ufffd\ufffd\ufffds\ufffdr\ufffd\ufffd\ufffd\ufffdw\ufffdZ\u0016&\u000b\ufffdy\ufffd\ufffda\u0014\ufffd\ufffd\ufffd\u0019P\ufffd{\ufffd\ufffd?\u010d\u000e\ufffd\ufffd\u001e\ufffd+\ufffd\u00003\ufffd\ufffdf\r\nendstream\rendobj\r217 0 obj < >stream\r\nH\ufffd\\\ufffd\u074e\ufffd@\u0010\u0005\ufffd{\ufffd\ufffd/g.&(]]\ufffd\t1qt&\ufffdb\u007f\ufffd\ufffd>\u0000B\ub4ac@\u0010/|\ufffd\ufffd\u00d9\ufffd&k\ufffd\u001e\u0002]|U\ufffd\ufffdw\ufffd\ufffd\ufffdk'\ufffd\u007f\u001f\ufffd\ufffd\u0018'wn\ufffdf\ufffd\ufffd\ufffd>\ufffd\u045d\ufffd\ufffd\ufffde\u16b6\ufffd>\ufffd\ufffd\ufffd\ufffdZ\rY\ufffd\u0016\u001f\u001f\ufffd)^\u000f\u0779\ufffd\ufffd\ufffd\ufffd?\ufffd\ufffd\ufffd4>\ufffd\u04f6\ufffdO\ufffd9\u02ff\ufffdM\u001c\ufffd\ufffd\ufffd~\ufffd\ufffd.?\u0787\ufffdO\ufffd\ufffdnr\u000b\ufffd\u0678&\ufffdS\ufffd/\ufffd\ufffdF\ufffd\ufffd\ufffd^\u000eM:\ufffdN\ufffd\ufffd\ufffd\ufffd\ufffd\u0015?\u001fCt\ufffd|\ufffd$\ufffd\ufffdx\u001b\ufffd:\ufffdUw\ufffdY\ufffdH\ufffd\ufffd+\ufffd\ufffdg\ufffd\u016e\ufffd\uff2e\ufffd\ufffdt\ufffd\u007fWcV\u0016\ufffdx\ufffdH\u007f)\u0017\ufffd\u0005\ufffd2+\ufffd1\u001b\ufffdy\ufffd\ufffdf^#\ufffdw\ufffd{\ufffd=\ufffd\u001b\ufffd\u001b\ufffd;s\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd_2/\ufffdi\ufffd0x\ufffd\uc445Y\ufffd\u0003s@\ufffd\ufffd\ufffd\ufffdi\ufffdy\ufffd 3\ufffdg\ufffd8\u0007\ufffd\u001c\ufffd~\ufffd\ufffd\ufffd7\ufffd\ufffd~\ufffd\ufffd\ufffd7\ufffd\ufffd~\ufffd\ufffd\ufffd7\ufffd\ufffd~\ufffd\ufffd\ufffd7\ufffd\ufffd~\ufffd\u007f\ufffd\ufffd\ufffd\ufffd\ufffd\u001b\ufffdc\ufffd`k\ufffd7\ufffd\ufffd\u0737\ufffd}\u001c\u04d6\ufffd_\u0013\ufffd^\ufffd.m\ufffd\ufffd\ufffd&\u0019\ufffd\ufffd\ufffdU\ufffdf\u007f\u0005\u0018\u0000\ufffd\ufffd\fm\r\nendstream\rendobj\r218 0 obj < >stream\r\nH\ufffd\\\ufffd\ufffdn\ufffd@\u0010\ufffd\ufffd < \ufffd\u001c\ufffdC\ufffd\r=\u074e\ufffd,9v\"\ufffd\ufffd?Z\ufffd>\u0000\ufffd\ufffd\ufffd\u0014\u0003\u001a\ufffd\ufffd~\ufffd\ufffd(+-\ufffd\u0347\ufffd\ufffd\ufffd\u0016\ufffdo\ufffd\ufffd}\ufffdM.\ufffd\u0019\ufffd\ufffd\u0010&w\ufffd\ufffd6\ufffd\ufffdp\ufffdMp\ufffdp\ufffd\ufffdlY\ufffd\ufffdk\ufffd\u03eb\ufffd\ufffd\ufffd\ufffdc\ufffd'\ufffd\ufffd~\ufffd\ufffde\u07df\ufffd\ufffd\ufffd\\\ufffd+\u077cN\ufffd\ufffd\u001e6\ufffdp\f\ufffdY\ufffd#\ufffd!v\ufffd\ufffd=\ufffd\ufffd\u001e\u001e]~\ufffd\ufffd\ufffdG\ufffd\ufffd~r\u000b\ufffd^\ufffd6\ufffd\u048b\ufffd\ufffd\ufffd\ufffd\ufffd\u0012\\>\u02de\ufffdm\ufffd\ufffdM\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\u0018\\1_/\u0019\ufffd\u0019\ufffdp\u001d\ufffd&\u013a?\ufffd\ufffdZ\ufffdc\ufffd\ufffd\ufffdt\ufffd\ufffd\u0437\ufffd\ufffd\ufffd+\u028e\ufffd\u6f4eYU\ufffd\ufffd\ufffd\"\ufffd\u0012+Y\ufffd[\ufffd\u0016\ufffd#\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd%\ufffd%\ufffd\u54bc\u0004\u0017\ufffd\u0002\\\ufffdK\ufffd\ufffd\u0005\ufffd\ufffd\u001eL\ufffd\u0012\ufffd\ufffd\ufffd\r\ufffd\"\ufffd\ufffdo\ufffdT\ufffd\u0012z\t\ufffd\ufffd^\u0002/\ufffd\ufffd\ufffdK\ufffd%\ufffd\u0012z\t\ufffd\ufffd^\u0002/\ufffd\ufffd\ufffdK\ufffd%\ufffdg\ufffd3\ufffds\u0010\ufffdA8\u0007\ufffd\u001c\ufffds\u0010\ufffdA\ufffdM\ufffd\ufffds&\u001e3\ufffd\ufffd\ufffd\ufffd3\ufffdG6\ufffdl\u001e\ufffd < 3xdP\ufffdR\ufffdRj\u0015Z\ufffdV\ufffdUj\u0015Ze/E/e/E/\ufffd;u~'{)z){)z\u91bc\u0001\ufffd\ufffd_\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffdk\ufffdk\ufffdk\ufffdo\ufffdo\ufffdo\ufffdo\ufffdo\ufffdo\ufffdo\ufffdo\ufffdo\ufffdo\ufffdo\ufffdo\ufffdo\ufffdo\ufffdo\ufffdo\u031fN\ufffd\ufffd?\ufffd`|\ufffdi\u0013\ufffd\ufffd\ufffd4\ufffd\u0018\ufffd\ufffd\ufffd\ufffd:\ufffd\f\ufffd\ufffd\ufffd\ufffd\ufffdF\ufffd\ufffd\ufffd\n\ufffd\ufffd\u0000\u0003\u0000xK\ufffd\u0014\r\nendstream\rendobj\r219 0 obj < >stream\r\nH\ufffd\\\ufffd\ufffdj\ufffd \u0010\ufffd\ufffd>\ufffd\u001cw\u000f\ufffd\u065c%P\ufffd\u0014r\ufffd\u001f\ufffd\ufffd\u0001\ufffdNR\ufffd\u0019eb\u000ey\ufffd\ufffd6l\ufffd\u0003*\ufffd\ufffd\ufffd\ufffds\ufffd\ufffd\u007f\ufffd)d\ufffdo\u001c\u0740\u0019\ufffd@\ufffdq\ufffd\u001b;\ufffd\u0011\ufffd@\ufffd\u0682\u000f.\u001f]\ufffd\ufffdb\ufffd\ufffd\u0002\u000f\ufffd\ufffdq\ufffdi\ufffd\ufffd\u0018\ufffd\ufffd\"\ufffd\ufffdw8=\ufffd8\ufffdY\ufffdW\ufffd\u0201f8}\u07863\ufffdaK\ufffd\u001b\u0017\ufffd\f\rt\u001dx\ufffd\ufffdg\ufffd^\uc0a0+v\ufffd\ufffd!\ufffd\u0017a\ufffd\u001c\u001f{Bhk\u007f\ufffd\r\ufffd\ufffd5Y\ufffdliFe\u001a\ufffd\u000e\u0313T\ufffd\ufffd\ufffd?\ufffd\ufffd\ufffd\ufffd}YV\ufffd-\u07a6\ufffd\ufffdx\ufffd\ufffdB\ufffd\ufffd\ufffd\u001e\ufffdm\u0312\ufffdN\ufffd\ufffd(\u0001\u0002\ufffd}H)&\u0010\ufffd,\ufffd#\ufffd\u0000\ufffd\ufffdo0\r\nendstream\rendobj\r220 0 obj < >stream\r\nH\ufffd\ufffdVMo\ufffdH\f\ufffd\ufffdW\u0010{\ufffd,\ufffdf\ufffdi\ufffd(P'\ufffd\ufffd\ufffd\u001a\u001b`\r\ufffd\ufffd\ufffdX\u33ed-\u0005\ufffd\ufffd4\ufffd~\ufffd\u0019\ufffdHrS\ufffd\ufffd\u0011E>>>rh/V\ufffd\ufffd\ufffdS\ufffd\ufffdT\ufffd\u000e\u07bf\ufffd}\ufffdj\ufffd35\ufffd\ufffdV\ufffd\u0013 < \ufffd\u0016\ufffd\ufffd\u0007\ufffd\ufffdLR]@1O\ufffd\ufffd\ufffd\u0006U\ufffdRg\ufffd\ufffd2.d\ufffd\ufffd\u0014]\ufffd=?v\ufffdO\u0006f7\ufffd\ufffd\ufffd\tf+\ufffdv[m\ufffdM\ufffd\ufffd\ufffd\u0006>|X\\_\ufffdd\ufffdZ\u0160`\ufffd\ufffdLc\u0019\ufffdxZ\u0003\u001f^`.\ufffd9Lc\ufffd\u0769\u0418\ufffd\ufffd*\ufffd\ufffdqr\u0017}\u0016\ufffd,!\ufffd7b\ufffdF\ufffd*1\ufffdd8\ufffdxX}\ufffd\ufffd\u0016\ufffd`\ufffdLTB\ufffdz\u0012\ufffdk\ufffd\ufffd\ufffd\u007f\ufffdXfq\ufffd6p\ufffd\u0018\r\u0018by$\u0014\u0017cY\u001cw\u0017\ufffd9|\u0015s\ufffdAtn\ufffdP(\u0002D\ufffdc\ufffd4\ufffd\ufffd\u0017)#\ufffd$C\ufffd\ufffd\ufffd$\ufffd\ufffdT\ufffd\"y\ufffdW_\ufffd\ufffd[\ufffd\ufffdr:P\ufffd4\u0010\ufffd\b\ufffd\ufffdy\ufffd\ufffd\u0014\ufffd\ufffd\u0731Y\ufffdL\u0016`%@F\u007f\ufffd\ufffd\"\u0016\ufffdM\ufffdRC\ufffds\ufffdH\ufffd\u001c\ufffdg\ufffdEY\ufffd\u0003\ufffd_\ufffd{\u007ftN\u0007\ufffd\u053a\ufffd\u0017F\ufffd\ufffd\u0006\ufffd9D[\ufffd\u0011n\u0011>q\ufffd\ufffd\ufffd$\ufffdY\ufffd\ufffd\ufffd}\ufffdJ`9\ufffd\ufffd\t\ufffd\ufffd\u0004\ufffd\ufffdI\ufffdO\u0017cguQ^\u0017\ufffd`\ufffd\ufffd\ufa52I\ufffd\u0010H\u0004\u001f\u0012qNf\ufffd\ufffd\ufffdA,\u0010\ufffdF\ufffd\ufffd\ufffd\u0007\ufffdR\ufffd\ufffd[b\ufffd\f\ufffdL\ufffd!\u04d6\u0016\ufffd\ufffdn\ufffd\u0711\ufffdL\ufffdn\u0194\u0014\u04dc\ufffd\u0006_\u05af\ufffdt1\ufffdeJ\ufffd\u0003\u0497^Q\ufffd\ufffd;\ufffdB\ufffdA\ufffd\ufffdY\ufffd\ufffdm\ufffd\ufffd\ufffdG\ufffd\ufffd^@\ufffdtf\ufffd\ufffd\ufffd\ufffdp\ufffd\ufffd\ufffdL\ufffd\u0531+\ufffd\ufffd\ufffd\ufffd\u001c\ufffd\ufffd\ufffd\ufffd`\ufffd\ufffd_\ufffd\b\ufffd\ufffd\ufffd\u0197m\ufffd]\ufffdR\ufffd\ufffd\u0017@I\\\t*Op\ufffd\ufffdj\ufffdm\ufffd\ufffdC\ufffd~\ufffd3\ufffd\u0000o-\ufffd|n\ufffd\ufffd\ufffd\u02f6c5\ufffd\u0013\ufffd",
+          "error": null
+        },
+        "app": {
+          "status": "uncertain",
+          "matches": [],
+          "candidates": [
+            {
+              "name": "IMO Car Wash UK",
+              "url": "https://apps.apple.com/gb/app/imo-car-wash-uk/id1281511171?uo=4",
+              "verified": false
+            },
+            {
+              "name": "Car Wash Empire",
+              "url": "https://apps.apple.com/gb/app/car-wash-empire/id1466637212?uo=4",
+              "verified": false
+            },
+            {
+              "name": "Clean Me - Mobile Car Wash",
+              "url": "https://apps.apple.com/gb/app/clean-me-mobile-car-wash/id1599680672?uo=4",
+              "verified": false
+            },
+            {
+              "name": "GoWash - Car Wash Payment",
+              "url": "https://apps.apple.com/gb/app/gowash-car-wash-payment/id1498489711?uo=4",
+              "verified": false
+            },
+            {
+              "name": "Wash Doctors - Mobile Car Care",
+              "url": "https://apps.apple.com/gb/app/wash-doctors-mobile-car-care/id1243060371?uo=4",
+              "verified": false
+            }
+          ],
+          "checks": [
+            "Apple App Store search"
+          ],
+          "limitations": [
+            "Google Play search unavailable",
+            "No matching app found is not proof that no app exists"
+          ]
+        }
+      },
+      "analysis": {
+        "summary": "Motor Fuel Group is a forecourt operator, not a car wash business. No evidence of a mobile app for a car wash service. The provided app candidates are unrelated and unverified. Therefore, it is unlikely to qualify for a mobile app opportunity in the car wash sector.",
+        "opportunity": "None",
+        "score": 10,
+        "reasons": [
+          "Company operates forecourt fuel and retail services, not car wash.",
+          "Website content focuses on fuel, EV charging, and retail, not car wash services.",
+          "App candidates listed are unrelated to the company and unverified.",
+          "No evidence of repeat\u2011customer booking or loyalty programs for car wash.",
+          "Uncertain app status but no matching app found for car wash.",
+          "Exclusion criteria for non\u2011app\u2011found businesses apply."
+        ],
+        "suitable": false,
+        "provider": "api.groq.com",
+        "tokens": 2824
+      },
+      "reason": "Qualification requires review",
+      "lead_id": null,
+      "campaign_id": null
+    },
+    {
+      "id": "5418f7d1-9b60-4b46-b8c3-e9e0c898d888",
+      "created_at": "2026-10-09T21:24:50.368015Z",
+      "updated_at": "2026-10-09T21:25:02.877857Z",
+      "run_id": "eedc99bc-5fd9-4940-b9e9-c3aa28150d0d",
+      "company": "bp Car Wash",
+      "website": "https://www.bp.com/en_gb/united-kingdom/home/products-and-services/our-offer/bp-car-wash.html",
+      "country": "GB",
+      "city": "South Croydon",
+      "phone": "+44 20 8676 1251",
+      "status": "inspection_failed",
+      "stage": "complete",
+      "emails": [],
+      "app_status": "not_checked",
+      "score": 0,
+      "evidence": {
+        "maps": {
+          "url": "https://www.google.com/maps/search/?api=1&query=bp%20Car%20Wash&query_place_id=ChIJn3QSNXoAdkgR3s-eF5DPGnA",
+          "place_id": "ChIJn3QSNXoAdkgR3s-eF5DPGnA",
+          "address": "215 Selsdon Park Rd, South Croydon CR2 8JH, United Kingdom",
+          "country_inferred_from_query": false
+        },
+        "checked_at": "2026-10-09T21:24:50.367765Z",
+        "website": {
+          "pages": [],
+          "emails": [],
+          "app_links": [],
+          "text": "",
+          "error": "Website blocks crawler access"
+        }
+      },
+      "analysis": {},
+      "reason": "Website blocks crawler access",
+      "lead_id": null,
+      "campaign_id": null
+    },
+    {
+      "id": "4336d5aa-68ed-4e55-8267-5c8f7b19c354",
+      "created_at": "2026-10-09T21:24:50.365286Z",
+      "updated_at": "2026-10-09T21:25:01.748993Z",
+      "run_id": "eedc99bc-5fd9-4940-b9e9-c3aa28150d0d",
+      "company": "bp Car Wash",
+      "website": "https://www.bp.com/en_gb/united-kingdom/home/products-and-services/bp-car-wash.html",
+      "country": "GB",
+      "city": "Sutton",
+      "phone": "+44 20 8642 6892",
+      "status": "inspection_failed",
+      "stage": "complete",
+      "emails": [],
+      "app_status": "not_checked",
+      "score": 0,
+      "evidence": {
+        "maps": {
+          "url": "https://www.google.com/maps/search/?api=1&query=bp%20Car%20Wash&query_place_id=ChIJtXL4owgIdkgRnH9EJU1JJaY",
+          "place_id": "ChIJtXL4owgIdkgRnH9EJU1JJaY",
+          "address": "32-34 Brighton Rd, Sutton SM2 5BN, United Kingdom",
+          "country_inferred_from_query": false
+        },
+        "checked_at": "2026-10-09T21:24:50.365001Z",
+        "website": {
+          "pages": [],
+          "emails": [],
+          "app_links": [],
+          "text": "",
+          "error": "Website blocks crawler access"
+        }
+      },
+      "analysis": {},
+      "reason": "Website blocks crawler access",
+      "lead_id": null,
+      "campaign_id": null
+    },
+    {
+      "id": "a80f8a14-7612-49b4-8e24-2b984d975621",
+      "created_at": "2026-10-09T21:24:50.362179Z",
+      "updated_at": "2026-10-09T21:25:02.971168Z",
+      "run_id": "eedc99bc-5fd9-4940-b9e9-c3aa28150d0d",
+      "company": "MFG Car Wash Centre",
+      "website": "https://www.motorfuelgroup.com/",
+      "country": "GB",
+      "city": "Sutton",
+      "phone": "+44 1727 898890",
+      "status": "needs_review",
+      "stage": "complete",
+      "emails": [
+        {
+          "email": "customercare@motorfuelgroup.com",
+          "source_url": "https://www.motorfuelgroup.com/about-us/"
+        },
+        {
+          "email": "media@motorfuelgroup.com",
+          "source_url": "https://www.motorfuelgroup.com/about-us/"
+        },
+        {
+          "email": "investorrelations@motorfuelgroup.com",
+          "source_url": "https://www.motorfuelgroup.com/about-us/"
+        }
+      ],
+      "app_status": "uncertain",
+      "score": 0,
+      "evidence": {
+        "maps": {
+          "url": "https://www.google.com/maps/search/?api=1&query=MFG%20Car%20Wash%20Centre&query_place_id=ChIJA6DbFnwJdkgRD7PY8MNliqA",
+          "place_id": "ChIJA6DbFnwJdkgRD7PY8MNliqA",
+          "address": "Brighton Rd, Sutton SM2 5BN, United Kingdom",
+          "country_inferred_from_query": false
+        },
+        "checked_at": "2026-10-09T21:24:50.361792Z",
+        "website": {
+          "pages": [
+            {
+              "url": "https://www.motorfuelgroup.com/",
+              "excerpt": "Motor Fuel Group - UK\u2019s Largest Independent Forecourt Operator Station Finder VAT Receipt Contact Us Home About Us Leadership Team Partners & Brands Reports & Publications Investors Charity Partner News ESG Sustainability Fuel a Greener World Fuel a More Diverse World Fuel a Safer World Fuel a Better World Governance Sustainability Reporting EV Power HSE Roberts Garages Business Opportunities Contract Management Become a Murco Dealer Careers Current Opportunities Working at MFG Station Finder Home About Us Leadership Team Partners & Brands Reports & Publications Investors Charity Partner News ESG Sustainability Fuel a Greener World Fuel a More Diverse World Fuel a Safer World Fuel a Better World Governance Sustainability Reporting EV Power HSE Roberts Garages Business Opportunities Contract Management Become a Murco Dealer Careers Current Opportunities Working at MFG VAT Receipt Contact Us Fuel Shopping EV Power Valeting Food to Go The Largest Independent Forecourt Operator In The UK Motor Fuel Group (MFG) is the UK\u2019s largest independent forecourt operator. With more than 1200 sites spread over its MFG and Morrisons forecourt networks, customers have access to a growing dual-fuel strategy, a versatile valeting offer and a convenient retail and \u2018food to go\u2019 portfolio. Learn more Partners & Brands MFG works with a number of carefully selected partners and brands to provide customers with a unique fuel, expanding ultra-rapid electric vehicle (EV) charging and convenient forecourt shop and \u2018food to go\u2019 experience. Learn more We Power The Future MFG forecourts will be the place "
+            },
+            {
+              "url": "https://www.motorfuelgroup.com/contact-us/",
+              "excerpt": "Contact Us - Motor Fuel Group Station Finder VAT Receipt Contact Us Home About Us Leadership Team Partners & Brands Reports & Publications Investors Charity Partner News ESG Sustainability Fuel a Greener World Fuel a More Diverse World Fuel a Safer World Fuel a Better World Governance Sustainability Reporting EV Power HSE Roberts Garages Business Opportunities Contract Management Become a Murco Dealer Careers Current Opportunities Working at MFG Station Finder Home About Us Leadership Team Partners & Brands Reports & Publications Investors Charity Partner News ESG Sustainability Fuel a Greener World Fuel a More Diverse World Fuel a Safer World Fuel a Better World Governance Sustainability Reporting EV Power HSE Roberts Garages Business Opportunities Contract Management Become a Murco Dealer Careers Current Opportunities Working at MFG VAT Receipt Contact Us Contact Us Contact Us Name * Subject * Subject Crime EV Fuel Health & Safety Parking Staff Behaviour Transaction Valeting Vehicle Damage Other Email Address * Telephone Number * Message I have read and agree to the Privacy Policy * Send Message Customer Services Phone: +44 (0) 1727 898890 Email: customercare@motorfuelgroup.com EV Charging Support 0808 175 9030 Where to Find Us: Motor Fuel Limited 10 Bricket Road St Albans Hertfordshire AL1 3JX Google Maps Media Enquiries: Camarco Email: media@motorfuelgroup.com Investor Enquiries: Investor Relations Email: investorrelations@motorfuelgroup.com Contact us: Phone: +44 (0) 1727 898890 Email: customercare@motorfuelgroup.com Media Enquiries: Camarco Email: media@motorfuelgroup"
+            },
+            {
+              "url": "https://www.motorfuelgroup.com/about-us/",
+              "excerpt": "About Us - Motor Fuel Group Station Finder VAT Receipt Contact Us Home About Us Leadership Team Partners & Brands Reports & Publications Investors Charity Partner News ESG Sustainability Fuel a Greener World Fuel a More Diverse World Fuel a Safer World Fuel a Better World Governance Sustainability Reporting EV Power HSE Roberts Garages Business Opportunities Contract Management Become a Murco Dealer Careers Current Opportunities Working at MFG Station Finder Home About Us Leadership Team Partners & Brands Reports & Publications Investors Charity Partner News ESG Sustainability Fuel a Greener World Fuel a More Diverse World Fuel a Safer World Fuel a Better World Governance Sustainability Reporting EV Power HSE Roberts Garages Business Opportunities Contract Management Become a Murco Dealer Careers Current Opportunities Working at MFG VAT Receipt Contact Us About Us About MFG Motor Fuel Group (MFG) is the UK\u2019s largest independent forecourt operator. It has around 1200 sites spread over its MFG and Morrisons forecourt networks, offering customers a growing dual-fuel strategy, a leading valeting offer, convenient retail and \u2018food to go\u2019 portfolio, online delivery lockers and business break areas/facilities, MFG is reported to be the fifth largest retailer by number of stores in the country. MFG is dedicated to keeping UK motorists on the move and supporting our local communities. For drivers who find filling up or charging a challenge, MFG has partnered with the fuelService app to provide customers with assistance on the forecourt. This service enables disabled drivers to ask p"
+            },
+            {
+              "url": "https://www.motorfuelgroup.com/app/uploads/2026/07/MFG-Whistleblowing-Policy-2026-Final-June-2026.pdf",
+              "excerpt": "%PDF-1.6\r%\ufffd\ufffd\ufffd\ufffd\r\n212 0 obj < >\rendobj\r             \r\n232 0 obj < >/Filter/FlateDecode/ID[ < 14BA18CC86498444B8924A8A89DA78D2> < 4B61C4629B017340ABF5ECA0DA31E1BA>]/Index[212 30]/Info 211 0 R/Length 102/Prev 160420/Root 213 0 R/Size 242/Type/XRef/W[1 3 1]>>stream\r\nh\ufffdbbd`\u0010``b``\ufffd\u0002\"\u0019V\ufffdHFy\ufffd\ufffd\u0001\ufffdd\ufffd\b&\ufffd\ufffd\"z`YM\u0010\u0252\r&m@$\ufffd%X\ufffd$X\ufffd5\ufffdd\u0000\ufffd\ufffd\ufffdzMAd\ufffd+\ufffdd\\r\u0011\ufffdn\ufffd\f$\ufffd\ufffdOg`\u0002\u069e\f\ufffd\ufffd\ufffd\ufffd(\ufffd?\u0003\ufffd\ufffdO\ufffd\u0000\u0003\u0000\u0003\ufffd\u000f;\r\nendstream\rendobj\rstartxref\r\n0\r\n%%EOF\r\n    \r\n241 0 obj < >stream\r\nh\ufffdb```\u0002\ufffd%\f\ufffd\f\f\u0002\u0002\f\ufffd\f\b \ufffd\ufffd\u0002\u0014ea\ufffdhp`\ufffd\ufffd\u0664\ufffd\ufffd\ufffd\ufffd\ufffda\ufffdL\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\u0016'\ufffd\t\ufffdj\ufffd\u0004yZ\ufffd\u001f\n00pt400ut00D\u0000\u0019\f\u001d\u001dp=H@\b\ufffd\u0019\u0018\ufffd\u0019\ufffdZ\ufffd\u0004\u0019\ufffd\u0018\ufffd\u0019\ufffd\u0019\ufffd\ufffd}\ufffde\ufffd\ufffd\ufffdV1\ufffdaz\u0234\ufffdQ,Wm\ufffd\ufffd+\ufffd\ufffd!\ufffd8\u0018\ufffd\ufffdALF\u0006\u0006\u0016\u001e \ufffd\ufffd\ufffd\u0014~\ufffd\u0001\ufffdt\ufffdKp\ufffdy\u0019\ufffd\n\ufffdCT1\ufffd\u0002\u0004\u0018\u0000b\t\"\ufffd\r\nendstream\rendobj\r213 0 obj < >/Metadata 11 0 R/Outlines 16 0 R/PageLayout/OneColumn/Pages 210 0 R/StructTreeRoot 49 0 R/Type/Catalog>>\rendobj\r214 0 obj < >>>/Rotate 0/StructParents 0/Tabs/S/Type/Page>>\rendobj\r215 0 obj < >stream\r\nh\u07b4Vmk\ufffd0\u0010\ufffd+\ufffd\ufffd1\ufffd\ufffdb\ufffd2\ufffdB\ufffd-\ufffd\ufffd\u058c&Y\ufffd\ufffd~\ufffdR\ufffd\u0018\u001c\ufffd\ufffd.[\ufffd}\ufffdd;\ufffd\ufffd\ufffdi\u0003C\u001c\ufffdu\ufffd\ufffd\ufffd{\u0014.\u0004\ufffd\ufffd\u000b\ufffdp\ufffd`\ufffdD\ufffd\u001afEBXs\u0011\u0010&BTh\u0094\ufffd\ufffd\ufffd0\ufffda\ufffd\u00077*99=\ufffdF\ufffd\u02a4%a\u0527\ufffdy\ufffd\ufffd\ufffd\ufffd\ufffdMI\ufffd\ufffd\ufffdGS\ufffdN\u0004\r\ufffdI\u0012\ufffd\u000b\"|o\ufffd\ufffd\ufffdx\ufffd\ufffd\ufffd=\ufffdJ[\u001d\ufffd\ufffd\rpg\ufffd\ufffdh\u001b'O\ufffd\ufffd\ufffd\ufffd\u0014\ufffd\ufffd\ufffd!W\ufffd6J\ufffdW\ufffd81\ufffdp\ufffd\ufffd\ufffd+\ufffds\u0019m\ufffd7\ufffd^\u070c.>X\u0017\ufffd\u000e?f\ufffd\ufffd\ufffdbV\ufffd\\m\ufffd\ufffd,\ufffdF\ufffd\ufffdZVU\ufffd\ufffdz_\ufffd(\ufffdW\ufffdt\ufffd\u0018B\ufffdYi\ufffd?\ufffd\ufffd\ufffd\ufffd\ufffd\ufffdXS >stream\r\nH\ufffd\\\ufffd\ufffdn\ufffd0\f\ufffd\ufffdy\n\u001f\ufffdC\u0005\u0004\ufffd\u0016\t!U\ufffd\ufffd8\ufffd\ufffd\ufffd\u000041\u001d\ufffd\bQ\ufffd\u0007\ufffd~1\ufffd:i\ufffd\ufffd_\ufffd\ufffd\u001c\ufffd\ufffd\ufffd\ufffdj\ufffd\ufffd\u0010\ufffd\ufffdQ78C\ufffd[\ufffdq\u001ao^#\\\ufffd\ufffd[\ufffdH0\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\u0589(\ufffd\ufffde\ufffdq\ufffdm7\ufffd\ufffd\ufffd\ufffd#\u0004\ufffd\ufffd/\ufffd9\ufffd\ufffd[\u0011\ufffdy\ufffd\ufffd\ufffdW\ufffd|U\ufffd\u0016\ufffd\ufffd\ufffd\ufffd\u000f\u000ehg\ufffd\ufffd,\ufffd`\u0017\u0012\ufffd\ufffd\ufffd\u001d\u0010\ufffd\u0576\ufffdM\ufffd\ufffd\ufffd\u000b\ufffd?\ufffd\ufffd\ufffd\u0010\ufffdO\ufffd\u0018=\u001a\ufffd\\\ufffd\u0477\ufffd\ufffd\ufffd\ufffd\ufffd*\ufffdx\u000e\ufffd\u0014h\u037f\ufffd\ufffdl\ufffdt\ufffd\ufffd\ufffd\ufffd\ufffd$\ufffd\ufffd\ufffd\t|f>\u0007N\ufffd < \ufffd\ufffd4aN\ufffd%\ufffd$N\ufffdS\ufffd9#\ufffd3\ufffd\u0015\ufffd\">0\u001f\ufffd\ufffd\ufffdG\ufffd9\u000f\ufffd\ufffd>#}vb>\u0005V\\\ufffd\ufffd\u001a\u0014\ufffdW\ufffd_\ufffdW\ufffdWU\ufffd\u00151\ufffdE\ufffd]\u000e\ufffd?\ufffd>'\ufffd\ufffd\ufffd\ufffds\ufffdr\ufffd\ufffd\ufffd\ufffdw\ufffdZ\u0016&\u000b\ufffdy\ufffd\ufffda\u0014\ufffd\ufffd\ufffd\u0019P\ufffd{\ufffd\ufffd?\u010d\u000e\ufffd\ufffd\u001e\ufffd+\ufffd\u00003\ufffd\ufffdf\r\nendstream\rendobj\r217 0 obj < >stream\r\nH\ufffd\\\ufffd\u074e\ufffd@\u0010\u0005\ufffd{\ufffd\ufffd/g.&(]]\ufffd\t1qt&\ufffdb\u007f\ufffd\ufffd>\u0000B\ub4ac@\u0010/|\ufffd\ufffd\u00d9\ufffd&k\ufffd\u001e\u0002]|U\ufffd\ufffdw\ufffd\ufffd\ufffdk'\ufffd\u007f\u001f\ufffd\ufffd\u0018'wn\ufffdf\ufffd\ufffd\ufffd>\ufffd\u045d\ufffd\ufffd\ufffde\u16b6\ufffd>\ufffd\ufffd\ufffd\ufffdZ\rY\ufffd\u0016\u001f\u001f\ufffd)^\u000f\u0779\ufffd\ufffd\ufffd\ufffd?\ufffd\ufffd\ufffd4>\ufffd\u04f6\ufffdO\ufffd9\u02ff\ufffdM\u001c\ufffd\ufffd\ufffd~\ufffd\ufffd.?\u0787\ufffdO\ufffd\ufffdnr\u000b\ufffd\u0678&\ufffdS\ufffd/\ufffd\ufffdF\ufffd\ufffd\ufffd^\u000eM:\ufffdN\ufffd\ufffd\ufffd\ufffd\ufffd\u0015?\u001fCt\ufffd|\ufffd$\ufffd\ufffd"
+            }
+          ],
+          "emails": [
+            {
+              "email": "customercare@motorfuelgroup.com",
+              "source_url": "https://www.motorfuelgroup.com/about-us/"
+            },
+            {
+              "email": "media@motorfuelgroup.com",
+              "source_url": "https://www.motorfuelgroup.com/about-us/"
+            },
+            {
+              "email": "investorrelations@motorfuelgroup.com",
+              "source_url": "https://www.motorfuelgroup.com/about-us/"
+            }
+          ],
+          "app_links": [],
+          "text": "Motor Fuel Group - UK\u2019s Largest Independent Forecourt Operator Station Finder VAT Receipt Contact Us Home About Us Leadership Team Partners & Brands Reports & Publications Investors Charity Partner News ESG Sustainability Fuel a Greener World Fuel a More Diverse World Fuel a Safer World Fuel a Better World Governance Sustainability Reporting EV Power HSE Roberts Garages Business Opportunities Contract Management Become a Murco Dealer Careers Current Opportunities Working at MFG Station Finder Home About Us Leadership Team Partners & Brands Reports & Publications Investors Charity Partner News ESG Sustainability Fuel a Greener World Fuel a More Diverse World Fuel a Safer World Fuel a Better World Governance Sustainability Reporting EV Power HSE Roberts Garages Business Opportunities Contract Management Become a Murco Dealer Careers Current Opportunities Working at MFG VAT Receipt Contact Us Fuel Shopping EV Power Valeting Food to Go The Largest Independent Forecourt Operator In The UK Motor Fuel Group (MFG) is the UK\u2019s largest independent forecourt operator. With more than 1200 sites spread over its MFG and Morrisons forecourt networks, customers have access to a growing dual-fuel strategy, a versatile valeting offer and a convenient retail and \u2018food to go\u2019 portfolio. Learn more Partners & Brands MFG works with a number of carefully selected partners and brands to provide customers with a unique fuel, expanding ultra-rapid electric vehicle (EV) charging and convenient forecourt shop and \u2018food to go\u2019 experience. Learn more We Power The Future MFG forecourts will be the place for high speed, ultra-rapid top-up charging alongside a convenient retail and \u2018food to go\u2019 offering. Learn more Serving Your Community Our key objective is to make all visits to our UK network of forecourts as pleasurable as possible by offering high levels of customer service, competitively priced fuels and a convenient shopping experience in the heart of our local communities. Learn more Run Your Own Retail Business MFG offers entrepreneurs the opportunity to run their own business and be involved in one of the fastest growing retail sectors around. Learn more Become A Murco Dealer Our Murco brand and dealer offer provides a great choice of fuel supply with a range of options that are extremely competitive, flexible and designed to help you grow your business. Learn more Latest News 25% saving for all EV Power Customers using the MFG Connect App MFG announces a 25% summer price drop on ultra-rapid electric vehicle (EV) charging across its entire network. Read More 1st Oct 2026 MFG EV Power slashes ultra-rapid charging prices at all sites by 25% for summer 2026 MFG announces a 25% summer price drop on ultra-rapid electric vehicle (EV) charging across its entire network. Read More 30th Jun 2026 Greggs trials new \u2018Greggs Express\u2019 concept on our network Greggs has commenced a trial of its first Greggs Express unit, their new self-service solution at our Glasgow Airport station in Paisley. Read More 28th May 2026 Local MP Opens Our New Chesterfield EV Hub Local MP Toby Perkins Opens Our New Chesterfield 8-bay EV Hub. Read More 14th May 2026 See all news posts Contact us: Phone: +44 (0) 1727 898890 Email: customercare@motorfuelgroup.com Media Enquiries: Camarco Email: media@motorfuelgroup.com Investor Enquiries: Investor Relations Email: investorrelations@motorfuelgroup.com Where to find us: Motor Fuel Limited 10 Bricket Road St Albans Hertfordshire AL1 3JX Google Maps Accreditations Helping Disabled Drivers Modern Slavery Statement Privacy Policy Notice of Injunction CMA Fuel Price Scheme HSE Whistleblowing Policy Fraud Policy \u00a9 Copyright Motor Fuel Limited 2026. All rights reserved. Registered in England & Wales Number: 05206547. VAT Number: 123 4141 61\nContact Us - Motor Fuel Group Station Finder VAT Receipt Contact Us Home About Us Leadership Team Partners & Brands Reports & Publications Investors Charity Partner News ESG Sustainability Fuel a Greener World Fuel a More Diverse World Fuel a Safer World Fuel a Better World Governance Sustainability Reporting EV Power HSE Roberts Garages Business Opportunities Contract Management Become a Murco Dealer Careers Current Opportunities Working at MFG Station Finder Home About Us Leadership Team Partners & Brands Reports & Publications Investors Charity Partner News ESG Sustainability Fuel a Greener World Fuel a More Diverse World Fuel a Safer World Fuel a Better World Governance Sustainability Reporting EV Power HSE Roberts Garages Business Opportunities Contract Management Become a Murco Dealer Careers Current Opportunities Working at MFG VAT Receipt Contact Us Contact Us Contact Us Name * Subject * Subject Crime EV Fuel Health & Safety Parking Staff Behaviour Transaction Valeting Vehicle Damage Other Email Address * Telephone Number * Message I have read and agree to the Privacy Policy * Send Message Customer Services Phone: +44 (0) 1727 898890 Email: customercare@motorfuelgroup.com EV Charging Support 0808 175 9030 Where to Find Us: Motor Fuel Limited 10 Bricket Road St Albans Hertfordshire AL1 3JX Google Maps Media Enquiries: Camarco Email: media@motorfuelgroup.com Investor Enquiries: Investor Relations Email: investorrelations@motorfuelgroup.com Contact us: Phone: +44 (0) 1727 898890 Email: customercare@motorfuelgroup.com Media Enquiries: Camarco Email: media@motorfuelgroup.com Investor Enquiries: Investor Relations Email: investorrelations@motorfuelgroup.com Where to find us: Motor Fuel Limited 10 Bricket Road St Albans Hertfordshire AL1 3JX Google Maps Accreditations Helping Disabled Drivers Modern Slavery Statement Privacy Policy Notice of Injunction CMA Fuel Price Scheme HSE Whistleblowing Policy Fraud Policy \u00a9 Copyright Motor Fuel Limited 2026. All rights reserved. Registered in England & Wales Number: 05206547. VAT Number: 123 4141 61\nAbout Us - Motor Fuel Group Station Finder VAT Receipt Contact Us Home About Us Leadership Team Partners & Brands Reports & Publications Investors Charity Partner News ESG Sustainability Fuel a Greener World Fuel a More Diverse World Fuel a Safer World Fuel a Better World Governance Sustainability Reporting EV Power HSE Roberts Garages Business Opportunities Contract Management Become a Murco Dealer Careers Current Opportunities Working at MFG Station Finder Home About Us Leadership Team Partners & Brands Reports & Publications Investors Charity Partner News ESG Sustainability Fuel a Greener World Fuel a More Diverse World Fuel a Safer World Fuel a Better World Governance Sustainability Reporting EV Power HSE Roberts Garages Business Opportunities Contract Management Become a Murco Dealer Careers Current Opportunities Working at MFG VAT Receipt Contact Us About Us About MFG Motor Fuel Group (MFG) is the UK\u2019s largest independent forecourt operator. It has around 1200 sites spread over its MFG and Morrisons forecourt networks, offering customers a growing dual-fuel strategy, a leading valeting offer, convenient retail and \u2018food to go\u2019 portfolio, online delivery lockers and business break areas/facilities, MFG is reported to be the fifth largest retailer by number of stores in the country. MFG is dedicated to keeping UK motorists on the move and supporting our local communities. For drivers who find filling up or charging a challenge, MFG has partnered with the fuelService app to provide customers with assistance on the forecourt. This service enables disabled drivers to ask participating service stations for help before they go, so they have the confidence of knowing someone will be available to assist them when they arrive. Learn more Five Key Points About MFG Supporting Local Communities MFG provides vital infrastructure and essential service that supports local communities, the economy and helps keep UK\u2019s motorists on the move. Locations Franchise Business Model MFG operates a franchise business model giving contract managers an opportunity to run their own businesses. Contract Management Proven Growth Strategy MFG has a proven growth strategy. Reports & Publications Low Carbon Future MFG is enabling Britain to transition to a lower carbon future by investing in an ultra-rapid electric vehicle charging infrastructure. Learn About EV Leadership Team MFG is led by a proven entrepreneurial management team and a well governed Board delivering for all stakeholders. Our Leadership A History Of Growth On the 22nd December 2011, one of the UK\u2019s leading independent forecourt operators, Motor Fuel Group (MFG), was acquired by a new management team headed by chief executive officer, William Bannister. William is joined by Jeremy Clarke as chief operating officer, Simon Lane as chief financial officer and Adam Wadlow as chief investment officer. All four directors have considerable experience of the forecourt and convenience sectors. The team is backed by committed investors and together they are focused on growing and developing the MFG business into one of the most dynamic and profitable independent forecourt operators in the UK. With the continued support of their investors and an unswerving drive to grow and improve the business, the MFG management team has an impressive acquisition track record. Our Purpose To be the UK\u2019s most dynamic and successful independent forecourt operator with a strong social conscience and serving local communities. Leading the UK\u2019s mobility energy transition for a sustainable future. Our Mission To provide customers with market leading local travel infrastructure hubs with convenience retail, food services and premium fuels including ultra-rapid electric charging facilities. We strive to be a valuable member of the local communities we serve. We want to provide a working environment for our employees and franchisees that encourages personal development, teamwork and rewards performance that is open to all. Our Ethos is to \u2018care\u2019 in what we do and for those around us and to enable each of us to be the \u2018best they can be\u2019. See MFG's History of Growth 2014 In October 2014, MFG completed the acquisition of the retail assets of Murco Petroleum ( www.murco.co.uk ). 2015 In April 2015, 90 Shell branded stations were acquired. In July 2015, MFG secured new investors Clayton, Dubilier & Rice (CD&R) in a transaction valued at approximately \u00a3500 million. 2016 2016 saw the acquisition of the north west based Synergie Holdings with 19 stations and the north-east based Roadside Group with 10 stations. 2017 In 2017, four stations each were acquired from FW Kerridge and Burns & Co., nine stations from Macclesfield-based Manor Service Stations and 14 stations from the Golden Cross Group. 2018 At the end of February 2018, MFG announced the \u00a31.2 billion acquisition of MRH, bringing nearly 500 stations into the network. In addition, the acquisition also brought a wholesale and retail fuel business in the Ch\n%PDF-1.6\r%\ufffd\ufffd\ufffd\ufffd\r\n212 0 obj < >\rendobj\r             \r\n232 0 obj < >/Filter/FlateDecode/ID[ < 14BA18CC86498444B8924A8A89DA78D2> < 4B61C4629B017340ABF5ECA0DA31E1BA>]/Index[212 30]/Info 211 0 R/Length 102/Prev 160420/Root 213 0 R/Size 242/Type/XRef/W[1 3 1]>>stream\r\nh\ufffdbbd`\u0010``b``\ufffd\u0002\"\u0019V\ufffdHFy\ufffd\ufffd\u0001\ufffdd\ufffd\b&\ufffd\ufffd\"z`YM\u0010\u0252\r&m@$\ufffd%X\ufffd$X\ufffd5\ufffdd\u0000\ufffd\ufffd\ufffdzMAd\ufffd+\ufffdd\\r\u0011\ufffdn\ufffd\f$\ufffd\ufffdOg`\u0002\u069e\f\ufffd\ufffd\ufffd\ufffd(\ufffd?\u0003\ufffd\ufffdO\ufffd\u0000\u0003\u0000\u0003\ufffd\u000f;\r\nendstream\rendobj\rstartxref\r\n0\r\n%%EOF\r\n    \r\n241 0 obj < >stream\r\nh\ufffdb```\u0002\ufffd%\f\ufffd\f\f\u0002\u0002\f\ufffd\f\b \ufffd\ufffd\u0002\u0014ea\ufffdhp`\ufffd\ufffd\u0664\ufffd\ufffd\ufffd\ufffd\ufffda\ufffdL\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\u0016'\ufffd\t\ufffdj\ufffd\u0004yZ\ufffd\u001f\n00pt400ut00D\u0000\u0019\f\u001d\u001dp=H@\b\ufffd\u0019\u0018\ufffd\u0019\ufffdZ\ufffd\u0004\u0019\ufffd\u0018\ufffd\u0019\ufffd\u0019\ufffd\ufffd}\ufffde\ufffd\ufffd\ufffdV1\ufffdaz\u0234\ufffdQ,Wm\ufffd\ufffd+\ufffd\ufffd!\ufffd8\u0018\ufffd\ufffdALF\u0006\u0006\u0016\u001e \ufffd\ufffd\ufffd\u0014~\ufffd\u0001\ufffdt\ufffdKp\ufffdy\u0019\ufffd\n\ufffdCT1\ufffd\u0002\u0004\u0018\u0000b\t\"\ufffd\r\nendstream\rendobj\r213 0 obj < >/Metadata 11 0 R/Outlines 16 0 R/PageLayout/OneColumn/Pages 210 0 R/StructTreeRoot 49 0 R/Type/Catalog>>\rendobj\r214 0 obj < >>>/Rotate 0/StructParents 0/Tabs/S/Type/Page>>\rendobj\r215 0 obj < >stream\r\nh\u07b4Vmk\ufffd0\u0010\ufffd+\ufffd\ufffd1\ufffd\ufffdb\ufffd2\ufffdB\ufffd-\ufffd\ufffd\u058c&Y\ufffd\ufffd~\ufffdR\ufffd\u0018\u001c\ufffd\ufffd.[\ufffd}\ufffdd;\ufffd\ufffd\ufffdi\u0003C\u001c\ufffdu\ufffd\ufffd\ufffd{\u0014.\u0004\ufffd\ufffd\u000b\ufffdp\ufffd`\ufffdD\ufffd\u001afEBXs\u0011\u0010&BTh\u0094\ufffd\ufffd\ufffd0\ufffda\ufffd\u00077*99=\ufffdF\ufffd\u02a4%a\u0527\ufffdy\ufffd\ufffd\ufffd\ufffd\ufffdMI\ufffd\ufffd\ufffdGS\ufffdN\u0004\r\ufffdI\u0012\ufffd\u000b\"|o\ufffd\ufffd\ufffdx\ufffd\ufffd\ufffd=\ufffdJ[\u001d\ufffd\ufffd\rpg\ufffd\ufffdh\u001b'O\ufffd\ufffd\ufffd\ufffd\u0014\ufffd\ufffd\ufffd!W\ufffd6J\ufffdW\ufffd81\ufffdp\ufffd\ufffd\ufffd+\ufffds\u0019m\ufffd7\ufffd^\u070c.>X\u0017\ufffd\u000e?f\ufffd\ufffd\ufffdbV\ufffd\\m\ufffd\ufffd,\ufffdF\ufffd\ufffdZVU\ufffd\ufffdz_\ufffd(\ufffdW\ufffdt\ufffd\u0018B\ufffdYi\ufffd?\ufffd\ufffd\ufffd\ufffd\ufffd\ufffdXS >stream\r\nH\ufffd\\\ufffd\ufffdn\ufffd0\f\ufffd\ufffdy\n\u001f\ufffdC\u0005\u0004\ufffd\u0016\t!U\ufffd\ufffd8\ufffd\ufffd\ufffd\u000041\u001d\ufffd\bQ\ufffd\u0007\ufffd~1\ufffd:i\ufffd\ufffd_\ufffd\ufffd\u001c\ufffd\ufffd\ufffd\ufffdj\ufffd\ufffd\u0010\ufffd\ufffdQ78C\ufffd[\ufffdq\u001ao^#\\\ufffd\ufffd[\ufffdH0\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\u0589(\ufffd\ufffde\ufffdq\ufffdm7\ufffd\ufffd\ufffd\ufffd#\u0004\ufffd\ufffd/\ufffd9\ufffd\ufffd[\u0011\ufffdy\ufffd\ufffd\ufffdW\ufffd|U\ufffd\u0016\ufffd\ufffd\ufffd\ufffd\u000f\u000ehg\ufffd\ufffd,\ufffd`\u0017\u0012\ufffd\ufffd\ufffd\u001d\u0010\ufffd\u0576\ufffdM\ufffd\ufffd\ufffd\u000b\ufffd?\ufffd\ufffd\ufffd\u0010\ufffdO\ufffd\u0018=\u001a\ufffd\\\ufffd\u0477\ufffd\ufffd\ufffd\ufffd\ufffd*\ufffdx\u000e\ufffd\u0014h\u037f\ufffd\ufffdl\ufffdt\ufffd\ufffd\ufffd\ufffd\ufffd$\ufffd\ufffd\ufffd\t|f>\u0007N\ufffd < \ufffd\ufffd4aN\ufffd%\ufffd$N\ufffdS\ufffd9#\ufffd3\ufffd\u0015\ufffd\">0\u001f\ufffd\ufffd\ufffdG\ufffd9\u000f\ufffd\ufffd>#}vb>\u0005V\\\ufffd\ufffd\u001a\u0014\ufffdW\ufffd_\ufffdW\ufffdWU\ufffd\u00151\ufffdE\ufffd]\u000e\ufffd?\ufffd>'\ufffd\ufffd\ufffd\ufffds\ufffdr\ufffd\ufffd\ufffd\ufffdw\ufffdZ\u0016&\u000b\ufffdy\ufffd\ufffda\u0014\ufffd\ufffd\ufffd\u0019P\ufffd{\ufffd\ufffd?\u010d\u000e\ufffd\ufffd\u001e\ufffd+\ufffd\u00003\ufffd\ufffdf\r\nendstream\rendobj\r217 0 obj < >stream\r\nH\ufffd\\\ufffd\u074e\ufffd@\u0010\u0005\ufffd{\ufffd\ufffd/g.&(]]\ufffd\t1qt&\ufffdb\u007f\ufffd\ufffd>\u0000B\ub4ac@\u0010/|\ufffd\ufffd\u00d9\ufffd&k\ufffd\u001e\u0002]|U\ufffd\ufffdw\ufffd\ufffd\ufffdk'\ufffd\u007f\u001f\ufffd\ufffd\u0018'wn\ufffdf\ufffd\ufffd\ufffd>\ufffd\u045d\ufffd\ufffd\ufffde\u16b6\ufffd>\ufffd\ufffd\ufffd\ufffdZ\rY\ufffd\u0016\u001f\u001f\ufffd)^\u000f\u0779\ufffd\ufffd\ufffd\ufffd?\ufffd\ufffd\ufffd4>\ufffd\u04f6\ufffdO\ufffd9\u02ff\ufffdM\u001c\ufffd\ufffd\ufffd~\ufffd\ufffd.?\u0787\ufffdO\ufffd\ufffdnr\u000b\ufffd\u0678&\ufffdS\ufffd/\ufffd\ufffdF\ufffd\ufffd\ufffd^\u000eM:\ufffdN\ufffd\ufffd\ufffd\ufffd\ufffd\u0015?\u001fCt\ufffd|\ufffd$\ufffd\ufffdx\u001b\ufffd:\ufffdUw\ufffdY\ufffdH\ufffd\ufffd+\ufffd\ufffdg\ufffd\u016e\ufffd\uff2e\ufffd\ufffdt\ufffd\u007fWcV\u0016\ufffdx\ufffdH\u007f)\u0017\ufffd\u0005\ufffd2+\ufffd1\u001b\ufffdy\ufffd\ufffdf^#\ufffdw\ufffd{\ufffd=\ufffd\u001b\ufffd\u001b\ufffd;s\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd_2/\ufffdi\ufffd0x\ufffd\uc445Y\ufffd\u0003s@\ufffd\ufffd\ufffd\ufffdi\ufffdy\ufffd 3\ufffdg\ufffd8\u0007\ufffd\u001c\ufffd~\ufffd\ufffd\ufffd7\ufffd\ufffd~\ufffd\ufffd\ufffd7\ufffd\ufffd~\ufffd\ufffd\ufffd7\ufffd\ufffd~\ufffd\ufffd\ufffd7\ufffd\ufffd~\ufffd\u007f\ufffd\ufffd\ufffd\ufffd\ufffd\u001b\ufffdc\ufffd`k\ufffd7\ufffd\ufffd\u0737\ufffd}\u001c\u04d6\ufffd_\u0013\ufffd^\ufffd.m\ufffd\ufffd\ufffd&\u0019\ufffd\ufffd\ufffdU\ufffdf\u007f\u0005\u0018\u0000\ufffd\ufffd\fm\r\nendstream\rendobj\r218 0 obj < >stream\r\nH\ufffd\\\ufffd\ufffdn\ufffd@\u0010\ufffd\ufffd < \ufffd\u001c\ufffdC\ufffd\r=\u074e\ufffd,9v\"\ufffd\ufffd?Z\ufffd>\u0000\ufffd\ufffd\ufffd\u0014\u0003\u001a\ufffd\ufffd~\ufffd\ufffd(+-\ufffd\u0347\ufffd\ufffd\ufffd\u0016\ufffdo\ufffd\ufffd}\ufffdM.\ufffd\u0019\ufffd\ufffd\u0010&w\ufffd\ufffd6\ufffd\ufffdp\ufffdMp\ufffdp\ufffd\ufffdlY\ufffd\ufffdk\ufffd\u03eb\ufffd\ufffd\ufffd\ufffdc\ufffd'\ufffd\ufffd~\ufffd\ufffde\u07df\ufffd\ufffd\ufffd\\\ufffd+\u077cN\ufffd\ufffd\u001e6\ufffdp\f\ufffdY\ufffd#\ufffd!v\ufffd\ufffd=\ufffd\ufffd\u001e\u001e]~\ufffd\ufffd\ufffdG\ufffd\ufffd~r\u000b\ufffd^\ufffd6\ufffd\u048b\ufffd\ufffd\ufffd\ufffd\ufffd\u0012\\>\u02de\ufffdm\ufffd\ufffdM\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\u0018\\1_/\u0019\ufffd\u0019\ufffdp\u001d\ufffd&\u013a?\ufffd\ufffdZ\ufffdc\ufffd\ufffd\ufffdt\ufffd\ufffd\u0437\ufffd\ufffd\ufffd+\u028e\ufffd\u6f4eYU\ufffd\ufffd\ufffd\"\ufffd\u0012+Y\ufffd[\ufffd\u0016\ufffd#\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd%\ufffd%\ufffd\u54bc\u0004\u0017\ufffd\u0002\\\ufffdK\ufffd\ufffd\u0005\ufffd\ufffd\u001eL\ufffd\u0012\ufffd\ufffd\ufffd\r\ufffd\"\ufffd\ufffdo\ufffdT\ufffd\u0012z\t\ufffd\ufffd^\u0002/\ufffd\ufffd\ufffdK\ufffd%\ufffd\u0012z\t\ufffd\ufffd^\u0002/\ufffd\ufffd\ufffdK\ufffd%\ufffdg\ufffd3\ufffds\u0010\ufffdA8\u0007\ufffd\u001c\ufffds\u0010\ufffdA\ufffdM\ufffd\ufffds&\u001e3\ufffd\ufffd\ufffd\ufffd3\ufffdG6\ufffdl\u001e\ufffd < 3xdP\ufffdR\ufffdRj\u0015Z\ufffdV\ufffdUj\u0015Ze/E/e/E/\ufffd;u~'{)z){)z\u91bc\u0001\ufffd\ufffd_\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffdk\ufffdk\ufffdk\ufffdo\ufffdo\ufffdo\ufffdo\ufffdo\ufffdo\ufffdo\ufffdo\ufffdo\ufffdo\ufffdo\ufffdo\ufffdo\ufffdo\ufffdo\ufffdo\u031fN\ufffd\ufffd?\ufffd`|\ufffdi\u0013\ufffd\ufffd\ufffd4\ufffd\u0018\ufffd\ufffd\ufffd\ufffd:\ufffd\f\ufffd\ufffd\ufffd\ufffd\ufffdF\ufffd\ufffd\ufffd\n\ufffd\ufffd\u0000\u0003\u0000xK\ufffd\u0014\r\nendstream\rendobj\r219 0 obj < >stream\r\nH\ufffd\\\ufffd\ufffdj\ufffd \u0010\ufffd\ufffd>\ufffd\u001cw\u000f\ufffd\u065c%P\ufffd\u0014r\ufffd\u001f\ufffd\ufffd\u0001\ufffdNR\ufffd\u0019eb\u000ey\ufffd\ufffd6l\ufffd\u0003*\ufffd\ufffd\ufffd\ufffds\ufffd\ufffd\u007f\ufffd)d\ufffdo\u001c\u0740\u0019\ufffd@\ufffdq\ufffd\u001b;\ufffd\u0011\ufffd@\ufffd\u0682\u000f.\u001f]\ufffd\ufffdb\ufffd\ufffd\u0002\u000f\ufffd\ufffdq\ufffdi\ufffd\ufffd\u0018\ufffd\ufffd\"\ufffd\ufffdw8=\ufffd8\ufffdY\ufffdW\ufffd\u0201f8}\u07863\ufffdaK\ufffd\u001b\u0017\ufffd\f\rt\u001dx\ufffd\ufffdg\ufffd^\uc0a0+v\ufffd\ufffd!\ufffd\u0017a\ufffd\u001c\u001f{Bhk\u007f\ufffd\r\ufffd\ufffd5Y\ufffdliFe\u001a\ufffd\u000e\u0313T\ufffd\ufffd\ufffd?\ufffd\ufffd\ufffd\ufffd}YV\ufffd-\u07a6\ufffd\ufffdx\ufffd\ufffdB\ufffd\ufffd\ufffd\u001e\ufffdm\u0312\ufffdN\ufffd\ufffd(\u0001\u0002\ufffd}H)&\u0010\ufffd,\ufffd#\ufffd\u0000\ufffd\ufffdo0\r\nendstream\rendobj\r220 0 obj < >stream\r\nH\ufffd\ufffdVMo\ufffdH\f\ufffd\ufffdW\u0010{\ufffd,\ufffdf\ufffdi\ufffd(P'\ufffd\ufffd\ufffd\u001a\u001b`\r\ufffd\ufffd\ufffdX\u33ed-\u0005\ufffd\ufffd4\ufffd~\ufffd\u0019\ufffdHrS\ufffd\ufffd\u0011E>>>rh/V\ufffd\ufffd\ufffdS\ufffd\ufffdT\ufffd\u000e\u07bf\ufffd}\ufffdj\ufffd35\ufffd\ufffdV\ufffd\u0013 < \ufffd\u0016\ufffd\ufffd\u0007\ufffd\ufffdLR]@1O\ufffd\ufffd\ufffd\u0006U\ufffdRg\ufffd\ufffd2.d\ufffd\ufffd\u0014]\ufffd=?v\ufffdO\u0006f7\ufffd\ufffd\ufffd\tf+\ufffdv[m\ufffdM\ufffd\ufffd\ufffd\u0006>|X\\_\ufffdd\ufffdZ\u0160`\ufffd\ufffdLc\u0019\ufffdxZ\u0003\u001f^`.\ufffd9Lc\ufffd\u0769\u0418\ufffd\ufffd*\ufffd\ufffdqr\u0017}\u0016\ufffd,!\ufffd7b\ufffdF\ufffd*1\ufffdd8\ufffdxX}\ufffd\ufffd\u0016\ufffd`\ufffdLTB\ufffdz\u0012\ufffdk\ufffd\ufffd\ufffd\u007f\ufffdXfq\ufffd6p\ufffd\u0018\r\u0018by$\u0014\u0017cY\u001cw\u0017\ufffd9|\u0015s\ufffdAtn\ufffdP(\u0002D\ufffdc\ufffd4\ufffd\ufffd\u0017)#\ufffd$C\ufffd\ufffd\ufffd$\ufffd\ufffdT\ufffd\"y\ufffdW_\ufffd\ufffd[\ufffd\ufffdr:P\ufffd4\u0010\ufffd\b\ufffd\ufffdy\ufffd\ufffd\u0014\ufffd\ufffd\u0731Y\ufffdL\u0016`%@F\u007f\ufffd\ufffd\"\u0016\ufffdM\ufffdRC\ufffds\ufffdH\ufffd\u001c\ufffdg\ufffdEY\ufffd\u0003\ufffd_\ufffd{\u007ftN\u0007\ufffd\u053a\ufffd\u0017F\ufffd\ufffd\u0006\ufffd9D[\ufffd\u0011n\u0011>q\ufffd\ufffd\ufffd$\ufffdY\ufffd\ufffd\ufffd}\ufffdJ`9\ufffd\ufffd\t\ufffd\ufffd\u0004\ufffd\ufffdI\ufffdO\u0017cguQ^\u0017\ufffd`\ufffd\ufffd\ufa52I\ufffd\u0010H\u0004\u001f\u0012qNf\ufffd\ufffd\ufffdA,\u0010\ufffdF\ufffd\ufffd\ufffd\u0007\ufffdR\ufffd\ufffd[b\ufffd\f\ufffdL\ufffd!\u04d6\u0016\ufffd\ufffdn\ufffd\u0711\ufffdL\ufffdn\u0194\u0014\u04dc\ufffd\u0006_\u05af\ufffdt1\ufffdeJ\ufffd\u0003\u0497^Q\ufffd\ufffd;\ufffdB\ufffdA\ufffd\ufffdY\ufffd\ufffdm\ufffd\ufffd\ufffdG\ufffd\ufffd^@\ufffdtf\ufffd\ufffd\ufffd\ufffdp\ufffd\ufffd\ufffdL\ufffd\u0531+\ufffd\ufffd\ufffd\ufffd\u001c\ufffd\ufffd\ufffd\ufffd`\ufffd\ufffd_\ufffd\b\ufffd\ufffd\ufffd\u0197m\ufffd]\ufffdR\ufffd\ufffd\u0017@I\\\t*Op\ufffd\ufffdj\ufffdm\ufffd\ufffdC\ufffd~\ufffd3\ufffd\u0000o-\ufffd|n\ufffd\ufffd\ufffd\u02f6c5\ufffd\u0013\ufffd",
+          "error": null
+        },
+        "app": {
+          "status": "uncertain",
+          "matches": [],
+          "candidates": [
+            {
+              "name": "IMO Car Wash UK",
+              "url": "https://apps.apple.com/gb/app/imo-car-wash-uk/id1281511171?uo=4",
+              "verified": false
+            },
+            {
+              "name": "Car Wash Empire",
+              "url": "https://apps.apple.com/gb/app/car-wash-empire/id1466637212?uo=4",
+              "verified": false
+            },
+            {
+              "name": "Clean Me - Mobile Car Wash",
+              "url": "https://apps.apple.com/gb/app/clean-me-mobile-car-wash/id1599680672?uo=4",
+              "verified": false
+            },
+            {
+              "name": "GoWash - Car Wash Payment",
+              "url": "https://apps.apple.com/gb/app/gowash-car-wash-payment/id1498489711?uo=4",
+              "verified": false
+            },
+            {
+              "name": "Wash Doctors - Mobile Car Care",
+              "url": "https://apps.apple.com/gb/app/wash-doctors-mobile-car-care/id1243060371?uo=4",
+              "verified": false
+            }
+          ],
+          "checks": [
+            "Apple App Store search"
+          ],
+          "limitations": [
+            "Google Play search unavailable",
+            "No matching app found is not proof that no app exists"
+          ]
+        }
+      },
+      "analysis": {
+        "summary": "Motor Fuel Group is a forecourt operator offering fuel, EV charging, retail and food services. The provided website text does not indicate any mobile app for a car wash service, nor does it mention a dedicated car wash app. The app verification data lists unrelated car wash apps that are not associated with Motor Fuel Group. Therefore, there is no evidence that Motor Fuel Group operates a car wash mobile app, and the opportunity for a car wash mobile app is not applicable.",
+        "opportunity": "None",
+        "score": 0,
+        "reasons": [
+          "Website content describes a forecourt operator, not a car wash service",
+          "No mention of a mobile app for car wash services",
+          "App verification candidates are unrelated third\u2011party car wash apps",
+          "No evidence of a partnership or branded app with Motor Fuel Group"
+        ],
+        "suitable": false,
+        "provider": "api.groq.com",
+        "tokens": 2831
+      },
+      "reason": "Qualification requires review",
+      "lead_id": null,
+      "campaign_id": null
+    },
+    {
+      "id": "de2502b8-5626-4f54-914a-8f2be014ee45",
+      "created_at": "2026-10-09T21:24:50.354580Z",
+      "updated_at": "2026-10-09T21:25:01.145265Z",
+      "run_id": "eedc99bc-5fd9-4940-b9e9-c3aa28150d0d",
+      "company": "Waves Hand Car Wash Purley",
+      "website": "https://wavescarwash.co.uk/",
+      "country": "GB",
+      "city": "Purley",
+      "phone": "+44 7833 122532",
+      "status": "missing_email",
+      "stage": "complete",
+      "emails": [],
+      "app_status": "uncertain",
+      "score": 60,
+      "evidence": {
+        "maps": {
+          "url": "https://www.google.com/maps/search/?api=1&query=Waves%20Hand%20Car%20Wash%20Purley&query_place_id=ChIJcXRHMI39dUgRxCc3gwBJUe4",
+          "place_id": "ChIJcXRHMI39dUgRxCc3gwBJUe4",
+          "address": "Car Park of Tesco Store, 9 Purley Rd, Purley CR8 2HA, United Kingdom",
+          "country_inferred_from_query": false
+        },
+        "checked_at": "2026-10-09T21:24:50.348551Z",
+        "website": {
+          "pages": [
+            {
+              "url": "https://wavescarwash.co.uk/",
+              "excerpt": "Waves Car Wash Mobile menu Find a car wash Prices / opening hours Perfect Partners Franchise opportunities Contact us Find a car wash Prices / opening hours Perfect Partners Franchise opportunities Contact us Car wash locator Contact us Legal Privacy policy Terms and conditions The Waves Group 1 Castle Court, Brewhouse Lane London, SW15 2JJ E: [email\u00a0protected] T: 0208 877 3884 Calls may be recorded for training and monitoring purposes \u00a9 2026 Waves Car Wash Ltd"
+            },
+            {
+              "url": "https://wavescarwash.co.uk/contact-us.html",
+              "excerpt": "Contact us Mobile menu Find a car wash Prices / opening hours Perfect Partners Franchise opportunities Contact us Contact us What would you like to contact us about? To check wash prices To check a site's opening hours To give positive feedback To make a complaint To buy a franchise To open a fleet account with Waves To become a Waves supplier To advertise on a Waves site To become a Waves landlord A general enquiry Waves Head Office 1 Castle Court Brewhouse Lane London SW15 2JJ [email\u00a0protected] 0208 877 3884 Calls may be recorded for training and monitoring purposes Car wash locator Contact us Legal Privacy policy Terms and conditions The Waves Group 1 Castle Court, Brewhouse Lane London, SW15 2JJ E: [email\u00a0protected] T: 0208 877 3884 Calls may be recorded for training and monitoring purposes \u00a9 2026 Waves Car Wash Ltd"
+            }
+          ],
+          "emails": [],
+          "app_links": [],
+          "text": "Waves Car Wash Mobile menu Find a car wash Prices / opening hours Perfect Partners Franchise opportunities Contact us Find a car wash Prices / opening hours Perfect Partners Franchise opportunities Contact us Car wash locator Contact us Legal Privacy policy Terms and conditions The Waves Group 1 Castle Court, Brewhouse Lane London, SW15 2JJ E: [email\u00a0protected] T: 0208 877 3884 Calls may be recorded for training and monitoring purposes \u00a9 2026 Waves Car Wash Ltd\nContact us Mobile menu Find a car wash Prices / opening hours Perfect Partners Franchise opportunities Contact us Contact us What would you like to contact us about? To check wash prices To check a site's opening hours To give positive feedback To make a complaint To buy a franchise To open a fleet account with Waves To become a Waves supplier To advertise on a Waves site To become a Waves landlord A general enquiry Waves Head Office 1 Castle Court Brewhouse Lane London SW15 2JJ [email\u00a0protected] 0208 877 3884 Calls may be recorded for training and monitoring purposes Car wash locator Contact us Legal Privacy policy Terms and conditions The Waves Group 1 Castle Court, Brewhouse Lane London, SW15 2JJ E: [email\u00a0protected] T: 0208 877 3884 Calls may be recorded for training and monitoring purposes \u00a9 2026 Waves Car Wash Ltd",
+          "error": null
+        },
+        "app": {
+          "status": "uncertain",
+          "matches": [],
+          "candidates": [
+            {
+              "name": "IMO Car Wash UK",
+              "url": "https://apps.apple.com/gb/app/imo-car-wash-uk/id1281511171?uo=4",
+              "verified": false
+            },
+            {
+              "name": "Waves Customer App",
+              "url": "https://apps.apple.com/gb/app/waves-customer-app/id6796789015?uo=4",
+              "verified": false
+            },
+            {
+              "name": "Clean Me - Mobile Car Wash",
+              "url": "https://apps.apple.com/gb/app/clean-me-mobile-car-wash/id1599680672?uo=4",
+              "verified": false
+            },
+            {
+              "name": "GoWash - Car Wash Payment",
+              "url": "https://apps.apple.com/gb/app/gowash-car-wash-payment/id1498489711?uo=4",
+              "verified": false
+            }
+          ],
+          "checks": [
+            "Apple App Store search"
+          ],
+          "limitations": [
+            "Google Play search unavailable",
+            "No matching app found is not proof that no app exists"
+          ]
+        }
+      },
+      "analysis": {
+        "summary": "Waves Hand Car Wash Purley is a car wash service with a website that offers franchise opportunities and fleet accounts. The evidence does not confirm the existence of a dedicated mobile app for the business, and the app verification process is inconclusive. The business model involves repeat customers through car wash services, but there is no clear indication of loyalty programs or memberships that would be enhanced by a mobile app.",
+        "opportunity": "Potential to develop a mobile app to streamline booking, payments, loyalty, and fleet account management for repeat customers.",
+        "score": 60,
+        "reasons": [
+          "Website indicates franchise and fleet account options, suggesting repeat customer interactions.",
+          "No confirmed mobile app found; app verification status is uncertain.",
+          "Car wash industry benefits from mobile booking and loyalty features.",
+          "No evidence of existing app or software development focus.",
+          "Business is not an app developer or aggregator."
+        ],
+        "suitable": true,
+        "provider": "api.groq.com",
+        "tokens": 1060
+      },
+      "reason": "No public business email found; outreach is blocked",
+      "lead_id": null,
+      "campaign_id": null
+    },
+    {
+      "id": "ae6124c7-3c0a-4d33-8ef5-d25a2d9b4aae",
+      "created_at": "2026-10-09T21:14:57.953561Z",
+      "updated_at": "2026-10-09T21:14:57.953563Z",
+      "run_id": "e2d7e093-1f77-4843-a9bd-b6fbc17d2d76",
+      "company": "Bexleyheath Hand Car Wash ltd",
+      "website": null,
+      "country": "GB",
+      "city": "Bexleyheath",
+      "phone": "",
+      "status": "missing_website",
+      "stage": "complete",
+      "emails": [],
+      "app_status": "not_checked",
+      "score": 0,
+      "evidence": {
+        "maps": {
+          "url": "https://www.google.com/maps/search/?api=1&query=Bexleyheath%20Hand%20Car%20Wash%20ltd&query_place_id=ChIJGYLaOF-u2EcRZdo5sPymiCI",
+          "place_id": "ChIJGYLaOF-u2EcRZdo5sPymiCI",
+          "address": "5 Royal Oak Rd, Bexleyheath DA6 7HJ, United Kingdom",
+          "country_inferred_from_query": false
+        },
+        "checked_at": "2026-10-09T21:14:57.953345Z"
+      },
+      "analysis": {},
+      "reason": "No website provided by source",
+      "lead_id": null,
+      "campaign_id": null
+    },
+    {
+      "id": "5068f6b3-7a8a-4515-bc0a-6a3b8b049dc3",
+      "created_at": "2026-10-09T21:14:57.952434Z",
+      "updated_at": "2026-10-09T21:14:57.952436Z",
+      "run_id": "e2d7e093-1f77-4843-a9bd-b6fbc17d2d76",
+      "company": "ICC Hand Car Wash Broadway Shopping Centre",
+      "website": null,
+      "country": "GB",
+      "city": "Bexleyheath",
+      "phone": "",
+      "status": "missing_website",
+      "stage": "complete",
+      "emails": [],
+      "app_status": "not_checked",
+      "score": 0,
+      "evidence": {
+        "maps": {
+          "url": "https://www.google.com/maps/search/?api=1&query=ICC%20Hand%20Car%20Wash%20Broadway%20Shopping%20Centre&query_place_id=ChIJKYqFdACv2EcRufMU3dsBEnY",
+          "place_id": "ChIJKYqFdACv2EcRufMU3dsBEnY",
+          "address": "Broadway Shopping Centre, Albion Rd, Bexleyheath DA6 7JJ, United Kingdom",
+          "country_inferred_from_query": false
+        },
+        "checked_at": "2026-10-09T21:14:57.952190Z"
+      },
+      "analysis": {},
+      "reason": "No website provided by source",
+      "lead_id": null,
+      "campaign_id": null
+    },
+    {
+      "id": "adc9586a-56fc-4a99-af86-79aefd61afb3",
+      "created_at": "2026-10-09T21:14:57.951252Z",
+      "updated_at": "2026-10-09T21:14:57.951254Z",
+      "run_id": "e2d7e093-1f77-4843-a9bd-b6fbc17d2d76",
+      "company": "The Big Car Wash Welling",
+      "website": null,
+      "country": "GB",
+      "city": "Welling",
+      "phone": "+44 7767 676367",
+      "status": "missing_website",
+      "stage": "complete",
+      "emails": [],
+      "app_status": "not_checked",
+      "score": 0,
+      "evidence": {
+        "maps": {
+          "url": "https://www.google.com/maps/search/?api=1&query=The%20Big%20Car%20Wash%20Welling&query_place_id=ChIJOayxbdyu2EcR-hWH7E3caJ0",
+          "place_id": "ChIJOayxbdyu2EcR-hWH7E3caJ0",
+          "address": "118-120 Upper Wickham Ln, Welling DA16 3DP, United Kingdom",
+          "country_inferred_from_query": false
+        },
+        "checked_at": "2026-10-09T21:14:57.951020Z"
+      },
+      "analysis": {},
+      "reason": "No website provided by source",
+      "lead_id": null,
+      "campaign_id": null
+    },
+    {
+      "id": "658b9438-f95b-4077-8889-60f2bf28c5bb",
+      "created_at": "2026-10-09T21:14:57.949964Z",
+      "updated_at": "2026-10-09T21:14:57.949966Z",
+      "run_id": "e2d7e093-1f77-4843-a9bd-b6fbc17d2d76",
+      "company": "The Bubble Way Car Wash",
+      "website": null,
+      "country": "GB",
+      "city": "Rainham",
+      "phone": "",
+      "status": "missing_website",
+      "stage": "complete",
+      "emails": [],
+      "app_status": "not_checked",
+      "score": 0,
+      "evidence": {
+        "maps": {
+          "url": "https://www.google.com/maps/search/?api=1&query=The%20Bubble%20Way%20Car%20Wash&query_place_id=ChIJy-Ss0Yal2EcRiySLoEloYVk",
+          "place_id": "ChIJy-Ss0Yal2EcRiySLoEloYVk",
+          "address": "1 Cherry Tree Ln, Rainham RM13 8TH, United Kingdom",
+          "country_inferred_from_query": false
+        },
+        "checked_at": "2026-10-09T21:14:57.949332Z"
+      },
+      "analysis": {},
+      "reason": "No website provided by source",
+      "lead_id": null,
+      "campaign_id": null
+    },
+    {
+      "id": "5bf1075e-e78c-4281-a2cf-f62f73341af3",
+      "created_at": "2026-10-09T21:14:57.943549Z",
+      "updated_at": "2026-10-09T21:24:25.552628Z",
+      "run_id": "e2d7e093-1f77-4843-a9bd-b6fbc17d2d76",
+      "company": "Waves Hand Car Wash Rainham",
+      "website": "https://wavescarwash.co.uk/",
+      "country": "GB",
+      "city": "London",
+      "phone": "+44 7748 776469",
+      "status": "missing_email",
+      "stage": "complete",
+      "emails": [],
+      "app_status": "uncertain",
+      "score": 70,
+      "evidence": {
+        "maps": {
+          "url": "https://www.google.com/maps/search/?api=1&query=Waves%20Hand%20Car%20Wash%20Rainham&query_place_id=ChIJxy9Efau62EcRPyJGgvG1558",
+          "place_id": "ChIJxy9Efau62EcRPyJGgvG1558",
+          "address": "Car Park of Tesco Store, Bridge Rd, London RM13 9YZ, United Kingdom",
+          "country_inferred_from_query": false
+        },
+        "checked_at": "2026-10-09T21:14:57.941838Z",
+        "website": {
+          "pages": [
+            {
+              "url": "https://wavescarwash.co.uk/",
+              "excerpt": "Waves Car Wash Mobile menu Find a car wash Prices / opening hours Perfect Partners Franchise opportunities Contact us Find a car wash Prices / opening hours Perfect Partners Franchise opportunities Contact us Car wash locator Contact us Legal Privacy policy Terms and conditions The Waves Group 1 Castle Court, Brewhouse Lane London, SW15 2JJ E: [email\u00a0protected] T: 0208 877 3884 Calls may be recorded for training and monitoring purposes \u00a9 2026 Waves Car Wash Ltd"
+            },
+            {
+              "url": "https://wavescarwash.co.uk/contact-us.html",
+              "excerpt": "Contact us Mobile menu Find a car wash Prices / opening hours Perfect Partners Franchise opportunities Contact us Contact us What would you like to contact us about? To check wash prices To check a site's opening hours To give positive feedback To make a complaint To buy a franchise To open a fleet account with Waves To become a Waves supplier To advertise on a Waves site To become a Waves landlord A general enquiry Waves Head Office 1 Castle Court Brewhouse Lane London SW15 2JJ [email\u00a0protected] 0208 877 3884 Calls may be recorded for training and monitoring purposes Car wash locator Contact us Legal Privacy policy Terms and conditions The Waves Group 1 Castle Court, Brewhouse Lane London, SW15 2JJ E: [email\u00a0protected] T: 0208 877 3884 Calls may be recorded for training and monitoring purposes \u00a9 2026 Waves Car Wash Ltd"
+            }
+          ],
+          "emails": [],
+          "app_links": [],
+          "text": "Waves Car Wash Mobile menu Find a car wash Prices / opening hours Perfect Partners Franchise opportunities Contact us Find a car wash Prices / opening hours Perfect Partners Franchise opportunities Contact us Car wash locator Contact us Legal Privacy policy Terms and conditions The Waves Group 1 Castle Court, Brewhouse Lane London, SW15 2JJ E: [email\u00a0protected] T: 0208 877 3884 Calls may be recorded for training and monitoring purposes \u00a9 2026 Waves Car Wash Ltd\nContact us Mobile menu Find a car wash Prices / opening hours Perfect Partners Franchise opportunities Contact us Contact us What would you like to contact us about? To check wash prices To check a site's opening hours To give positive feedback To make a complaint To buy a franchise To open a fleet account with Waves To become a Waves supplier To advertise on a Waves site To become a Waves landlord A general enquiry Waves Head Office 1 Castle Court Brewhouse Lane London SW15 2JJ [email\u00a0protected] 0208 877 3884 Calls may be recorded for training and monitoring purposes Car wash locator Contact us Legal Privacy policy Terms and conditions The Waves Group 1 Castle Court, Brewhouse Lane London, SW15 2JJ E: [email\u00a0protected] T: 0208 877 3884 Calls may be recorded for training and monitoring purposes \u00a9 2026 Waves Car Wash Ltd",
+          "error": null
+        },
+        "app": {
+          "status": "uncertain",
+          "matches": [],
+          "candidates": [
+            {
+              "name": "IMO Car Wash UK",
+              "url": "https://apps.apple.com/gb/app/imo-car-wash-uk/id1281511171?uo=4",
+              "verified": false
+            },
+            {
+              "name": "Waves Customer App",
+              "url": "https://apps.apple.com/gb/app/waves-customer-app/id6796789015?uo=4",
+              "verified": false
+            },
+            {
+              "name": "Clean Me - Mobile Car Wash",
+              "url": "https://apps.apple.com/gb/app/clean-me-mobile-car-wash/id1599680672?uo=4",
+              "verified": false
+            },
+            {
+              "name": "GoWash - Car Wash Payment",
+              "url": "https://apps.apple.com/gb/app/gowash-car-wash-payment/id1498489711?uo=4",
+              "verified": false
+            }
+          ],
+          "checks": [
+            "Apple App Store search"
+          ],
+          "limitations": [
+            "Google Play search unavailable",
+            "No matching app found is not proof that no app exists"
+          ]
+        }
+      },
+      "analysis": {
+        "summary": "Waves Hand Car Wash Rainham operates a physical car wash service with franchise and fleet account options. The website indicates potential for repeat customers through fleet accounts and loyalty, but no definitive evidence of an existing mobile app. The app verification is uncertain, requiring human review. The business is not an app developer or aggregator.",
+        "opportunity": "High repeat\u2011customer value via fleet accounts, loyalty programs, and franchise opportunities. Mobile app could enhance booking, ordering, and loyalty engagement.",
+        "score": 70,
+        "reasons": [
+          "Physical car wash with franchise and fleet account options",
+          "Website mentions repeat\u2011customer services (fleet accounts)",
+          "No confirmed mobile app found, but candidates exist",
+          "App status uncertain \u2013 requires human review"
+        ],
+        "suitable": true,
+        "provider": "api.groq.com",
+        "tokens": 1046
+      },
+      "reason": "No public business email found; outreach is blocked",
+      "lead_id": null,
+      "campaign_id": null
+    }
+  ]
+}

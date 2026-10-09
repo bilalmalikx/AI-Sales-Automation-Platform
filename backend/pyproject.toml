@@ -23,6 +23,7 @@ env = [
 target-version = "py311"
 line-length = 100
 src = ["app", "tests"]
+extend-exclude = ["app/agents/test_*.py"]
 
 [tool.ruff.lint]
 select = [
@@ -39,6 +40,7 @@ select = [
     "RUF",  # ruff-specific
 ]
 ignore = [
+    "E501",  # Formatter manages code wrapping; preserve prompt/string content
     "S101",  # assert statements in tests are fine
     "B008",  # FastAPI Depends() in function defaults
     "N805",  # cls first arg in validators (Pydantic)
@@ -64,3 +66,10 @@ plugins = ["pydantic.mypy"]
 [[tool.mypy.overrides]]
 module = ["tests.*"]
 disallow_untyped_defs = false
+
+[tool.coverage.run]
+concurrency = ["thread", "greenlet"]
+omit = ["app/agents/test_*.py"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/conftest.py" = ["E402"]  # Test environment must be set before app imports.

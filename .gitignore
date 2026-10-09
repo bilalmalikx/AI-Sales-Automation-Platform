@@ -36,3 +36,9 @@ frontend/.angular/
 
 # Docker
 *.dockerignore
+# Backend local configuration, mailbox and worker state
+backend/.env.*
+!backend/.env.example
+!backend/.env.production.example
+backend/var/
+backend/.venv/

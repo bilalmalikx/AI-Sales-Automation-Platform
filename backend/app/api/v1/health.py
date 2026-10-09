@@ -11,7 +11,7 @@ from datetime import UTC, datetime
 from typing import Any
 
 import structlog
-from fastapi import APIRouter
+from fastapi import APIRouter, Response
 
 from app.core.config import settings
 
@@ -38,17 +38,19 @@ async def health_live() -> dict[str, str]:
 
 
 @router.get("/health/ready", summary="Readiness probe")
-async def health_ready() -> dict[str, Any]:
+async def health_ready(response: Response) -> dict[str, Any]:
     """
     Readiness probe.  Each dependency reports its status.
     Returns HTTP 200 when the service is ready to accept traffic.
     """
     checks: dict[str, str] = {}
-    
+
     # Database check
     try:
-        from app.db.engine import get_engine
         from sqlalchemy import text
+
+        from app.db.engine import get_engine
+
         engine = get_engine()
         async with engine.connect() as conn:
             await conn.execute(text("SELECT 1"))
@@ -56,13 +58,29 @@ async def health_ready() -> dict[str, Any]:
     except Exception as e:
         logger.error("database_health_check_failed", error=str(e))
         checks["database"] = "failed"
-    
+
     # Redis check (Phase 6)
-    checks["redis"] = "not_configured"
+    checks["redis"] = "not_required"
+    if settings.WORKER_MODE == "celery":
+        from redis.asyncio import Redis
+
+        redis = Redis.from_url(
+            settings.CELERY_BROKER_URL, socket_connect_timeout=2, socket_timeout=2
+        )
+        try:
+            await redis.ping()
+            checks["redis"] = "ok"
+        except Exception:
+            checks["redis"] = "failed"
+        finally:
+            await redis.aclose()
 
     # Determine overall status — degrade gracefully
-    all_ok = all(v in ("ok", "not_configured") for v in checks.values())
+    all_ok = all(v in ("ok", "not_required") for v in checks.values())
     overall = "ready" if all_ok else "degraded"
+
+    if not all_ok:
+        response.status_code = 503
 
     logger.debug("health_ready_check", checks=checks, overall=overall)
 

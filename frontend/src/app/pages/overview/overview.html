@@ -1,0 +1,65 @@
+<app-page-header
+  title="Room for better conversations."
+  description="Your leads, outreach, and next steps. Thoughtfully connected."
+  eyebrow="CODELPS · LIVE WORKSPACE"
+  ><button (click)="dialog.open('lead')">+ Add lead</button
+  ><button class="primary" (click)="dialog.open('campaign')">
+    Create campaign ↗
+  </button></app-page-header
+><app-metric-grid [items]="metrics()" />
+<div class="hero-note">
+  <div>
+    <h3>Your next good conversation starts with a lead.</h3>
+    <p>Research your prospects, review the message, and make it personal.</p>
+  </div>
+  <button class="primary" routerLink="/workflow">Open AI workflow ↗</button>
+</div>
+<div class="grid2">
+  <section class="card">
+    <div class="card-head">
+      <h2>Outreach at a glance</h2>
+      <span class="badge">Last 7 days</span>
+    </div>
+    <app-activity-chart />
+  </section>
+  <section class="card">
+    <div class="card-head">
+      <h2>What needs your attention</h2>
+      <button class="link" routerLink="/inbox">View inbox ↗</button>
+    </div>
+    <div class="activity">
+      <span class="icon-tile"><app-icon name="inbox" /></span>
+      <div>
+        <p>
+          <strong>{{ store.state().messages.length }} conversations</strong> waiting for a next step
+        </p>
+        <small>Review replies and book a meeting</small>
+      </div>
+    </div>
+    <div class="activity">
+      <span class="icon-tile"><app-icon name="emails" /></span>
+      <div>
+        <p>
+          <strong>{{ draftCount() }} email drafts</strong> ready for review
+        </p>
+        <small>Your voice. A little help from AI.</small>
+      </div>
+    </div>
+    <div class="activity">
+      <span class="icon-tile"><app-icon name="workflow" /></span>
+      <div>
+        <p>
+          <strong>{{ unresearched() }} leads</strong> ready for research
+        </p>
+        <small>Build context before reaching out</small>
+      </div>
+    </div>
+  </section>
+</div>
+<section class="card">
+  <div class="card-head">
+    <h2>People in your pipeline</h2>
+    <button class="link" routerLink="/leads">All leads ↗</button>
+  </div>
+  <app-lead-table [leads]="store.state().leads.slice(0, 4)" />
+</section>

@@ -1,0 +1,77 @@
+<app-page-header
+  title="A thoughtful first impression."
+  description="Turn a contact into a researched, personalized email. One clear step at a time."
+  eyebrow="AI WORKFLOW"
+/>
+<div class="notice">
+  The backend orchestrator saves each stage and uses the configured AI provider. Website-derived leads retain their source evidence. Every draft requires review.
+</div>
+<section class="card">
+  <div class="form-grid">
+    <div>
+      <label>Choose a lead</label
+      ><app-dropdown
+        [options]="leadOptions()"
+        [value]="leadId()"
+        label="Choose a lead"
+        [disabled]="workflow.processing()"
+        (changed)="leadId.set($event)"
+      />
+    </div>
+    <div>
+      <label>Campaign context</label
+      ><app-dropdown
+        [options]="campaignOptions()"
+        [value]="campaignId()"
+        label="Campaign context"
+        [disabled]="workflow.processing()"
+        (changed)="campaignId.set($event)"
+      />
+    </div>
+  </div>
+  <div class="steps">
+    @for (s of steps; track s; let i = $index) {
+      <div class="step" [class.active]="workflow.stage() >= i">
+        <strong>{{ workflow.stage() > i ? '✓' : i + 1 }} · {{ s }}</strong
+        ><span>{{
+          workflow.stage() > i
+            ? 'Completed'
+            : workflow.stage() === i
+              ? 'Processing…'
+              : 'Waiting'
+        }}</span>
+      </div>
+    }
+  </div>
+  <div class="actions">
+    <button
+      class="primary"
+      [disabled]="workflow.processing() || !leadId() || !campaignId()"
+      (click)="run()"
+    >
+      @if (workflow.processing()) {
+        <span class="spinner" aria-hidden="true"></span>Preparing your draft…
+      } @else {
+        Run workflow ↗
+      }</button
+    ><small>Provider calls run in the background · progress refreshes automatically</small>
+  </div>
+  <div id="workflow-result">
+    @if (workflow.processing()) {
+      <div class="research-preview" style="margin-top: 24px" aria-label="Loading research">
+        @for (i of [1, 2]; track i) {
+          <article>
+            <div class="skeleton"></div>
+            <div class="skeleton skeleton-block"></div>
+          </article>
+        }
+      </div>
+    }
+    @if (workflow.completed()) {
+      <div class="notice" style="margin-top: 24px">
+        <strong>✓ Your draft is ready.</strong> Contact context and email saved for human
+        review. <button class="link" routerLink="/emails">Review email ↗</button>
+      </div>
+    }
+  </div>
+</section>

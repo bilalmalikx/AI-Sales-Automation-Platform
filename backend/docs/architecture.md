@@ -1,3 +1,5 @@
+> Historical Phase 1 notes. See [the current backend README](../README.md) and [OpenAPI contract](openapi.json) for the implemented backend and run instructions.
+
 # Architecture — Phase 1: Backend Foundation
 
 ## Overview

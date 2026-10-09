@@ -2,23 +2,23 @@
 API router for Lead endpoints.
 """
 
-from typing import Optional
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, UploadFile, File, Query, status
+from fastapi import APIRouter, Depends, File, Query, UploadFile, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.db.session import get_db
-from app.services.lead import LeadService
-from app.schemas.lead import (
-    LeadCreate,
-    LeadUpdate,
-    LeadResponse,
-    LeadFilter,
-    LeadListResponse,
-)
+from app.core.config import settings
 from app.core.exceptions import ValidationException
 from app.core.logging import get_logger
+from app.db.session import get_db
+from app.schemas.lead import (
+    LeadCreate,
+    LeadFilter,
+    LeadListResponse,
+    LeadResponse,
+    LeadUpdate,
+)
+from app.services.lead import LeadService
 
 logger = get_logger(__name__)
 
@@ -60,10 +60,10 @@ async def create_lead(
     summary="List leads with filtering and pagination",
 )
 async def list_leads(
-    status_filter: Optional[str] = Query(None, alias="status", description="Filter by status"),
-    company_name: Optional[str] = Query(None, description="Filter by company name (partial match)"),
-    source_name: Optional[str] = Query(None, description="Filter by source name"),
-    email: Optional[str] = Query(None, description="Filter by email (partial match)"),
+    status_filter: str | None = Query(None, alias="status", description="Filter by status"),
+    company_name: str | None = Query(None, description="Filter by company name (partial match)"),
+    source_name: str | None = Query(None, description="Filter by source name"),
+    email: str | None = Query(None, description="Filter by email (partial match)"),
     page: int = Query(1, ge=1, description="Page number (1-indexed)"),
     page_size: int = Query(50, ge=1, le=100, description="Items per page (max 100)"),
     service: LeadService = Depends(get_lead_service),
@@ -89,7 +89,12 @@ async def list_leads(
         email=email,
     )
 
-    logger.info("list_leads_request", page=page, page_size=page_size, filters=filters.model_dump(exclude_none=True))
+    logger.info(
+        "list_leads_request",
+        page=page,
+        page_size=page_size,
+        filters=filters.model_dump(exclude_none=True),
+    )
     return await service.list_leads(filters=filters, page=page, page_size=page_size)
 
 
@@ -138,7 +143,11 @@ async def update_lead(
     **Returns:**
     - Updated lead details
     """
-    logger.info("update_lead_request", lead_id=str(lead_id), update_fields=lead_data.model_dump(exclude_unset=True))
+    logger.info(
+        "update_lead_request",
+        lead_id=str(lead_id),
+        update_fields=lead_data.model_dump(exclude_unset=True),
+    )
     return await service.update_lead(lead_id, lead_data)
 
 
@@ -206,15 +215,17 @@ async def import_leads_csv(
     logger.info("import_csv_request", filename=file.filename, skip_duplicates=skip_duplicates)
 
     # Validate file type
-    if not file.filename or not file.filename.endswith('.csv'):
+    if not file.filename or not file.filename.endswith(".csv"):
         raise ValidationException(message="File must be a CSV (.csv extension)")
 
     # Read file content
     try:
-        content = await file.read()
-        csv_content = content.decode('utf-8')
+        content = await file.read(settings.MAX_CSV_BYTES + 1)
+        if len(content) > settings.MAX_CSV_BYTES:
+            raise ValidationException("CSV file size limit exceeded")
+        csv_content = content.decode("utf-8")
     except UnicodeDecodeError:
-        raise ValidationException(message="File must be UTF-8 encoded")
+        raise ValidationException(message="File must be UTF-8 encoded") from None
 
     # Import leads
     stats = await service.import_leads_from_csv(

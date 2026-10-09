@@ -1,0 +1,31 @@
+<app-page-header
+  title="Your voice. Ready for review."
+  description="Fine-tune the message before starting a conversation."
+  eyebrow="EMAIL REVIEW"
+/>
+<div class="notice">
+  Review the recipient, app evidence and claims before approval. @if(!store.deliveryEnabled() && store.emailProvider() === 'smtp'){ Live SMTP delivery is disabled. Drafts and approvals can still be reviewed. } @else { Sending queues delivery through the configured provider. }
+</div>
+@for (d of email.drafts(); track d.id) {
+  <section class="card" style="margin-bottom: 20px">
+    <div class="card-head">
+      <app-person [lead]="leads.get(d.lead)" /><app-badge [text]="d.status" />
+    </div>
+    <h3>{{ d.subject }}</h3>
+    <p class="email-body">{{ d.body }}</p> @if(d.failure) { <p class="error">{{ d.failure }}</p> }
+    <div class="actions">
+      <button [disabled]="!['Needs review', 'Approved', 'Failed', 'Cancelled'].includes(d.status)" (click)="dialog.open('draft', d.id)">
+        Edit draft</button
+      ><button [disabled]="d.status !== 'Needs review'" (click)="approve(d.id)">Approve</button
+      ><button class="primary" [disabled]="d.status !== 'Approved' || (store.emailProvider() === 'smtp' && !store.deliveryEnabled())" (click)="send(d.id)">
+        {{ d.status === 'Sent' ? 'Sent ✓' : 'Send email ↗' }}
+      </button>
+    </div>
+  </section>
+} @empty {
+  <section class="card empty">
+    <h2>A blank page, a good beginning.</h2>
+    <p>Run the AI workflow to create your first personalized draft.</p>
+    <button class="primary" routerLink="/workflow">Prepare an email ↗</button>
+  </section>
+}

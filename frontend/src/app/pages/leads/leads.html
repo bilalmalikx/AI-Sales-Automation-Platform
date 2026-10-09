@@ -1,0 +1,24 @@
+<app-page-header
+  title="Every opportunity starts here."
+  description="Keep the people behind your pipeline in focus."
+  eyebrow="CONTACTS & COMPANIES"
+  ><button (click)="dialog.open('import')">Import CSV</button
+  ><button class="primary" (click)="dialog.open('lead')">+ Add lead</button></app-page-header
+>
+<div class="card">
+  <div class="filters">
+    <input
+      id="search"
+      aria-label="Search leads"
+      placeholder="Search name, email, or company…"
+      [ngModel]="search()"
+      (ngModelChange)="search.set($event)"
+    /><app-dropdown
+      [options]="options"
+      [value]="filter()"
+      label="Filter by status"
+      (changed)="filter.set($event)"
+    /><button (click)="export()">Export CSV ↓</button>
+  </div>
+  <div id="lead-results"><app-lead-table [leads]="filtered()" /></div>
+</div>

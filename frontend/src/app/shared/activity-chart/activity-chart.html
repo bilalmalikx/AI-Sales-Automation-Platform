@@ -1,0 +1,1 @@
+<div class="chart">@for(p of points();track p.date){<div class="bar-group"><div class="bar" [style.height.%]="p.height" [title]="p.count + ' accepted emails · ' + p.date"></div><small>{{ p.label }}</small></div>}</div><div class="legend"><span><i></i>Accepted emails</span><span>Persisted records · last 7 UTC days</span></div>

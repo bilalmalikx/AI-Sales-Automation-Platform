@@ -6,10 +6,10 @@ prepare() → execute() → validate() → cleanup()
 """
 
 from app.agents.base import (
-    BaseAgent,
     AgentConfig,
-    AgentResult,
     AgentExecutionContext,
+    AgentResult,
+    BaseAgent,
 )
 from app.agents.company_research import CompanyResearchAgent
 from app.agents.email_generator import EmailGeneratorAgent
@@ -24,20 +24,20 @@ from app.agents.schemas import (
 )
 
 __all__ = [
+    "AgentConfig",
+    "AgentExecutionContext",
+    "AgentResult",
     # Base framework
     "BaseAgent",
-    "AgentConfig",
-    "AgentResult",
-    "AgentExecutionContext",
+    "CompanyResearchAgent",
+    "CompanyResearchInput",
+    "CompanyResearchOutput",
+    "EmailGeneratorAgent",
+    "EmailGeneratorInput",
+    "EmailGeneratorOutput",
     # AI Agents
     "LeadEnrichmentAgent",
-    "CompanyResearchAgent",
-    "EmailGeneratorAgent",
     # Schemas
     "LeadEnrichmentInput",
     "LeadEnrichmentOutput",
-    "CompanyResearchInput",
-    "CompanyResearchOutput",
-    "EmailGeneratorInput",
-    "EmailGeneratorOutput",
 ]

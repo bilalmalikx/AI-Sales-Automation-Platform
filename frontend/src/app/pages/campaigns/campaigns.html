@@ -1,0 +1,41 @@
+<app-page-header
+  title="Outreach with intention."
+  description="Give every campaign a clear audience, a useful offer, and your own voice."
+  eyebrow="CAMPAIGNS"
+  ><button class="primary" (click)="dialog.open('campaign')">
+    + New campaign
+  </button></app-page-header
+>
+<div class="campaigns">
+  @for (c of campaigns.items(); track c.id) {
+    <article class="card campaign tilt" appTilt>
+      <div class="card-head">
+        <app-badge [text]="c.status" /><button class="link" (click)="dialog.open('campaign', c.id)">
+          Edit ↗
+        </button>
+      </div>
+      <h3>{{ c.name }}</h3>
+      <p>{{ c.audience }}</p>
+      <div class="mini-stats">
+        <div>
+          <strong>{{ c.ids.length }}</strong
+          ><small>Leads</small>
+        </div>
+        <div>
+          <strong>{{ c.sent }}</strong
+          ><small>Demo sends</small>
+        </div>
+        <div>
+          <strong>{{ c.replies }}</strong
+          ><small>Replies received</small>
+        </div>
+      </div>
+      <small>{{ c.tone }} tone · Human review enabled</small>
+      <div class="track"><i [style.width.%]="progress(c.sent, c.ids.length)"></i></div>
+      <div class="actions">
+        <button class="primary" routerLink="/workflow">Prepare outreach ↗</button
+        ><button (click)="toggle(c.id)">{{ c.status === 'Active' ? 'Pause' : 'Activate' }}</button>
+      </div>
+    </article>
+  }
+</div>

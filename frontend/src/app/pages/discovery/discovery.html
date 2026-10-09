@@ -1,0 +1,253 @@
+<app-page-header
+  title="Find the next mobile app opportunity."
+  description="Discover UK and US businesses, inspect their websites, and review app evidence before outreach."
+  eyebrow="CODELPS · BUSINESS DISCOVERY"
+/>
+<form class="card discovery-form" (ngSubmit)="start()" ngNativeValidate>
+  <div class="form-grid">
+    <div class="field">
+      <label for="discovery-industry">Business category</label
+      ><input
+        id="discovery-industry"
+        name="industry"
+        [(ngModel)]="form.industry"
+        required
+        minlength="2"
+        maxlength="100"
+        placeholder="Car wash, fitness studios, restaurants…"
+      />
+    </div>
+    <div class="field">
+      <label for="discovery-location">City or region</label
+      ><input
+        id="discovery-location"
+        name="location"
+        [(ngModel)]="form.location"
+        required
+        minlength="2"
+        maxlength="200"
+      />
+    </div>
+    <div class="field">
+      <label for="discovery-country">Target country</label
+      ><select id="discovery-country" name="country" [(ngModel)]="form.country">
+        <option value="GB">United Kingdom</option>
+        <option value="US">United States</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="discovery-limit">Maximum businesses</label
+      ><input
+        id="discovery-limit"
+        name="limit"
+        type="number"
+        min="1"
+        max="100"
+        [(ngModel)]="form.limit"
+        required
+      />
+    </div>
+  </div>
+  <div class="discovery-meta">
+    <span>Fresh Maps search · {{ discovery.config()?.daily_limit || 100 }} / day</span
+    ><span>Provider charge cap: ${{ discovery.config()?.run_budget_usd || 0.5 }} / run</span
+    ><span>AI: {{ discovery.config()?.ai_endpoint || 'Checking configuration…' }}</span>
+  </div>
+  <label class="check-option"
+    ><input type="checkbox" name="drafts" [(ngModel)]="form.generate_drafts" /> Prepare review
+    drafts for suitable contacts with public emails</label
+  >
+  <div class="form-actions">
+    <button
+      class="primary"
+      [disabled]="discovery.submitting() || !discovery.config()?.apify_configured"
+    >
+      @if (discovery.submitting()) {
+        <span class="spinner"></span>Starting…
+      } @else {
+        Discover businesses ↗
+      }</button
+    ><small>Runs on the server. No Maps tab required. No automatic email sends.</small>
+  </div>
+</form>
+@if (discovery.error()) {
+  <div class="notice error" role="alert">
+    {{ discovery.error() }} <button (click)="discovery.refresh()">Retry connection</button>
+  </div>
+}
+@if (discovery.runs().length) {
+  <section class="card run-status" aria-live="polite">
+    <div class="card-head">
+      <h2>Orchestrator activity</h2>
+      <select
+        aria-label="Select discovery run"
+        [ngModel]="discovery.selected()"
+        (ngModelChange)="discovery.select($event)"
+      >
+        <option value="all">All contactable businesses</option>
+        @for (r of discovery.runs(); track r.id) {
+          <option [value]="r.id">
+            {{ r.parameters.industry }} · {{ r.parameters.location }} · {{ label(r.status) }}
+          </option>
+        }
+      </select>
+    </div>
+    @if (run(); as r) {
+      <div class="run-numbers">
+        <div>
+          <strong>{{ r.total }}</strong
+          ><span>Businesses discovered</span>
+        </div>
+        <div>
+          <strong>{{ r.processed }} / {{ r.total }}</strong
+          ><span>Inspections completed</span>
+        </div>
+        <div>
+          <strong>{{ r.ai_calls }}</strong
+          ><span>Qualification calls</span>
+        </div>
+        <div>
+          <strong>${{ r.provider_cost.toFixed(3) }}</strong
+          ><span>Reported Apify cost</span>
+        </div>
+      </div>
+      <div class="run-progress">
+        <span [style.width.%]="r.total ? (r.processed / r.total) * 100 : 0"></span>
+      </div>
+      <div class="discovery-meta">
+        <app-badge [text]="label(r.status)" /><span>
+          @if (active()) {
+            <span class="spinner"></span>
+          }
+          {{ label(r.stage) }}</span
+        ><span>Updates every 2 seconds</span>
+        @if (active()) {
+          <button (click)="discovery.cancel(r.id)">Stop processing</button>
+        }
+      </div>
+      @if (r.error) {
+        <p class="error" role="alert">{{ r.error }}</p>
+      }
+    }
+  </section>
+}
+<div class="notice">
+  “App not found” is a search result, not proof that a business has no app. Uncertain matches
+  require review. Only businesses with a website-confirmed email, phone or contact page appear
+  below. Email outreach requires a public email.
+</div>
+<section class="card discovery-results">
+  <div class="card-head">
+    <h2>All business results</h2>
+    <span>{{ visibleProspects().length }} / {{ discovery.prospects().length }} records</span>
+  </div>
+  <div class="run-numbers contact-summary" aria-live="polite">
+    <div>
+      <strong>{{ contactCount() }}</strong
+      ><span>Contacts found</span>
+    </div>
+    <div>
+      <strong>{{ emailCount() }}</strong
+      ><span>Businesses with public email</span>
+    </div>
+    <div>
+      <strong>{{ crmCount() }}</strong
+      ><span>Contacts added to CRM</span>
+    </div>
+  </div>
+  <label class="check-option"
+    ><input type="checkbox" [ngModel]="contactsOnly()" (ngModelChange)="contactsOnly.set($event)" />
+    Show only businesses with contact details</label
+  >
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Business / website</th>
+          <th>Contact</th>
+          <th>App evidence</th>
+          <th>Fit</th>
+          <th>Orchestrator status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (p of visibleProspects(); track p.id) {
+          <tr>
+            <td>
+              <strong>{{ p.company }}</strong
+              ><small>{{ p.city }} · {{ p.country }}</small>
+              @if (safeUrl(p.website); as website) {
+                <a [href]="website" target="_blank" rel="noopener noreferrer">{{ p.website }} ↗</a>
+              } @else {
+                <small>Website not available</small>
+              }
+            </td>
+            <td>
+              @if (p.contact_available) {
+                <app-badge text="Contact found" />
+              }
+              @for (e of p.emails; track e.email) {
+                <div>{{ e.email }}</div>
+              } @empty {
+                <small>No public email found</small>
+              }
+              @for (phone of websitePhones(p); track phone.phone) {
+                <div>{{ phone.phone }}</div>
+              }
+              @for (url of contactLinks(p); track url) {
+                <a [href]="url" target="_blank" rel="noopener noreferrer">Contact page ↗</a>
+              }
+            </td>
+            <td><app-badge [text]="label(p.app_status)" /></td>
+            <td>{{ p.analysis['score'] !== undefined ? p.score + ' / 100' : 'Pending' }}</td>
+            <td>
+              <app-badge [text]="label(p.status)" /><small>{{ p.reason || label(p.stage) }}</small>
+            </td>
+            <td>
+              <button (click)="selected.set(p)">Evidence</button>
+              @if (p.status === 'inspection_failed') {
+                <button (click)="discovery.retry(p.id)">Retry inspection</button>
+              }
+              @if (p.lead_id) {
+                <a routerLink="/leads">CRM ↗</a>
+              }
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="6" class="empty">
+              @if (active()) {
+                <span class="spinner"></span>Fetching and inspecting businesses…
+              } @else {
+                No website-confirmed contacts in this run. Try another city/category or inspect more
+                businesses.
+              }
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</section>
+@if (selectedProspect(); as p) {
+  <section class="card evidence-panel">
+    <div class="card-head">
+      <h2>{{ p.company }} · Evidence</h2>
+      <button (click)="selected.set(null)">Close</button>
+    </div>
+    <p>{{ p.analysis.summary }}</p>
+    <p>
+      <strong>Mobile app opportunity:</strong>
+      {{ p.analysis.opportunity || 'Requires inspection/review' }}
+    </p>
+    @if (p.campaign_id) {
+      <a routerLink="/campaigns">Review campaign ↗</a>
+      <a routerLink="/emails">Review email drafts ↗</a>
+    }
+    <details>
+      <summary>Collected sources and app checks</summary>
+      <pre>{{ evidenceText(p) }}</pre>
+    </details>
+  </section>
+}

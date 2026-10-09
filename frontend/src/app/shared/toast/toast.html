@@ -1,0 +1,7 @@
+<div id="toast" role="status" aria-live="polite" [class.show]="!!notify.message()">
+  @if (notify.message()) {
+    <span class="toast-icon" aria-hidden="true">{{ warning() ? '!' : '✓' }}</span
+    ><span class="toast-copy"><strong>Workspace update</strong>{{ notify.message() }}</span
+    ><button aria-label="Dismiss notification" (click)="notify.dismiss()">×</button>
+  }
+</div>

@@ -1,0 +1,41 @@
+<div class="dropdown" (keydown)="key($event)">
+  <button
+    type="button"
+    #trigger
+    class="dropdown-trigger"
+    [disabled]="disabled()"
+    [attr.aria-label]="label()"
+    aria-haspopup="listbox"
+    [attr.aria-expanded]="opened()"
+    (click)="toggle()"
+  >
+    <span>{{ selected() }}</span
+    ><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+  </button>
+  @if (opened()) {
+    <div
+      class="dropdown-menu angular-dropdown"
+      popover="manual"
+      [appOverlay]="trigger"
+      role="listbox"
+      [attr.aria-label]="label()"
+      [class.upward]="upward()"
+    >
+      @for (o of options(); track o.value) {
+        <button
+          type="button"
+          class="dropdown-option"
+          role="option"
+          [attr.aria-selected]="o.value === value()"
+          [disabled]="o.disabled"
+          (click)="choose(o)"
+        >
+          <span>{{ o.label }}</span>
+          @if (o.value === value()) {
+            <span aria-hidden="true">✓</span>
+          }
+        </button>
+      }
+    </div>
+  }
+</div>

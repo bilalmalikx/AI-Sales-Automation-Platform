@@ -1,0 +1,47 @@
+<app-page-header
+  title="Keep the conversation going."
+  description="Read the reply, understand the intent, and take the right next step."
+  eyebrow="CONVERSATIONS"
+/>
+<div class="inbox">
+  <section>
+    @for (m of inbox.messages(); track m.lead; let i = $index) {
+      <button class="thread" [class.selected]="selected() === i" (click)="select(i)">
+        <app-person [lead]="leads.get(m.lead)" />
+        <p>{{ m.text.slice(0, 85) }}…</p>
+        <app-badge [text]="m.type" />
+      </button>
+    }
+  </section>
+  <section class="card">
+    @if (message(); as m) {
+      <div class="card-head">
+        <app-person [lead]="leads.get(m.lead)" /><app-badge [text]="m.type" />
+      </div>
+      <small>Fictional incoming reply · Demo conversation</small>
+      <div class="message">{{ m.text }}</div>
+      @for (r of m.replies; track $index) {
+        <div class="message"><small>You · Sent reply</small><br />{{ r }}</div>
+      }
+      <label for="reply">Your reply</label
+      ><textarea
+        id="reply"
+        placeholder="Write a thoughtful response…"
+        [ngModel]="reply()"
+        (ngModelChange)="reply.set($event)"
+      ></textarea>
+      <div class="form-actions">
+        <button (click)="suggest()">Suggest reply ✧</button
+        ><button class="primary" (click)="save()">Save reply draft ↗</button>
+      </div>
+      <hr style="border: 0; border-top: 1px solid var(--border); margin: 24px 0" />
+      <div class="actions">
+        <button (click)="dialog.open('booking', undefined, m.lead)">Book a meeting</button
+        ><button (click)="dialog.open('followup', m.lead)">Schedule follow-up</button
+        ><button (click)="stop()">Stop outreach</button>
+      </div>
+    } @else {
+      <div class="empty">No conversations yet.</div>
+    }
+  </section>
+</div>

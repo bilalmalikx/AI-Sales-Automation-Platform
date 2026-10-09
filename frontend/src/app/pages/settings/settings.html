@@ -1,0 +1,46 @@
+<app-page-header
+  title="Make this workspace yours."
+  description="Set your business context and keep your outreach consistent."
+  eyebrow="WORKSPACE SETTINGS"
+/>
+<form ngNativeValidate class="card" (ngSubmit)="save()">
+  <h2>Business & sending preferences</h2>
+  <div class="form-grid">
+    <div class="field">
+      <label for="company">Company name</label
+      ><input id="company" name="company" [(ngModel)]="form.company" required />
+    </div>
+    <div class="field">
+      <label for="sender">Sender name</label
+      ><input id="sender" name="sender" [(ngModel)]="form.sender" required />
+    </div>
+    <div class="field span2">
+      <label for="offer">Your product or service</label
+      ><textarea id="offer" name="offer" [(ngModel)]="form.offer" required></textarea>
+    </div>
+    <div class="field">
+      <label for="timezone">Timezone</label
+      ><input id="timezone" name="timezone" [(ngModel)]="form.timezone" required />
+    </div>
+    <div class="field">
+      <label for="limit">Daily send limit</label
+      ><input
+        id="limit"
+        name="limit"
+        type="number"
+        min="1"
+        max="500"
+        [(ngModel)]="form.limit"
+        required
+      />
+    </div>
+  </div>
+  <p class="error" role="alert">{{ error() }}</p>
+  <div class="notice">
+    Preferences and CRM records are saved in the backend. Discovery uses Apify; email/calendar behavior depends on configured providers.
+  </div>
+  <div class="form-actions">
+    <button type="button" (click)="dialog.open('reset')">Refresh backend data</button
+    ><button class="primary">Save preferences</button>
+  </div>
+</form>

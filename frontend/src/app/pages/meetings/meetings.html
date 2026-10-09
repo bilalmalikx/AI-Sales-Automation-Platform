@@ -1,0 +1,39 @@
+<app-page-header
+  title="Make time for what matters."
+  description="A clear view of your upcoming customer conversations."
+  eyebrow="MEETINGS"
+  ><button class="primary" (click)="dialog.open('booking')">
+    + Book meeting
+  </button></app-page-header
+>
+<div class="notice">
+  Bookings are saved in the backend and checked for local overlaps. Calendar synchronization depends on provider configuration. Times
+  use {{ store.state().settings.timezone }}.
+</div>
+<section class="card">
+  @for (m of meetings.items(); track m.id) {
+    <div class="meeting">
+      <div class="date-tile">
+        {{ month(m.date) }}<strong>{{ day(m.date) }}</strong>
+      </div>
+      <div>
+        <h3>Discovery call · {{ leads.get(m.lead).company }}</h3>
+        <small>{{ leads.get(m.lead).name }} · {{ m.time }} · {{ m.duration }} minutes</small>
+        <p style="margin: 6px 0"><app-badge [text]="m.status" /></p>
+      </div>
+      <div class="actions">
+        <button
+          [disabled]="m.status === 'Cancelled'"
+          (click)="dialog.open('booking', m.id, m.lead)"
+        >
+          Reschedule</button
+        ><button [disabled]="m.status === 'Cancelled'" (click)="cancel(m.id)">Cancel</button>
+      </div>
+    </div>
+  } @empty {
+    <div class="empty">
+      <h3>Your calendar has room.</h3>
+      <p>Book a meeting from an interested conversation.</p>
+    </div>
+  }
+</section>

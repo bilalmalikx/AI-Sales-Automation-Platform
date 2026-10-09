@@ -1,0 +1,36 @@
+@if (leads().length) {
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Contact</th>
+          <th>Company</th>
+          <th>Status</th>
+          <th>Research</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (l of leads(); track l.id) {
+          <tr>
+            <td><app-person [lead]="l" /></td>
+            <td>
+              {{ l.company }}<small style="display: block; margin-top: 5px">{{ l.title }}</small>
+            </td>
+            <td><app-badge [text]="l.status" /></td>
+            <td>{{ l.confidence ? l.confidence + '% · confidence' : 'Not researched' }}</td>
+            <td>
+              <button class="link" (click)="dialog.open('lead-detail', l.id)">View ↗</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+} @else {
+  <div class="empty">
+    <h3>No leads here yet</h3>
+    <p>Add a contact or import a CSV to get started.</p>
+    <button (click)="dialog.open('lead')">Add a lead</button>
+  </div>
+}

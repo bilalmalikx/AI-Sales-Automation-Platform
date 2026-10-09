@@ -1,0 +1,103 @@
+<a class="skip" href="#main" (click)="$event.preventDefault(); main.focus()">Skip to workspace</a
+><app-intro />
+<header [class.scrolled]="scrolled()">
+  <button
+    id="collapse"
+    [attr.aria-label]="collapsed() ? 'Expand sidebar' : 'Collapse sidebar'"
+    [attr.aria-expanded]="!collapsed()"
+    (click)="toggleCollapse()"
+  >
+    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+      <rect x="3" y="4" width="18" height="16" rx="3" />
+      <path d="M9 4v16m6-11-3 3 3 3" />
+    </svg></button
+  ><a class="brand" routerLink="/overview"
+    ><span class="brandmark">↗</span><span>Salesway<small>YOUR SALES, CONNECTED</small></span></a
+  ><span id="breadcrumb">Workspace <span>/</span> {{ pageTitle() }}</span>
+  <div class="header-right">
+    <span class="operational"><span class="dot"></span>{{ store.error() ? 'Connection issue' : store.ready() ? 'Backend connected' : 'Connecting…' }}</span
+    ><button class="header-search" (click)="dialog.open('search')" aria-label="Search workspace">
+      Search workspace <kbd>⌘ K</kbd></button
+    ><button class="icon-button" (click)="dialog.open('notifications')" aria-label="Notifications">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M18 8a6 6 0 0 0-12 0v6l-2 3h16l-2-3zM10 21h4" />
+      </svg>
+    </button>
+    <div class="themes" aria-label="Color theme">
+      <button
+        (click)="theme.set('porcelain')"
+        [class.selected]="theme.preference() === 'porcelain'"
+        [attr.aria-pressed]="theme.preference() === 'porcelain'"
+        data-theme="porcelain"
+        aria-label="Porcelain Indigo theme"
+      >
+        <i class="teal"></i>Porcelain</button
+      ><button
+        (click)="theme.set('midnight')"
+        [class.selected]="theme.preference() === 'midnight'"
+        [attr.aria-pressed]="theme.preference() === 'midnight'"
+        data-theme="midnight"
+        aria-label="Midnight Ink theme"
+      >
+        <i class="sand"></i>Midnight</button
+      ><button
+        (click)="theme.set('system')"
+        [class.selected]="theme.preference() === 'system'"
+        [attr.aria-pressed]="theme.preference() === 'system'"
+        data-theme="system"
+        aria-label="Match System theme"
+      >
+        <i class="system-swatch"></i>System
+      </button>
+    </div>
+    <button class="avatar" title="Workspace settings" routerLink="/settings">BM</button
+    ><button
+      id="menu"
+      aria-label="Open navigation"
+      [attr.aria-expanded]="drawerOpen()"
+      (click)="drawer(true)"
+    >
+      ☰
+    </button>
+  </div>
+</header>
+<div id="shade" [class.open]="drawerOpen()" (click)="drawer(false)"></div>
+<aside #sidebar id="sidebar" [class.open]="drawerOpen()" [inert]="mobile() && !drawerOpen()">
+  <div class="workspace">
+    <span class="workspace-icon">S</span>
+    <div>Codelps workspace<small>Mobile app opportunities</small></div>
+    <button id="close-menu" aria-label="Close navigation" (click)="drawer(false)">×</button>
+  </div>
+  <button class="primary sidebar-create" (click)="dialog.open('campaign')">
+    <span>+</span><span class="create-label">Create campaign</span></button
+  ><small class="nav-label">SALES WORKSPACE</small>
+  <nav id="nav">
+    @for (p of navigation; track p.id) {
+      <a
+        [routerLink]="'/' + p.id"
+        routerLinkActive="active"
+        ariaCurrentWhenActive="page"
+        [title]="p.label"
+        [attr.aria-label]="p.label"
+        (click)="drawer(false)"
+        ><app-icon [name]="p.id" /><span class="nav-text">{{ p.label }}</span></a
+      >
+    }
+  </nav>
+  <div class="sidebar-note">
+    <span>✧</span><strong>A little less busywork.</strong>
+    <p>A lot more meaningful conversations.</p>
+    <button routerLink="/campaigns">Build your next campaign ↗</button>
+  </div>
+  <div class="sidebar-bottom"><span class="dot"></span>Live backend data · refreshes automatically</div>
+</aside>
+<main #main id="main" tabindex="-1" [inert]="drawerOpen()">
+  @if(store.error()) { <div class="notice" role="alert">{{ store.error() }} <button (click)="store.refresh()">Retry connection</button></div> }
+  @if(!store.ready() && store.loading()) { <div class="notice" role="status"><span class="spinner"></span>Loading backend records…</div> }
+  <router-outlet />
+  <footer>
+    <span>Salesway · A calmer way to grow.</span
+    ><span>{{ store.error() ? 'Backend connection unavailable' : 'PostgreSQL · Live workspace' }}</span>
+  </footer>
+</main>
+<app-workspace-dialog /><app-toast />

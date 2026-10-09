@@ -9,8 +9,6 @@ These tests verify that:
 
 from typing import Any
 
-import pytest
-
 
 class TestHealthBasic:
     """GET /health"""

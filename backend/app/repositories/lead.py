@@ -4,16 +4,15 @@ Repository for Lead model data access operations.
 
 from __future__ import annotations
 
-from typing import Optional
 from uuid import UUID
 
-from sqlalchemy import select, func, or_, and_
+from sqlalchemy import and_, func, or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
-from app.models.domain import Lead, Company, LeadSource
-from app.schemas.lead import LeadCreate, LeadUpdate, LeadFilter
 from app.core.logging import get_logger
+from app.models.domain import Company, Lead, LeadSource
+from app.schemas.lead import LeadCreate, LeadFilter, LeadUpdate
 
 logger = get_logger(__name__)
 
@@ -46,13 +45,16 @@ class LeadRepository:
             notes=lead_data.notes,
         )
 
-        # Associate with company if company data provided
-        if lead_data.company_name or lead_data.company_domain:
-            company = await self._get_or_create_company(
-                name=lead_data.company_name,
-                domain=lead_data.company_domain,
-            )
-            lead.company_id = company.id
+        # A lead always has a company, even when the source provides only an email.
+        company = await self._get_or_create_company(
+            name=lead_data.company_name
+            or lead_data.company_domain
+            or lead_data.email.split("@")[1],
+            domain=lead_data.company_domain,
+        )
+        lead.company_id = company.id
+        if lead_data.industry:
+            company.industry = lead_data.industry
 
         # Associate with source if provided
         if lead_data.source_name:
@@ -61,12 +63,12 @@ class LeadRepository:
 
         self.session.add(lead)
         await self.session.flush()
-        await self.session.refresh(lead)
+        await self.session.refresh(lead, attribute_names=["company", "source"])
 
         logger.info("lead_created", lead_id=str(lead.id), email=lead.email)
         return lead
 
-    async def get_by_id(self, lead_id: UUID) -> Optional[Lead]:
+    async def get_by_id(self, lead_id: UUID) -> Lead | None:
         """
         Get lead by ID.
 
@@ -87,7 +89,7 @@ class LeadRepository:
         result = await self.session.execute(stmt)
         return result.scalar_one_or_none()
 
-    async def get_by_email(self, email: str) -> Optional[Lead]:
+    async def get_by_email(self, email: str) -> Lead | None:
         """
         Get lead by email address.
 
@@ -97,13 +99,13 @@ class LeadRepository:
         Returns:
             Lead instance or None if not found
         """
-        stmt = select(Lead).where(Lead.email == email.lower())
+        stmt = select(Lead).where(func.lower(Lead.email) == email.lower())
         result = await self.session.execute(stmt)
         return result.scalar_one_or_none()
 
     async def list(
         self,
-        filters: Optional[LeadFilter] = None,
+        filters: LeadFilter | None = None,
         skip: int = 0,
         limit: int = 100,
     ) -> tuple[list[Lead], int]:
@@ -172,7 +174,7 @@ class LeadRepository:
         )
         return leads, total
 
-    async def update(self, lead_id: UUID, lead_data: LeadUpdate) -> Optional[Lead]:
+    async def update(self, lead_id: UUID, lead_data: LeadUpdate) -> Lead | None:
         """
         Update an existing lead.
 
@@ -199,11 +201,15 @@ class LeadRepository:
                         domain=update_data.get("company_domain"),
                     )
                     lead.company_id = company.id
+                if lead_data.industry:
+                    company.industry = lead_data.industry
+            elif field == "industry":
+                lead.company.industry = value
             else:
                 setattr(lead, field, value)
 
         await self.session.flush()
-        await self.session.refresh(lead)
+        await self.session.refresh(lead, attribute_names=["company", "source"])
 
         logger.info(
             "lead_updated",
@@ -257,12 +263,15 @@ class LeadRepository:
             )
 
             # Associate with company
-            if lead_data.company_name or lead_data.company_domain:
-                company = await self._get_or_create_company(
-                    name=lead_data.company_name,
-                    domain=lead_data.company_domain,
-                )
-                lead.company_id = company.id
+            company = await self._get_or_create_company(
+                name=lead_data.company_name
+                or lead_data.company_domain
+                or lead_data.email.split("@")[1],
+                domain=lead_data.company_domain,
+            )
+            lead.company_id = company.id
+            if lead_data.industry:
+                company.industry = lead_data.industry
 
             # Associate with source
             if lead_data.source_name:
@@ -276,15 +285,15 @@ class LeadRepository:
 
         # Refresh all leads to get IDs and timestamps
         for lead in leads:
-            await self.session.refresh(lead)
+            await self.session.refresh(lead, attribute_names=["company", "source"])
 
         logger.info("leads_bulk_created", count=len(leads))
         return leads
 
     async def _get_or_create_company(
         self,
-        name: Optional[str] = None,
-        domain: Optional[str] = None,
+        name: str | None = None,
+        domain: str | None = None,
     ) -> Company:
         """
         Get existing company or create new one.
@@ -304,7 +313,7 @@ class LeadRepository:
         if domain:
             conditions.append(Company.domain == domain.lower())
         if name and not domain:
-            conditions.append(Company.name.ilike(name))
+            conditions.append(func.lower(Company.name) == name.lower())
 
         if conditions:
             stmt = select(Company).where(or_(*conditions))

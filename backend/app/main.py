@@ -8,19 +8,23 @@ Usage:
     uvicorn app.main:app --reload
 """
 
-from contextlib import asynccontextmanager
-from typing import AsyncGenerator
+import asyncio
+from collections.abc import AsyncGenerator
+from contextlib import asynccontextmanager, suppress
 
-import structlog
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.api.v1.discovery import router as discovery_router
 from app.api.v1.health import router as health_router
 from app.api.v1.leads import router as leads_router
+from app.api.v1.sales import public as public_router
+from app.api.v1.sales import router as sales_router
 from app.core.config import settings
 from app.core.exceptions import register_exception_handlers
 from app.core.logging import get_logger, setup_logging
 from app.core.middleware import RequestContextMiddleware
+from app.core.security import require_auth
 
 logger = get_logger(__name__)
 
@@ -36,17 +40,34 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     )
     # Initialize database engine
     from app.db.engine import init_db
+
     await init_db()
-    
-    # Phase 6: initialise Redis connection pool here
-    yield
+
+    from sqlalchemy import select
+
+    from app.db.engine import get_engine
+    from app.models.sales import WorkspaceSettings
+
+    async with get_engine().connect() as conn:
+        await conn.execute(select(WorkspaceSettings.id).limit(1))
+    worker = None
+    if settings.WORKER_MODE == "inline":
+        from app.tasks.worker import poll
+
+        worker = asyncio.create_task(poll())
+    try:
+        yield
+    finally:
+        if worker:
+            worker.cancel()
+            with suppress(asyncio.CancelledError):
+                await worker
     logger.info("application_shutdown")
-    
+
     # Dispose database engine
     from app.db.engine import dispose_db
+
     await dispose_db()
-    
-    # Phase 6: close Redis connection pool here
 
 
 def create_app() -> FastAPI:
@@ -92,7 +113,12 @@ def create_app() -> FastAPI:
 
     # ── Routers ───────────────────────────────────────────────────────────────
     app.include_router(health_router)
-    app.include_router(leads_router, prefix=settings.API_V1_PREFIX)
+    app.include_router(discovery_router, prefix=settings.API_V1_PREFIX)
+    app.include_router(sales_router, prefix=settings.API_V1_PREFIX)
+    app.include_router(
+        leads_router, prefix=settings.API_V1_PREFIX, dependencies=[Depends(require_auth)]
+    )
+    app.include_router(public_router, prefix=settings.API_V1_PREFIX)
 
     return app
 

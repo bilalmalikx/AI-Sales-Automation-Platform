@@ -14,6 +14,7 @@ import structlog
 from fastapi import FastAPI, Request, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
+from sqlalchemy.exc import IntegrityError
 
 logger = structlog.get_logger(__name__)
 
@@ -21,7 +22,7 @@ logger = structlog.get_logger(__name__)
 # ── Exception Hierarchy ───────────────────────────────────────────────────────
 
 
-class AppBaseException(Exception):
+class AppBaseException(Exception):  # noqa: N818 -- Existing public exception hierarchy
     """Root application exception. All custom exceptions inherit from this."""
 
     status_code: int = status.HTTP_500_INTERNAL_SERVER_ERROR
@@ -58,7 +59,8 @@ class ResourceNotFoundException(NotFoundException):
         self.resource_id = resource_id
         super().__init__(
             message=message,
-            details=details or {
+            details=details
+            or {
                 "resource_type": resource_type,
                 "resource_id": resource_id,
             },
@@ -66,7 +68,7 @@ class ResourceNotFoundException(NotFoundException):
 
 
 class ValidationException(AppBaseException):
-    status_code = status.HTTP_422_UNPROCESSABLE_ENTITY
+    status_code = status.HTTP_422_UNPROCESSABLE_CONTENT
     error_code = "VALIDATION_ERROR"
     message = "Validation failed"
 
@@ -178,9 +180,7 @@ def register_exception_handlers(app: FastAPI) -> None:
     """Register all exception handlers onto the FastAPI app instance."""
 
     @app.exception_handler(AppBaseException)
-    async def app_exception_handler(
-        request: Request, exc: AppBaseException
-    ) -> JSONResponse:
+    async def app_exception_handler(request: Request, exc: AppBaseException) -> JSONResponse:
         logger.warning(
             "app_exception",
             error_code=exc.error_code,
@@ -207,16 +207,20 @@ def register_exception_handlers(app: FastAPI) -> None:
         )
         return _build_error_response(
             request,
-            status.HTTP_422_UNPROCESSABLE_ENTITY,
+            status.HTTP_422_UNPROCESSABLE_CONTENT,
             "VALIDATION_ERROR",
             "Request validation failed",
-            exc.errors(),
+            [{"loc": e["loc"], "msg": e["msg"], "type": e["type"]} for e in exc.errors()],
+        )
+
+    @app.exception_handler(IntegrityError)
+    async def integrity_exception_handler(request: Request, exc: IntegrityError) -> JSONResponse:
+        return _build_error_response(
+            request, 409, "CONFLICT", "Database constraint conflict; reload and retry"
         )
 
     @app.exception_handler(Exception)
-    async def unhandled_exception_handler(
-        request: Request, exc: Exception
-    ) -> JSONResponse:
+    async def unhandled_exception_handler(request: Request, exc: Exception) -> JSONResponse:
         logger.exception(
             "unhandled_exception",
             exc_type=type(exc).__name__,

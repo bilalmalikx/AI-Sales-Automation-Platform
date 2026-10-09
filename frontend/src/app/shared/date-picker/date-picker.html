@@ -1,0 +1,62 @@
+<div class="date-control" (keydown)="key($event)">
+  <button
+    type="button"
+    #trigger
+    class="date-trigger"
+    [attr.aria-label]="label()"
+    aria-haspopup="dialog"
+    [attr.aria-expanded]="open()"
+    (click)="toggle()"
+  >
+    <span [class.date-placeholder]="!value()">{{
+      value() ? dateLabel(value()) : 'Choose a date'
+    }}</span
+    ><app-icon name="meetings" />
+  </button>
+  @if (open()) {
+    <div
+      class="calendar angular-calendar"
+      popover="manual"
+      [appOverlay]="trigger"
+      [overlayWidth]="320"
+      role="dialog"
+      [attr.aria-label]="label() + ' calendar'"
+    >
+      <div class="calendar-header">
+        <button type="button" aria-label="Previous month" (click)="move(-1)">‹</button
+        ><strong aria-live="polite">{{ title() }}</strong
+        ><button type="button" aria-label="Next month" (click)="move(1)">›</button>
+      </div>
+      <div class="calendar-grid">
+        @for (w of weekdays; track w) {
+          <span class="calendar-weekday">{{ w }}</span>
+        }
+        @for (d of days(); track $index) {
+          @if (d) {
+            <button
+              type="button"
+              class="calendar-day"
+              [class.today]="d.value === today"
+              [class.selected]="d.value === value()"
+              [disabled]="!!min() && d.value < min()"
+              [attr.aria-label]="d.label"
+              [attr.aria-pressed]="d.value === value()"
+              [attr.data-date]="d.value"
+              (click)="select(d.value)"
+            >
+              {{ d.day }}
+            </button>
+          } @else {
+            <span></span>
+          }
+        }
+      </div>
+      <div class="calendar-footer">
+        <button type="button" [disabled]="!!min() && today < min()" (click)="select(today)">
+          Today</button
+        ><small>Use arrow keys to navigate</small
+        ><button type="button" (click)="close()">Close</button>
+      </div>
+    </div>
+  }
+</div>

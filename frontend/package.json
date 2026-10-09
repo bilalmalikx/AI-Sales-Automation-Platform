@@ -3,10 +3,12 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --configuration local --port 4202",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test --watch=false",
+    "build:production": "ng build --configuration production",
+    "build:local": "ng build --configuration local"
   },
   "prettier": {
     "printWidth": 100,

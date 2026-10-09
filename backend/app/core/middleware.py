@@ -20,9 +20,7 @@ logger = structlog.get_logger(__name__)
 
 
 class RequestContextMiddleware(BaseHTTPMiddleware):
-    async def dispatch(
-        self, request: Request, call_next: RequestResponseEndpoint
-    ) -> Response:
+    async def dispatch(self, request: Request, call_next: RequestResponseEndpoint) -> Response:
         request_id = request.headers.get("X-Request-ID") or str(uuid.uuid4())
 
         # Bind to structlog context — all log calls within this request inherit these.

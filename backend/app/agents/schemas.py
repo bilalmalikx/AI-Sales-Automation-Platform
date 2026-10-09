@@ -7,8 +7,6 @@ These Pydantic models define the structure for agent inputs and outputs.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any
-
 
 # ── Lead Enrichment Agent ─────────────────────────────────────────────────────
 
@@ -16,7 +14,7 @@ from typing import Any
 @dataclass
 class LeadEnrichmentInput:
     """Input for lead enrichment agent."""
-    
+
     email: str
     company_domain: str | None = None
     first_name: str | None = None
@@ -26,7 +24,7 @@ class LeadEnrichmentInput:
 @dataclass
 class LeadEnrichmentOutput:
     """Output from lead enrichment agent."""
-    
+
     company_name: str | None = None
     company_domain: str | None = None
     company_industry: str | None = None
@@ -46,7 +44,7 @@ class LeadEnrichmentOutput:
 @dataclass
 class CompanyResearchInput:
     """Input for company research agent."""
-    
+
     company_name: str
     company_domain: str | None = None
     industry: str | None = None
@@ -55,14 +53,16 @@ class CompanyResearchInput:
 @dataclass
 class CompanyResearchOutput:
     """Output from company research agent."""
-    
+
     company_description: str | None = None
     industry: str | None = None
     size: str | None = None
     founded_year: int | None = None
     headquarters: str | None = None
     key_products: list[str] | None = None
-    recent_news: list[dict[str, str]] | None = None  # [{"title": "...", "date": "...", "summary": "..."}]
+    recent_news: list[dict[str, str]] | None = (
+        None  # [{"title": "...", "date": "...", "summary": "..."}]
+    )
     tech_stack: list[str] | None = None
     social_media: dict[str, str] | None = None  # {"linkedin": "...", "twitter": "..."}
     funding_info: str | None = None
@@ -76,7 +76,7 @@ class CompanyResearchOutput:
 @dataclass
 class EmailGeneratorInput:
     """Input for email generator agent."""
-    
+
     recipient_name: str
     recipient_company: str
     recipient_title: str | None = None
@@ -93,7 +93,7 @@ class EmailGeneratorInput:
 @dataclass
 class EmailGeneratorOutput:
     """Output from email generator agent."""
-    
+
     subject_line: str
     email_body: str
     call_to_action: str
@@ -109,10 +109,10 @@ class EmailGeneratorOutput:
 class AgentExecutionMetadata:
     """
     Metadata about agent execution for tracking and analytics.
-    
+
     This can be included in AgentResult.metadata.
     """
-    
+
     model_used: str
     tokens_used: int = 0
     latency_ms: float = 0.0

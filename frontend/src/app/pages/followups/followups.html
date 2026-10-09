@@ -1,0 +1,28 @@
+<app-page-header
+  title="A timely, thoughtful nudge."
+  description="Keep track of your next touchpoint without losing the conversation."
+  eyebrow="FOLLOW-UPS"
+/>
+<div class="notice">
+  The scheduler prepares due follow-up drafts for review. Replies, opt-outs and booked meetings stop pending follow-ups.
+</div>
+<section class="card">
+  @for (l of followups.items(); track l.id) {
+    <div class="meeting">
+      <div>
+        <app-person [lead]="l" />
+        <p>Next touchpoint: {{ l.followup }}</p>
+      </div>
+      <div class="actions">
+        <button (click)="dialog.open('followup', l.id)">Reschedule</button
+        ><button (click)="cancel(l.id)">Cancel follow-up</button>
+      </div>
+    </div>
+  } @empty {
+    <div class="empty">
+      <h3>All caught up.</h3>
+      <p>Schedule a next touchpoint from a conversation in your inbox.</p>
+      <button routerLink="/inbox">Open inbox ↗</button>
+    </div>
+  }
+</section>

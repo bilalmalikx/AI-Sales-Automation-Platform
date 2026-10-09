@@ -1,0 +1,32 @@
+<app-page-header
+  title="See the next step clearly."
+  description="Move opportunities forward, with the full conversation in view."
+  eyebrow="CRM PIPELINE"
+/>
+<div class="board">
+  @for (c of columns; track c.name) {
+    <section class="column">
+      <h3>
+        {{ c.name }}<span>{{ inColumn(c.statuses).length }}</span>
+      </h3>
+      @for (l of inColumn(c.statuses); track l.id) {
+        <article class="deal">
+          <h3>{{ l.company }}</h3>
+          <p>{{ l.name }} · {{ l.title }}</p>
+          <app-badge [text]="l.status" /><label
+            class="muted"
+            style="font-size: 11px; margin: 12px 0 0"
+            >Move to stage</label
+          ><app-dropdown
+            [options]="options"
+            [value]="l.status"
+            [label]="'Move ' + l.name + ' to stage'"
+            (changed)="move(l.id, $event)"
+          />
+        </article>
+      } @empty {
+        <p class="muted">No opportunities in this stage.</p>
+      }
+    </section>
+  }
+</div>

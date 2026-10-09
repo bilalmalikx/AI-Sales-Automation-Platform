@@ -34,14 +34,22 @@ async def init_db() -> None:
         pool_size=settings.DATABASE_POOL_SIZE,
         max_overflow=settings.DATABASE_MAX_OVERFLOW,
     )
-    engine = create_async_engine(
-        settings.DATABASE_URL,
-        echo=settings.DATABASE_ECHO,
-        pool_size=settings.DATABASE_POOL_SIZE,
-        max_overflow=settings.DATABASE_MAX_OVERFLOW,
-        pool_timeout=settings.DATABASE_POOL_TIMEOUT,
-        pool_pre_ping=True,  # verify connections before use
-    )
+    kwargs = {"echo": settings.DATABASE_ECHO, "pool_pre_ping": True}
+    if not settings.DATABASE_URL.startswith("sqlite"):
+        kwargs.update(
+            pool_size=settings.DATABASE_POOL_SIZE,
+            max_overflow=settings.DATABASE_MAX_OVERFLOW,
+            pool_timeout=settings.DATABASE_POOL_TIMEOUT,
+        )
+    engine = create_async_engine(settings.DATABASE_URL, **kwargs)
+    if settings.DATABASE_URL.startswith("sqlite"):
+        from sqlalchemy import event
+
+        @event.listens_for(engine.sync_engine, "connect")
+        def sqlite_constraints(connection, _):
+            connection.execute("PRAGMA foreign_keys=ON")
+            connection.execute("PRAGMA busy_timeout=10000")
+
     logger.info("database_engine_initialized")
 
 

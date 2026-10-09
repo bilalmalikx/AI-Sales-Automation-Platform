@@ -1,0 +1,11 @@
+<div class="metrics">
+  @for (m of items(); track m.label) {
+    <div class="card tilt" appTilt>
+      <div class="metric-top">
+        {{ m.label }}<span class="icon-tile"><app-icon [name]="m.icon" /></span>
+      </div>
+      <div class="metric-value">{{ m.value }}</div>
+      <div class="metric-note">{{ m.note }}</div>
+    </div>
+  }
+</div>

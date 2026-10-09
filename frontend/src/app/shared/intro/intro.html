@@ -1,0 +1,12 @@
+@if (visible()) {
+  <div
+    id="intro"
+    [style.opacity]="fading() ? 0 : 1"
+    [style.pointer-events]="fading() ? 'none' : 'auto'"
+  >
+    <div class="brandmark">↗</div>
+    <h2>Salesway</h2>
+    <p>Good conversations start here.</p>
+    <div class="progress"><i></i></div>
+  </div>
+}

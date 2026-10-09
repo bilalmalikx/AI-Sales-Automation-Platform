@@ -1,0 +1,280 @@
+<dialog
+  #native
+  id="modal"
+  aria-labelledby="dialog-title"
+  [class.closing]="closing()"
+  (cancel)="cancel($event)"
+>
+  <div id="modal-body">
+    <div class="modal-head">
+      <h2 id="dialog-title">{{ title() }}</h2>
+      <button aria-label="Close dialog" (click)="close()" [disabled]="busy()">×</button>
+    </div>
+    @switch (kind()) {
+      @case ('lead') {
+        <form ngNativeValidate (ngSubmit)="submit()">
+          <div class="form-grid">
+            <div class="field">
+              <label for="name">Full name</label
+              ><input id="name" name="name" [(ngModel)]="f.name" required />
+            </div>
+            <div class="field">
+              <label for="email">Email address</label
+              ><input id="email" name="email" type="email" [(ngModel)]="f.email" required />
+            </div>
+            <div class="field">
+              <label for="company">Company</label
+              ><input id="company" name="company" [(ngModel)]="f.company" required />
+            </div>
+            <div class="field">
+              <label for="title">Job title</label
+              ><input id="title" name="title" [(ngModel)]="f.title" required />
+            </div>
+            <div class="field">
+              <label for="industry">Industry</label
+              ><input id="industry" name="industry" [(ngModel)]="f.industry" required />
+            </div>
+          </div>
+          <p class="error" role="alert">{{ error() }}</p>
+          <div class="form-actions">
+            <button type="button" (click)="close()">Cancel</button
+            ><button class="primary">Save lead</button>
+          </div>
+        </form>
+      }
+      @case ('lead-detail') {
+        @if (profile(); as l) {
+          <app-person [lead]="l" />
+          <p>
+            <strong>{{ l.company }}</strong
+            ><br />{{ l.title }} · {{ l.industry }}
+          </p>
+          <app-badge [text]="l.status" />
+          @if (l.research; as research) {
+            <h3 style="margin-top: 24px">Company context</h3>
+            <p>{{ research.summary }}</p>
+            <p>{{ research.opportunity }}</p>
+            <small>{{ research.source }}</small>
+          }
+          <div class="notice" style="margin-top: 20px">
+            {{
+              l.confidence
+                ? 'Demo research confidence: ' +
+                  l.confidence +
+                  '%. Sample profile, not verified information.'
+                : 'This contact has not been researched yet.'
+            }}
+            @if (l.followup) {
+              <br />Follow-up: {{ l.followup }}
+            }
+          </div>
+          <div class="actions">
+            <button (click)="dialog.open('lead', l.id)">Edit contact</button
+            ><button class="primary" (click)="navigate('workflow')">Prepare outreach ↗</button
+            ><button (click)="dialog.open('delete', l.id)">Delete</button>
+          </div>
+        }
+      }
+      @case ('delete') {
+        <p>This removes the contact and their related drafts, meetings, and conversations.</p>
+        <div class="actions">
+          <button (click)="close()">Keep lead</button
+          ><button class="primary" (click)="remove()">Delete lead</button>
+        </div>
+      }
+      @case ('campaign') {
+        <form ngNativeValidate (ngSubmit)="submit()">
+          <div class="field">
+            <label for="name">Campaign name</label
+            ><input id="name" name="name" [(ngModel)]="f.name" required />
+          </div>
+          <div class="field">
+            <label for="audience">Target audience</label
+            ><input id="audience" name="audience" [(ngModel)]="f.audience" required />
+          </div>
+          <div class="field">
+            <label for="campaign-offer">Value proposition</label
+            ><textarea id="campaign-offer" name="offer" [(ngModel)]="f.offer" required></textarea>
+          </div>
+          <div class="field">
+            <label>Tone</label
+            ><app-dropdown
+              [options]="tones"
+              [value]="f.tone"
+              label="Tone"
+              (changed)="f.tone = $event"
+            />
+          </div>
+          <label>Campaign leads</label>
+          <div style="max-height: 180px; overflow: auto; margin: 15px 0">
+            @for (l of campaignLeads(); track l.id) {
+              <label style="display: flex; gap: 10px; align-items: center"
+                ><input
+                  style="width: auto"
+                  type="checkbox"
+                  [checked]="f.ids.includes(l.id)"
+                  (change)="checkLead(l.id, $any($event.target).checked)"
+                />{{ l.name }} · {{ l.company }}</label
+              >
+            }
+          </div>
+          <p class="error" role="alert">{{ error() }}</p>
+          <div class="form-actions">
+            <button type="button" (click)="close()">Cancel</button
+            ><button class="primary">Save campaign</button>
+          </div>
+        </form>
+      }
+      @case ('draft') {
+        <form ngNativeValidate (ngSubmit)="submit()">
+          <div class="field">
+            <label for="subject">Subject</label
+            ><input id="subject" name="subject" [(ngModel)]="f.subject" required />
+          </div>
+          <label for="email-body">Email body</label
+          ><textarea id="email-body" name="body" [(ngModel)]="f.body" required rows="10"></textarea>
+          <p class="error" role="alert">{{ error() }}</p>
+          <div class="form-actions"><button class="primary">Save draft</button></div>
+        </form>
+      }
+      @case ('booking') {
+        <form ngNativeValidate (ngSubmit)="submit()">
+          <div class="field">
+            <label>Contact</label
+            ><app-dropdown
+              [options]="contactOptions()"
+              [value]="f.lead"
+              label="Contact"
+              (changed)="f.lead = $event"
+            />
+          </div>
+          <div class="form-grid">
+            <div class="field">
+              <label>Date</label
+              ><app-date-picker
+                [value]="f.date"
+                [min]="minDate()"
+                label="Date"
+                (changed)="f.date = $event"
+              />
+            </div>
+            <div class="field">
+              <label for="time">Time</label
+              ><input id="time" name="time" type="time" [(ngModel)]="f.time" required />
+            </div>
+            <div class="field">
+              <label>Duration</label
+              ><app-dropdown
+                [options]="durations"
+                [value]="f.duration"
+                label="Duration"
+                (changed)="f.duration = $event"
+              />
+            </div>
+          </div>
+          <p class="error" role="alert">{{ error() }}</p>
+          <small>Timezone: {{ store.state().settings.timezone }} · Backend reservation</small>
+          <div class="form-actions">
+            <button class="primary" [disabled]="!contactOptions().length">Save booking</button>
+          </div>
+        </form>
+      }
+      @case ('followup') {
+        <form ngNativeValidate (ngSubmit)="submit()">
+          <div class="field">
+            <label>Follow-up date</label
+            ><app-date-picker
+              [value]="f.date"
+              [min]="minDate()"
+              label="Follow-up date"
+              (changed)="f.date = $event"
+            />
+          </div>
+          <p class="error" role="alert">{{ error() }}</p>
+          <div class="form-actions"><button class="primary">Schedule follow-up</button></div>
+        </form>
+      }
+      @case ('import') {
+        <form ngNativeValidate (ngSubmit)="submit()">
+          <p>
+            Upload CSV with an <strong>email</strong> column. Optional: name, first_name, last_name,
+            company, company_name, title, industry.
+          </p>
+          <label for="csv-file">CSV file</label
+          ><input
+            id="csv-file"
+            name="file"
+            type="file"
+            accept=".csv,text/csv"
+            (change)="fileChanged($event)"
+            required
+            [disabled]="busy()"
+          />
+          <p class="error" role="alert">{{ error() }}</p>
+          <div class="form-actions">
+            <button type="button" (click)="leads.sample()">Download sample</button
+            ><button class="primary" [disabled]="busy()">
+              @if (busy()) {
+                <span class="spinner"></span>
+              }
+              Import leads
+            </button>
+          </div>
+        </form>
+      }
+      @case ('reset') {
+        <p>Refresh the latest backend records. Saved records will not be deleted.</p>
+        <div class="actions">
+          <button (click)="close()">Keep changes</button
+          ><button class="primary" (click)="reset()">Refresh data</button>
+        </div>
+      }
+      @case ('search') {
+        <label for="workspace-search">Search contacts, companies, or pages</label
+        ><input
+          id="workspace-search"
+          placeholder="Type a name or page…"
+          [ngModel]="search()"
+          (ngModelChange)="search.set($event)"
+        />
+        <div class="search-results">
+          @if (!search().trim()) {
+            <p>Start typing to search this workspace.</p>
+          } @else {
+            @for (p of matches().pages; track p.id) {
+              <button (click)="navigate(p.id)">
+                <app-icon [name]="p.id" />{{ p.label }}<small>Page ↗</small>
+              </button>
+            }
+            @for (l of matches().leads; track l.id) {
+              <button (click)="dialog.open('lead-detail', l.id)">
+                <app-person [lead]="l" /><small>Contact ↗</small>
+              </button>
+            }
+            @if (!matches().pages.length && !matches().leads.length) {
+              <p>No matches. Try another name or company.</p>
+            }
+          }
+        </div>
+      }
+      @case ('notifications') {
+        <div class="activity">
+          <span class="icon-tile"><app-icon name="inbox" /></span>
+          <div>
+            <h3>{{ store.state().messages.length }} conversations</h3>
+            <p>Review interested contacts and plan your next step.</p>
+            <button class="link" (click)="navigate('inbox')">Open inbox ↗</button>
+          </div>
+        </div>
+        <div class="activity">
+          <span class="icon-tile"><app-icon name="emails" /></span>
+          <div>
+            <h3>{{ needsReview() }} drafts to review</h3>
+            <p>Every message stays in your hands.</p>
+            <button class="link" (click)="navigate('emails')">Review drafts ↗</button>
+          </div>
+        </div>
+      }
+    }
+  </div>
+</dialog>

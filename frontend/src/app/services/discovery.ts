@@ -6,6 +6,7 @@ export class Discovery {
   private api = inject(Api);
   readonly runs = signal<DiscoveryRun[]>([]);
   readonly prospects = signal<Prospect[]>([]);
+  readonly contacts = signal<Prospect[]>([]);
   readonly config = signal<DiscoveryConfiguration | null>(null);
   readonly loading = signal(false);
   readonly error = signal('');
@@ -22,12 +23,14 @@ export class Discovery {
     if (this.loading()) return;
     this.loading.set(true);
     try {
-      const [runs, config] = await Promise.all([
+      const [runs, config, contacts] = await Promise.all([
         this.api.all<DiscoveryRun>('discovery/runs'),
         this.api.get<DiscoveryConfiguration>('discovery/configuration'),
+        this.api.all<Prospect>('discovery/prospects?contact_only=true'),
       ]);
       this.runs.set(runs);
       this.config.set(config);
+      this.contacts.set(contacts);
       if (!this.selected() && runs.length) this.selected.set(runs[0].id);
       this.prospects.set(
         await this.api.all<Prospect>(

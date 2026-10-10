@@ -78,6 +78,8 @@ export interface ActivityRecord {
 }
 export interface WorkflowRecord {
   id: string;
+  lead_id: string;
+  campaign_id: string;
   status: string;
   stage: string;
   error: string | null;

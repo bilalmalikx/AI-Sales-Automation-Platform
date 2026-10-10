@@ -48,9 +48,10 @@
   background: var(--accent-1);
   transition: width 0.4s;
 }
-.card-head select {
-  max-width: 420px;
-  width: 100%;
+.card-head .run-dropdown {
+  width: min(100%, 440px);
+  min-width: 0;
+  flex: 0 1 440px;
 }
 td small {
   display: block;
@@ -60,7 +61,7 @@ td small {
 td a {
   display: block;
   font-size: 12px;
-  max-width: 260px;
+  max-width: 100%;
   overflow-wrap: anywhere;
 }
 td {
@@ -93,7 +94,80 @@ td button {
     flex-direction: column;
     align-items: flex-start;
   }
-  .card-head select {
+  .card-head .run-dropdown {
     max-width: 100%;
   }
+}
+
+.business-table {
+  table-layout: fixed;
+  min-width: 1080px;
+  white-space: normal;
+}
+.business-column {
+  width: 24%;
+}
+.contact-column {
+  width: 24%;
+}
+.app-column {
+  width: 11%;
+}
+.fit-column {
+  width: 9%;
+}
+.status-column {
+  width: 20%;
+}
+.actions-column {
+  width: 12%;
+}
+.business-table td,
+.business-table th {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.55;
+}
+.business-table td strong,
+.business-table td a,
+.business-table td small {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.business-table td a {
+  margin-top: 5px;
+}
+.business-table td app-badge {
+  display: inline-block;
+  margin-bottom: 5px;
+}
+.row-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+.row-actions button {
+  max-width: 100%;
+  white-space: normal;
+}
+.contact-summary {
+  grid-template-columns: repeat(3, 1fr);
+}
+@media (max-width: 700px) {
+  .card-head .run-dropdown {
+    width: 100%;
+    flex-basis: auto;
+  }
+  .contact-summary {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.business-table td {
+  font-size: 14px;
+}
+.business-table td:nth-child(4) {
+  white-space: nowrap;
+  font-size: 13px;
 }

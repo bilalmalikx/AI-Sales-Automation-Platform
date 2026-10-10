@@ -46,3 +46,8 @@ class ProspectResponse(Record):
     reason: str | None
     lead_id: UUID | None
     campaign_id: UUID | None
+
+
+class ProspectOutreachInput(Input):
+    campaign_id: UUID
+    reviewed_contact: Literal[True]

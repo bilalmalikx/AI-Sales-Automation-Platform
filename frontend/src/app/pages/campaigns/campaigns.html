@@ -23,7 +23,7 @@
         </div>
         <div>
           <strong>{{ c.sent }}</strong
-          ><small>Demo sends</small>
+          ><small>Emails sent</small>
         </div>
         <div>
           <strong>{{ c.replies }}</strong
@@ -33,7 +33,8 @@
       <small>{{ c.tone }} tone · Human review enabled</small>
       <div class="track"><i [style.width.%]="progress(c.sent, c.ids.length)"></i></div>
       <div class="actions">
-        <button class="primary" routerLink="/workflow">Prepare outreach ↗</button
+        <button class="primary" routerLink="/workflow" [queryParams]="{ campaign: c.id }">
+          Prepare outreach ↗</button
         ><button (click)="toggle(c.id)">{{ c.status === 'Active' ? 'Pause' : 'Activate' }}</button>
       </div>
     </article>

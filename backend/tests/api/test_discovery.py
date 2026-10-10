@@ -372,3 +372,94 @@ def test_website_phone_is_visible_but_never_used_for_email_outreach(client, drai
     assert result["total"] == 1
     assert result["items"][0]["status"] == "missing_email"
     assert client.get("/api/v1/leads").json()["total"] == 0
+
+
+def test_operator_can_prepare_review_draft_from_public_email_prospect(client, drain, providers):
+    async def weak(*args):
+        return {
+            "summary": "Wash",
+            "opportunity": "Review booking potential",
+            "score": 35,
+            "suitable": False,
+        }
+
+    providers.setattr(discovery, "qualify", weak)
+    start(client)
+    drain()
+    p = client.get(BASE + "/prospects").json()["items"][0]
+    assert not p["lead_id"]
+    campaign = client.post(
+        "/api/v1/campaigns",
+        json={
+            "name": "Mobile app review",
+            "audience": "UK businesses",
+            "offer": "Build mobile booking apps",
+            "lead_ids": [],
+        },
+    ).json()
+    path = BASE + "/prospects/" + p["id"] + "/prepare-outreach"
+    body = {"campaign_id": campaign["id"], "reviewed_contact": True}
+    headers = {"Idempotency-Key": "review-selected-contact"}
+    assert (
+        client.post(path, json={**body, "reviewed_contact": False}, headers=headers).status_code
+        == 422
+    )
+    r = client.post(path, json=body, headers=headers)
+    assert r.status_code == 202, r.text
+    assert client.post(path, json=body, headers=headers).json()["id"] == r.json()["id"]
+    drain()
+    assert client.get("/api/v1/emails").json()["items"][0]["status"] == "needs_review"
+    p = client.get(BASE + "/prospects/" + p["id"]).json()
+    assert p["lead_id"] and p["score"] == 35 and not p["analysis"]["suitable"]
+    assert client.get("/api/v1/campaigns/" + campaign["id"]).json()["lead_ids"] == [p["lead_id"]]
+
+
+def test_review_draft_refuses_existing_app(client, drain, providers):
+    async def found(*args):
+        return {"status": "app_found", "matches": []}
+
+    providers.setattr(discovery, "verify_app", found)
+    start(client)
+    drain()
+    p = client.get(BASE + "/prospects").json()["items"][0]
+    campaign = client.post(
+        "/api/v1/campaigns",
+        json={"name": "Review", "audience": "UK", "offer": "Mobile booking", "lead_ids": []},
+    ).json()
+    r = client.post(
+        BASE + "/prospects/" + p["id"] + "/prepare-outreach",
+        json={"campaign_id": campaign["id"], "reviewed_contact": True},
+        headers={"Idempotency-Key": "excluded"},
+    )
+    assert r.status_code == 409
+    assert client.get("/api/v1/leads").json()["total"] == 0
+
+
+def test_review_draft_cannot_bypass_email_opt_out(client, drain, providers):
+    async def weak(*args):
+        return {"summary": "Wash", "score": 20, "suitable": False}
+
+    providers.setattr(discovery, "qualify", weak)
+    start(client)
+    drain()
+    p = client.get(BASE + "/prospects").json()["items"][0]
+    lead = client.post(
+        "/api/v1/leads",
+        json={
+            "email": "hello@wash.example.com",
+            "company_name": "Studio Wash",
+            "first_name": "Team",
+        },
+    ).json()
+    assert client.post("/api/v1/leads/" + lead["id"] + "/unsubscribe").status_code == 200
+    campaign = client.post(
+        "/api/v1/campaigns",
+        json={"name": "Review", "audience": "UK", "offer": "Mobile booking", "lead_ids": []},
+    ).json()
+    r = client.post(
+        BASE + "/prospects/" + p["id"] + "/prepare-outreach",
+        json={"campaign_id": campaign["id"], "reviewed_contact": True},
+        headers={"Idempotency-Key": "opt-out-protected"},
+    )
+    assert r.status_code == 409
+    assert client.get("/api/v1/emails").json()["total"] == 0

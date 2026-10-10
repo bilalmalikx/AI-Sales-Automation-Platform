@@ -3,18 +3,44 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { PageHeader } from '../../shared/page-header/page-header';
 import { Badge } from '../../shared/badge/badge';
+import { Dropdown } from '../../shared/dropdown/dropdown';
 import { Discovery as DiscoveryService } from '../../services/discovery';
 import { DiscoveryInput, Prospect } from '../../models/backend';
 import { label } from '../../services/workspace';
 @Component({
   selector: 'app-discovery',
-  imports: [FormsModule, RouterLink, PageHeader, Badge],
+  imports: [FormsModule, RouterLink, PageHeader, Badge, Dropdown],
   templateUrl: './discovery.html',
   styleUrl: './discovery.css',
 })
 export class Discovery {
   discovery = inject(DiscoveryService);
   label = label;
+  countries = [
+    { value: 'GB', label: 'United Kingdom' },
+    { value: 'US', label: 'United States' },
+  ];
+  runOptions = computed(() => [
+    { value: 'all', label: 'All businesses · all runs' },
+    ...this.discovery
+      .runs()
+      .map((r) => ({
+        value: r.id,
+        label: r.parameters.industry + ' · ' + r.parameters.location + ' · ' + label(r.status),
+      })),
+  ]);
+  changeCountry(value: string): void {
+    if (value === 'GB' || value === 'US') this.form.country = value;
+  }
+  websiteLabel(value: string): string {
+    try {
+      const u = new URL(value);
+      return u.hostname + (u.pathname === '/' ? '' : u.pathname);
+    } catch {
+      return value;
+    }
+  }
+
   form: DiscoveryInput = {
     industry: 'car wash',
     location: 'London',

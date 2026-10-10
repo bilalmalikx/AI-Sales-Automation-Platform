@@ -13,7 +13,7 @@ from app.core.config import settings
 from app.core.exceptions import ConflictException, RateLimitException, ValidationException
 from app.models.discovery import DiscoveryRun, Prospect
 from app.models.domain import Lead
-from app.models.sales import Campaign, CampaignLead, Job
+from app.models.sales import Campaign, CampaignLead, Job, WorkflowRun
 from app.providers import apify, website
 from app.repositories.sales import SalesRepository
 from app.schemas.lead import LeadCreate
@@ -391,3 +391,39 @@ async def promote(db, p, params):
         )
     else:
         await db.commit()
+
+
+async def prepare_outreach(db, identifier, campaign_id, key):
+    """Operator-selected prospect: create a review draft without claiming AI qualification."""
+    repo = SalesRepository(db)
+    await repo.settings(lock=True)
+    p = await repo.get(Prospect, identifier, lock=True)
+    run = await repo.get(DiscoveryRun, p.run_id, lock=True)
+    await repo.get(Campaign, campaign_id, lock=True)
+    if (
+        run.status == "cancelled"
+        or p.status in {"excluded", "cancelled"}
+        or p.app_status == "app_found"
+    ):
+        raise ConflictException("This business is excluded from mobile-app outreach")
+    if p.stage != "complete" or not p.emails or not p.evidence.get("website", {}).get("pages"):
+        raise ValidationException("A completed website inspection and public email are required")
+    prior = await db.scalar(select(WorkflowRun).where(WorkflowRun.idempotency_key == key))
+    if prior:
+        if prior.campaign_id != campaign_id or prior.lead_id != p.lead_id:
+            raise ConflictException("Idempotency key already belongs to another request")
+        return prior
+    await promote(db, p, {**run.parameters, "generate_drafts": False})
+    if not p.lead_id:
+        raise ValidationException("No usable CRM contact could be created")
+    lead = await repo.get(Lead, p.lead_id, lock=True)
+    if lead.status in {"unsubscribed", "lost"}:
+        raise ConflictException("Outreach is stopped for this contact")
+    if not await db.get(CampaignLead, (campaign_id, lead.id)):
+        db.add(CampaignLead(campaign_id=campaign_id, lead_id=lead.id))
+    p.campaign_id = campaign_id
+    p.reason = "Operator selected contact for a review draft; AI qualification remains unchanged"
+    await db.flush()
+    return await SalesService(db).start_workflow(
+        WorkflowInput(lead_id=lead.id, campaign_id=campaign_id), key
+    )

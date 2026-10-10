@@ -38,3 +38,9 @@ SALESWAY_TEST_DATABASE_URL=postgresql+asyncpg://bilalmalik@127.0.0.1:5432/salesw
 ```
 
 Tests use local providers or mocks and cannot access the configured Apify token. The live trial records are saved separately in `docs/live-discovery-result.json` after provider completion. No prospect email is sent during verification.
+
+## Operator-selected review drafts
+
+Campaigns → Prepare outreach opens AI workflow with that campaign selected. The lead selector includes eligible CRM contacts and public-email discovery contacts from all runs. Discovery-only candidates remain labelled review required; they are not silently marked AI-qualified. Their website, actual email, AI fit and app evidence appear before selection is confirmed.
+
+`POST /api/v1/discovery/prospects/{id}/prepare-outreach` requires `campaign_id`, `reviewed_contact: true` and an `Idempotency-Key`. It preserves evidence/AI scores, deduplicates the contact into CRM, assigns it to the chosen campaign and queues a human-review draft. Completed website inspection and a public email are required. Existing apps, excluded/cancelled records and stopped/suppressed CRM contacts cannot use this route. It neither activates the campaign nor sends mail.

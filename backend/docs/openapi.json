@@ -295,6 +295,16 @@
               ],
               "title": "Run Id"
             }
+          },
+          {
+            "name": "contact_only",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Contact Only"
+            }
           }
         ],
         "responses": {
@@ -472,6 +482,75 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ProspectResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/discovery/prospects/{identifier}/prepare-outreach": {
+      "post": {
+        "tags": [
+          "Business discovery"
+        ],
+        "summary": "Prepare Outreach",
+        "operationId": "prepare_outreach_api_v1_discovery_prospects__identifier__prepare_outreach_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Identifier"
+            }
+          },
+          {
+            "name": "idempotency-key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100,
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProspectOutreachInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowResponse"
                 }
               }
             }
@@ -4841,6 +4920,27 @@
         ],
         "title": "Preferences"
       },
+      "ProspectOutreachInput": {
+        "properties": {
+          "campaign_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Campaign Id"
+          },
+          "reviewed_contact": {
+            "type": "boolean",
+            "const": true,
+            "title": "Reviewed Contact"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "campaign_id",
+          "reviewed_contact"
+        ],
+        "title": "ProspectOutreachInput"
+      },
       "ProspectResponse": {
         "properties": {
           "id": {
@@ -4897,6 +4997,10 @@
           "stage": {
             "type": "string",
             "title": "Stage"
+          },
+          "contact_available": {
+            "type": "boolean",
+            "title": "Contact Available"
           },
           "emails": {
             "items": {},
@@ -4968,6 +5072,7 @@
           "phone",
           "status",
           "stage",
+          "contact_available",
           "emails",
           "app_status",
           "score",

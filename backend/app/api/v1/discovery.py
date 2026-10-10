@@ -9,8 +9,13 @@ from app.core.config import settings
 from app.core.security import require_auth
 from app.models.discovery import DiscoveryRun, Prospect
 from app.repositories.sales import SalesRepository
-from app.schemas.discovery import DiscoveryInput, DiscoveryResponse, ProspectResponse
-from app.schemas.sales import Page
+from app.schemas.discovery import (
+    DiscoveryInput,
+    DiscoveryResponse,
+    ProspectOutreachInput,
+    ProspectResponse,
+)
+from app.schemas.sales import Page, WorkflowResponse
 from app.services import discovery
 
 router = APIRouter(
@@ -114,3 +119,15 @@ async def retry(identifier: UUID, db: DB):
     await SalesService(db).enqueue("inspect", p, f"inspect:{p.id}:{uuid4()}")
     await db.commit()
     return p
+
+
+@router.post(
+    "/prospects/{identifier}/prepare-outreach", response_model=WorkflowResponse, status_code=202
+)
+async def prepare_outreach(
+    identifier: UUID,
+    value: ProspectOutreachInput,
+    db: DB,
+    idempotency_key: Annotated[str, Header(min_length=1, max_length=100)],
+):
+    return await discovery.prepare_outreach(db, identifier, value.campaign_id, idempotency_key)

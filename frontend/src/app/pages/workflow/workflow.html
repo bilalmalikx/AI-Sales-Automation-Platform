@@ -4,7 +4,8 @@
   eyebrow="AI WORKFLOW"
 />
 <div class="notice">
-  The backend orchestrator saves each stage and uses the configured AI provider. Website-derived leads retain their source evidence. Every draft requires review.
+  The backend orchestrator saves each stage and uses the configured AI provider. Website-derived
+  leads retain their source evidence. Every draft requires review.
 </div>
 <section class="card">
   <div class="form-grid">
@@ -15,7 +16,7 @@
         [value]="leadId()"
         label="Choose a lead"
         [disabled]="workflow.processing()"
-        (changed)="leadId.set($event)"
+        (changed)="leadId.set($event); reviewedContact.set(false)"
       />
     </div>
     <div>
@@ -29,16 +30,44 @@
       />
     </div>
   </div>
+  @if (!leadOptions().length) {
+    <div class="notice">
+      No eligible contacts yet. Unsubscribed/lost leads are excluded.
+      <a routerLink="/discovery">Discover businesses with public emails ↗</a>
+    </div>
+  }
+  @if (discoverySelection()) {
+    <div class="notice">
+      @if (selectedProspect(); as p) {
+        <p>
+          <strong>{{ p.company }}</strong> · {{ p.emails[0].email }}
+        </p>
+        <p><strong>AI summary (unverified):</strong> {{ p.analysis.summary }}</p>
+        <p>AI fit: {{ p.score }} / 100 · App evidence: {{ p.app_status }}</p>
+        @if (p.website) {
+          <a [href]="p.website" target="_blank" rel="noopener noreferrer"
+            >Review business website ↗</a
+          >
+        }
+      }
+      This is a discovery contact, not an automatically qualified lead. Selecting it prepares a
+      review draft and assigns it to this campaign; it does not send an email.
+      <label class="review-confirm"
+        ><input
+          type="checkbox"
+          [ngModel]="reviewedContact()"
+          (ngModelChange)="reviewedContact.set($event)"
+        />
+        I reviewed this business/contact and want a draft. App absence is not confirmed.</label
+      >
+    </div>
+  }
   <div class="steps">
     @for (s of steps; track s; let i = $index) {
       <div class="step" [class.active]="workflow.stage() >= i">
         <strong>{{ workflow.stage() > i ? '✓' : i + 1 }} · {{ s }}</strong
         ><span>{{
-          workflow.stage() > i
-            ? 'Completed'
-            : workflow.stage() === i
-              ? 'Processing…'
-              : 'Waiting'
+          workflow.stage() > i ? 'Completed' : workflow.stage() === i ? 'Processing…' : 'Waiting'
         }}</span>
       </div>
     }
@@ -46,7 +75,12 @@
   <div class="actions">
     <button
       class="primary"
-      [disabled]="workflow.processing() || !leadId() || !campaignId()"
+      [disabled]="
+        workflow.processing() ||
+        !leadId() ||
+        !campaignId() ||
+        (discoverySelection() && !reviewedContact())
+      "
       (click)="run()"
     >
       @if (workflow.processing()) {
@@ -69,8 +103,8 @@
     }
     @if (workflow.completed()) {
       <div class="notice" style="margin-top: 24px">
-        <strong>✓ Your draft is ready.</strong> Contact context and email saved for human
-        review. <button class="link" routerLink="/emails">Review email ↗</button>
+        <strong>✓ Your draft is ready.</strong> Contact context and email saved for human review.
+        <button class="link" routerLink="/emails">Review email ↗</button>
       </div>
     }
   </div>

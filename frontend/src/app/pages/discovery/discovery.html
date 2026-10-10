@@ -29,11 +29,13 @@
       />
     </div>
     <div class="field">
-      <label for="discovery-country">Target country</label
-      ><select id="discovery-country" name="country" [(ngModel)]="form.country">
-        <option value="GB">United Kingdom</option>
-        <option value="US">United States</option>
-      </select>
+      <label>Target country</label>
+      <app-dropdown
+        label="Target country"
+        [options]="countries"
+        [value]="form.country"
+        (changed)="changeCountry($event)"
+      />
     </div>
     <div class="field">
       <label for="discovery-limit">Maximum businesses</label
@@ -79,18 +81,13 @@
   <section class="card run-status" aria-live="polite">
     <div class="card-head">
       <h2>Orchestrator activity</h2>
-      <select
-        aria-label="Select discovery run"
-        [ngModel]="discovery.selected()"
-        (ngModelChange)="discovery.select($event)"
-      >
-        <option value="all">All contactable businesses</option>
-        @for (r of discovery.runs(); track r.id) {
-          <option [value]="r.id">
-            {{ r.parameters.industry }} · {{ r.parameters.location }} · {{ label(r.status) }}
-          </option>
-        }
-      </select>
+      <app-dropdown
+        class="run-dropdown"
+        label="Select discovery run"
+        [options]="runOptions()"
+        [value]="discovery.selected()"
+        (changed)="discovery.select($event)"
+      />
     </div>
     @if (run(); as r) {
       <div class="run-numbers">
@@ -133,8 +130,8 @@
 }
 <div class="notice">
   “App not found” is a search result, not proof that a business has no app. Uncertain matches
-  require review. Only businesses with a website-confirmed email, phone or contact page appear
-  below. Email outreach requires a public email.
+  require review. All businesses remain visible. Contact found means a public email, website phone
+  or contact-page link was collected. CRM qualification is separate; email outreach requires review.
 </div>
 <section class="card discovery-results">
   <div class="card-head">
@@ -160,7 +157,15 @@
     Show only businesses with contact details</label
   >
   <div class="table-wrap">
-    <table>
+    <table class="business-table">
+      <colgroup>
+        <col class="business-column" />
+        <col class="contact-column" />
+        <col class="app-column" />
+        <col class="fit-column" />
+        <col class="status-column" />
+        <col class="actions-column" />
+      </colgroup>
       <thead>
         <tr>
           <th>Business / website</th>
@@ -178,7 +183,13 @@
               <strong>{{ p.company }}</strong
               ><small>{{ p.city }} · {{ p.country }}</small>
               @if (safeUrl(p.website); as website) {
-                <a [href]="website" target="_blank" rel="noopener noreferrer">{{ p.website }} ↗</a>
+                <a
+                  [href]="website"
+                  [title]="p.website || ''"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >{{ websiteLabel(website) }} ↗</a
+                >
               } @else {
                 <small>Website not available</small>
               }
@@ -205,13 +216,15 @@
               <app-badge [text]="label(p.status)" /><small>{{ p.reason || label(p.stage) }}</small>
             </td>
             <td>
-              <button (click)="selected.set(p)">Evidence</button>
-              @if (p.status === 'inspection_failed') {
-                <button (click)="discovery.retry(p.id)">Retry inspection</button>
-              }
-              @if (p.lead_id) {
-                <a routerLink="/leads">CRM ↗</a>
-              }
+              <div class="row-actions">
+                <button (click)="selected.set(p)">Evidence</button>
+                @if (p.status === 'inspection_failed') {
+                  <button (click)="discovery.retry(p.id)">Retry inspection</button>
+                }
+                @if (p.lead_id) {
+                  <a routerLink="/leads">CRM ↗</a>
+                }
+              </div>
             </td>
           </tr>
         } @empty {

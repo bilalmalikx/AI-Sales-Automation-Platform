@@ -4,6 +4,7 @@ import asyncio
 import smtplib
 import ssl
 from email.message import EmailMessage
+from email.utils import formataddr
 from pathlib import Path
 
 from app.core.config import settings
@@ -18,7 +19,12 @@ class DeliveryUncertainError(Exception):
 def compose(draft, lead, sender: str) -> EmailMessage:
     message = EmailMessage()
     message["Subject"] = draft.subject
-    message["From"] = settings.DEFAULT_FROM_EMAIL or "salesway@localhost.test"
+    message["From"] = formataddr(
+        (
+            settings.DEFAULT_FROM_NAME or sender,
+            settings.DEFAULT_FROM_EMAIL or "salesway@localhost.test",
+        )
+    )
     message["To"] = lead.email
     domain = (settings.DEFAULT_FROM_EMAIL or "salesway@localhost.test").split("@")[1]
     message["Message-ID"] = f"<{draft.id}.{draft.revision}@{domain}>"
@@ -29,27 +35,74 @@ def compose(draft, lead, sender: str) -> EmailMessage:
     return message
 
 
+def _smtp_connect():
+    if not settings.SMTP_HOST:
+        raise ExternalServiceException("SMTP host is not configured")
+    if settings.SMTP_TLS == "ssl":
+        smtp = smtplib.SMTP_SSL(
+            settings.SMTP_HOST,
+            settings.SMTP_PORT,
+            timeout=settings.SMTP_TIMEOUT_SECONDS,
+            context=ssl.create_default_context(),
+        )
+    else:
+        smtp = smtplib.SMTP(
+            settings.SMTP_HOST, settings.SMTP_PORT, timeout=settings.SMTP_TIMEOUT_SECONDS
+        )
+    try:
+        smtp.ehlo()
+        if settings.SMTP_TLS == "starttls":
+            smtp.starttls(context=ssl.create_default_context())
+            smtp.ehlo()
+        if settings.SMTP_USERNAME:
+            smtp.login(settings.SMTP_USERNAME, settings.SMTP_PASSWORD)
+        return smtp
+    except Exception:
+        smtp.close()
+        raise
+
+
+async def check_connection() -> dict:
+    """Verify TLS/authentication without submitting any message or enabling delivery."""
+
+    def check():
+        smtp = None
+        try:
+            smtp = _smtp_connect()
+            code, _ = smtp.noop()
+            if code != 250:
+                raise ExternalServiceException("SMTP readiness check was rejected")
+            return {
+                "status": "connected",
+                "message": "SMTP connection and authentication verified. No email sent.",
+            }
+        except smtplib.SMTPAuthenticationError:
+            return {
+                "status": "failed",
+                "message": "SMTP authentication failed. Check username and app password.",
+            }
+        except Exception:
+            return {
+                "status": "failed",
+                "message": "SMTP connection failed. Check host, port, TLS and network access.",
+            }
+        finally:
+            if smtp:
+                try:
+                    smtp.quit()
+                except Exception:
+                    smtp.close()
+
+    return await asyncio.to_thread(check)
+
+
 def _smtp_send(message: EmailMessage) -> str:
     if not settings.LIVE_DELIVERY_ENABLED:
         raise ExternalServiceException("Live email delivery is disabled")
     smtp = None
     data_started = False
     try:
-        if settings.SMTP_TLS == "ssl":
-            smtp = smtplib.SMTP_SSL(
-                settings.SMTP_HOST,
-                settings.SMTP_PORT,
-                timeout=settings.SMTP_TIMEOUT_SECONDS,
-                context=ssl.create_default_context(),
-            )
-        else:
-            smtp = smtplib.SMTP(
-                settings.SMTP_HOST, settings.SMTP_PORT, timeout=settings.SMTP_TIMEOUT_SECONDS
-            )
-            if settings.SMTP_TLS == "starttls":
-                smtp.starttls(context=ssl.create_default_context())
-        if settings.SMTP_USERNAME:
-            smtp.login(settings.SMTP_USERNAME, settings.SMTP_PASSWORD)
+        smtp = _smtp_connect()
         data_started = True
         refused = smtp.send_message(message)
         if refused:

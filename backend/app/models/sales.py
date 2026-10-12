@@ -147,3 +147,13 @@ class SuppressedEmail(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime, default=lambda: datetime.now(UTC).replace(tzinfo=None)
     )
+
+
+class MailboxSync(Base):
+    __tablename__ = "mailbox_sync"
+    id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    uid_validity: Mapped[str] = mapped_column(String(100), default="")
+    last_uid: Mapped[int] = mapped_column(Integer, default=0)
+    status: Mapped[str] = mapped_column(String(30), default="idle")
+    checked_at: Mapped[datetime | None] = mapped_column(DateTime)
+    error: Mapped[str | None] = mapped_column(String(300))

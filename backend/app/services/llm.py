@@ -61,7 +61,7 @@ class LLMService:
             api_key=api_key or settings.OPENAI_API_KEY,
             base_url=settings.LLM_BASE_URL,
             timeout=settings.LLM_TIMEOUT_SECONDS,
-            max_retries=1,
+            max_retries=settings.LLM_MAX_RETRIES,
             **({"reasoning_effort": "low"} if "gpt-oss" in model else {}),
         )
 

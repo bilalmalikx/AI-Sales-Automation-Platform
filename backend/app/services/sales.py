@@ -9,6 +9,7 @@ from zoneinfo import ZoneInfo
 from sqlalchemy import delete, func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.core.config import settings
 from app.core.exceptions import ConflictException, RateLimitException, ValidationException
 from app.models.domain import Lead
 from app.models.sales import (
@@ -206,6 +207,10 @@ class SalesService:
             return draft
         if draft.status != "approved" or draft.approved_revision != draft.revision:
             raise ConflictException("Approve the current draft before sending")
+        if settings.EMAIL_PROVIDER == "smtp" and not settings.LIVE_DELIVERY_ENABLED:
+            raise ConflictException(
+                "Live SMTP delivery is disabled; enable delivery before requesting Send"
+            )
         await self.allowed(draft.lead_id, draft.campaign_id, active=True)
         local = datetime.now(ZoneInfo(prefs.timezone))
         start = (

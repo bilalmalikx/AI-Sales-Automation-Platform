@@ -81,6 +81,22 @@ def test_smtp_adapter_delivers_once_over_real_protocol(client, drain, monkeypatc
         assert client.get(BASE + f"/emails/{d['id']}").json()["status"] == "sent"
 
 
+def test_smtp_readiness_does_not_send_or_enable_delivery(client, monkeypatch):
+    with smtp_server() as (port, deliveries):
+        for key, value in {
+            "SMTP_HOST": "127.0.0.1",
+            "SMTP_PORT": port,
+            "SMTP_TLS": "none",
+            "SMTP_USERNAME": "",
+            "LIVE_DELIVERY_ENABLED": False,
+        }.items():
+            monkeypatch.setattr(settings, key, value)
+        result = client.post(BASE + "/integrations/email/check").json()
+        assert result["status"] == "connected"
+        assert deliveries == []
+        assert not settings.LIVE_DELIVERY_ENABLED
+
+
 def test_google_calendar_create_reschedule_cancel(client, drain, monkeypatch):
     events = {}
     operations = []
@@ -172,3 +188,14 @@ def test_known_delivery_failure_needs_new_approval(client, drain, monkeypatch):
     assert result["status"] == "failed" and result["approved_revision"] is None
     assert result["revision"] == 2
     assert client.post(BASE + f"/emails/{d['id']}/send").status_code == 409
+
+
+def test_disabled_smtp_does_not_queue_or_invalidate_approval(client, drain, monkeypatch):
+    record = lead(client)
+    c = campaign(client, [record["id"]])
+    d = approve(client, workflow(client, drain, record, c))
+    monkeypatch.setattr(settings, "EMAIL_PROVIDER", "smtp")
+    monkeypatch.setattr(settings, "LIVE_DELIVERY_ENABLED", False)
+    assert client.post(BASE + f"/emails/{d['id']}/send").status_code == 409
+    result = client.get(BASE + f"/emails/{d['id']}").json()
+    assert result["status"] == "approved" and result["revision"] == d["revision"]

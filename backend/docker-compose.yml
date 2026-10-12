@@ -15,7 +15,7 @@ x-app: &app
     EMAIL_PROVIDER: local
     CALENDAR_PROVIDER: local
     LIVE_DELIVERY_ENABLED: "false"
-    PUBLIC_BASE_URL: http://localhost:8000
+    PUBLIC_BASE_URL: http://localhost:${SALESWAY_API_PORT:-8002}
     WEBHOOK_SECRET: local-development-webhook-secret
     CORS_ORIGINS: '["http://localhost:4202"]'
     LOG_FORMAT: json
@@ -31,7 +31,7 @@ services:
       POSTGRES_PASSWORD: local-development-password
       POSTGRES_DB: salesway
     ports:
-      - "127.0.0.1:15432:5432"
+      - "127.0.0.1:${SALESWAY_DB_PORT:-15432}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -66,7 +66,7 @@ services:
   api:
     <<: *app
     ports:
-      - "127.0.0.1:8000:8000"
+      - "127.0.0.1:${SALESWAY_API_PORT:-8002}:8000"
     depends_on:
       migrate:
         condition: service_completed_successfully

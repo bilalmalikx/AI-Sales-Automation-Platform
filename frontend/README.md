@@ -31,7 +31,7 @@ Angular CLI generated the pages, shared components and services before implement
 
 ## Live data and backend integration
 
-Both environments use the real API. Local base URL: `http://localhost:8000/api/v1`; production: `/api/v1`, served through your authenticated reverse proxy. There is no fallback to demo leads or browser-stored sales records. Workspace pages refresh every five seconds; discovery refreshes every two seconds. Theme preferences remain local.
+Both environments use the real API. Local base URL: `http://localhost:8002/api/v1`; production: `/api/v1`, served through your authenticated reverse proxy. There is no fallback to demo leads or browser-stored sales records. Workspace pages refresh every five seconds; discovery refreshes every two seconds. Theme preferences remain local.
 
 Start the backend using its documented Compose live override, then `npm start`. Open `http://localhost:4202/#/discovery`. A single click starts the server-side Maps search, public website crawl, app evidence checks, AI qualification and eligible CRM/draft creation. Maps does not need to be open. Failed inspections can resume from saved evidence.
 

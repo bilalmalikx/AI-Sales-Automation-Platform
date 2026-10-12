@@ -1,0 +1,15 @@
+# Opt-in delivery override. Apply after checking SMTP and verifying no old queued sends.
+# Draft approval, campaign activation and explicit Send remain required.
+services:
+  api:
+    environment:
+      LIVE_DELIVERY_ENABLED: "true"
+  worker:
+    environment:
+      LIVE_DELIVERY_ENABLED: "true"
+  beat:
+    environment:
+      LIVE_DELIVERY_ENABLED: "true"
+  migrate:
+    environment:
+      LIVE_DELIVERY_ENABLED: "true"

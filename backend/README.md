@@ -11,7 +11,7 @@ docker compose up -d --build
 docker compose ps
 ```
 
-API: http://localhost:8000 · interactive API docs: http://localhost:8000/docs · readiness: http://localhost:8000/health/ready
+API: http://localhost:8002 · interactive API docs: http://localhost:8002/docs · readiness: http://localhost:8002/health/ready
 
 Compose starts PostgreSQL 16, Redis, migrations, API, Celery worker and Celery beat. PostgreSQL is available on localhost:15432; Redis stays inside the network. Data and local email files persist in Docker volumes. `docker compose down` stops the stack while retaining its data.
 
@@ -51,7 +51,19 @@ Configure the API, worker and beat with the same environment settings. The local
 
 SMTP: `EMAIL_PROVIDER=smtp`, `SMTP_HOST`, `SMTP_PORT`, `SMTP_USERNAME`, `SMTP_PASSWORD`, `SMTP_TLS=starttls` (or `ssl`), `DEFAULT_FROM_EMAIL`, `DEFAULT_FROM_NAME`, then `LIVE_DELIVERY_ENABLED=true`. Authentication is optional only when your SMTP server supports it. Outbound mail includes a stable Message-ID and signed one-click unsubscribe headers.
 
-SMTP does not provide incoming replies, delivery or open events. Your inbound mailbox/provider bridge must map the original Message-ID to its draft UUID and forward normalized events to `POST /api/v1/webhooks/email`. There is no IMAP polling or open-tracking pixel in this backend. Payload: `event_id`, `draft_id`, `kind` (`delivered`, `opened`, `replied`, `bounced`, `unsubscribed`), optional `body`, and `intent`. Sign the exact request bytes with HMAC-SHA256 over `timestamp + "." + body`, using `WEBHOOK_SECRET`; pass `X-Webhook-Timestamp` (Unix seconds) and `X-Webhook-Signature` (hex). Requests outside five minutes are rejected; repeated event IDs are deduplicated.
+SMTP does not provide incoming replies, delivery or open events. For automatic incoming replies, set `IMAP_ENABLED=true`, `IMAP_HOST`, `IMAP_PORT=993`, `IMAP_USERNAME`, `IMAP_PASSWORD`, `IMAP_FOLDER=INBOX`. Celery beat polls every `IMAP_POLL_SECONDS` (default 60). TLS IMAP reads bounded batches using BODY.PEEK without marking mail as read or deleting it. Replies must match a sent Message-ID and the lead's sender address. UIDVALIDITY/checkpoints survive restarts; events deduplicate; replies stop scheduled followups. HTML-only replies are converted to plain text; automatic responses, unrelated mail and oversized messages are skipped. Only explicit first-line unsubscribe commands are classified automatically; other intent remains for human review. Settings shows sync status and offers manual sync. No open-tracking pixel is installed.
+
+Alternatively, an inbound mailbox/provider bridge can map the original Message-ID to its draft UUID and forward normalized events to `POST /api/v1/webhooks/email`. Payload: `event_id`, `draft_id`, `kind` (`delivered`, `opened`, `replied`, `bounced`, `unsubscribed`), optional `body`, and `intent`. Sign exact request bytes with HMAC-SHA256 over `timestamp + "." + body`, using `WEBHOOK_SECRET`; pass `X-Webhook-Timestamp` (Unix seconds) and `X-Webhook-Signature` (hex). Requests outside five minutes are rejected; repeated event IDs are deduplicated.
+
+Settings → Check SMTP connection verifies TLS/authentication without sending. `venv/bin/python scripts/verify_smtp.py --send-to-self` sends one fixed verification message only to `DEFAULT_FROM_EMAIL`; it does not run queued customer jobs. SMTP acceptance is distinct from confirmed inbox receipt.
+
+After SMTP verification and checking that old queued/sending emails and queued/processing email jobs are absent, opt into manual live delivery:
+
+```sh
+docker compose -f docker-compose.yml -f docker-compose.live.yml -f docker-compose.delivery.yml up -d --build
+```
+
+Activation, current-revision approval and explicit Send are still required. The live-discovery override alone keeps delivery disabled; disabled delivery requests return a conflict without invalidating approval. Configure a publicly reachable HTTPS `PUBLIC_BASE_URL` for recipient unsubscribe links before external deployment. Google remains local until OAuth is configured and its provider is explicitly changed.
 
 Google: enable Calendar API, configure an OAuth client and obtain an offline refresh token with `https://www.googleapis.com/auth/calendar.events` scope. Set `CALENDAR_PROVIDER=google`, `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `GOOGLE_REFRESH_TOKEN`, `GOOGLE_CALENDAR_ID`, then enable live delivery. The account must own or have write access to the calendar. Event IDs are stable across retries; attendee updates use `sendUpdates=all`, and Meet links are returned when Google creates them. Refresh-token acquisition is performed by the operator; this backend does not expose an OAuth consent/login UI.
 
@@ -88,4 +100,4 @@ Default pytest uses a temporary migrated SQLite database and local providers. Po
 
 `api/v1` routes → `schemas` validation → `services` business rules → `repositories` persistence → `models` entities. `workflows` contains LangGraph orchestration, `agents` contains AI agents, `providers` contains SMTP/Google adapters, `tasks` contains durable workers and Celery, `core` contains config/security/errors, and `alembic` contains versioned migrations.
 
-Latest verification: **49 tests passed on SQLite and PostgreSQL**, PostgreSQL coverage **86.43%**, Ruff lint/format checks passed, and migration upgrade/downgrade/upgrade passed. The running Docker PostgreSQL/Redis/API/Celery/beat stack passed the HTTP end-to-end smoke flow; its result is saved in [smoke-result.json](docs/smoke-result.json). SMTP was tested with a temporary local SMTP server; Google Calendar responses were mocked. No live account credentials were used.
+See [end-to-end verification](docs/end-to-end-verification.md) for current checks, live SMTP acceptance, and remaining credential-dependent verification. PostgreSQL tests reset application tables: never point `SALESWAY_TEST_DATABASE_URL` at your actual workspace database.

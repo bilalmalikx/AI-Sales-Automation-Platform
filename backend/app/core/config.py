@@ -88,6 +88,14 @@ class Settings(BaseSettings):
         "starttls", validation_alias=AliasChoices("SMTP_TLS", "SMTP_SECURITY")
     )
     SMTP_TIMEOUT_SECONDS: int = 30
+    IMAP_ENABLED: bool = False
+    IMAP_HOST: str = ""
+    IMAP_PORT: int = Field(993, ge=1, le=65535)
+    IMAP_USERNAME: str = ""
+    IMAP_PASSWORD: str = ""
+    IMAP_FOLDER: str = "INBOX"
+    IMAP_POLL_SECONDS: int = Field(60, ge=30, le=3600)
+    IMAP_TIMEOUT_SECONDS: int = Field(15, ge=3, le=60)
     GOOGLE_CLIENT_ID: str = ""
     GOOGLE_CLIENT_SECRET: str = ""
     GOOGLE_REFRESH_TOKEN: str = ""
@@ -146,6 +154,8 @@ class Settings(BaseSettings):
                 raise ValueError(
                     "Google Calendar requires OAuth client credentials and refresh token"
                 )
+        if self.IMAP_ENABLED and not all([self.IMAP_HOST, self.IMAP_USERNAME, self.IMAP_PASSWORD]):
+            raise ValueError("IMAP requires host, username and password")
         return self
 
     @property

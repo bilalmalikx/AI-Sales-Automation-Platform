@@ -305,7 +305,11 @@ async def notifications(db: DB):
 
 
 @router.get("/integrations", tags=["Workspace"])
-async def integrations():
+async def integrations(db: DB):
+    from app.models.sales import MailboxSync
+    from app.providers.inbox import mailbox_key
+
+    mailbox = await db.get(MailboxSync, mailbox_key()) if settings.IMAP_ENABLED else None
     return {
         "ai": {
             "provider": settings.AI_PROVIDER,
@@ -315,15 +319,41 @@ async def integrations():
             "provider": settings.EMAIL_PROVIDER,
             "configured": settings.EMAIL_PROVIDER == "local"
             or bool(settings.SMTP_HOST and settings.DEFAULT_FROM_EMAIL),
+            "delivery_enabled": settings.EMAIL_PROVIDER == "local"
+            or settings.LIVE_DELIVERY_ENABLED,
         },
         "calendar": {
             "provider": settings.CALENDAR_PROVIDER,
             "configured": settings.CALENDAR_PROVIDER == "local"
             or bool(settings.GOOGLE_REFRESH_TOKEN),
         },
+        "inbox": {
+            "provider": "imap" if settings.IMAP_ENABLED else "webhook",
+            "configured": settings.IMAP_ENABLED or bool(settings.WEBHOOK_SECRET),
+            "automatic_sync": settings.IMAP_ENABLED and settings.WORKER_MODE == "celery",
+            "status": mailbox.status if mailbox else "not_checked",
+            "last_checked_at": mailbox.checked_at.isoformat() + "Z"
+            if mailbox and mailbox.checked_at
+            else None,
+            "error": mailbox.error if mailbox else None,
+        },
         "live_delivery_enabled": settings.LIVE_DELIVERY_ENABLED,
         "worker_mode": settings.WORKER_MODE,
     }
+
+
+@router.post("/integrations/email/check", tags=["Workspace"])
+async def check_email_connection():
+    from app.providers.email import check_connection
+
+    return await check_connection()
+
+
+@router.post("/integrations/inbox/sync", tags=["Workspace"])
+async def sync_email_inbox():
+    from app.services.inbox import sync_inbox
+
+    return await sync_inbox()
 
 
 @router.get("/jobs", response_model=Page[JobResponse], tags=["Operations"])

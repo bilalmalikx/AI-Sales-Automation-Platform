@@ -18,7 +18,14 @@ celery_app.conf.update(
     task_acks_late=True,
     worker_prefetch_multiplier=1,
     broker_connection_retry_on_startup=True,
-    beat_schedule={"drain-sales-jobs": {"task": "salesway.drain", "schedule": 5.0}},
+    beat_schedule={
+        "drain-sales-jobs": {"task": "salesway.drain", "schedule": 5.0},
+        **(
+            {"sync-inbox": {"task": "salesway.sync_inbox", "schedule": settings.IMAP_POLL_SECONDS}}
+            if settings.IMAP_ENABLED
+            else {}
+        ),
+    },
 )
 
 
@@ -31,6 +38,21 @@ def drain_jobs() -> int:
         await init_db()
         try:
             return await drain(20)
+        finally:
+            await dispose_db()
+
+    return asyncio.run(execute())
+
+
+@celery_app.task(name="salesway.sync_inbox", acks_late=True)
+def sync_mailbox() -> dict:
+    async def execute():
+        from app.db.engine import dispose_db, init_db
+        from app.services.inbox import sync_inbox
+
+        await init_db()
+        try:
+            return await sync_inbox()
         finally:
             await dispose_db()
 

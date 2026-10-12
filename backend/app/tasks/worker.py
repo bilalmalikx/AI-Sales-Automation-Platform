@@ -101,12 +101,13 @@ async def process_workflow(identifier: UUID) -> None:
                 "research_verified": False,
             }
             lead.confidence = confidence
-            lead.research = {
-                **output["research"],
-                "source": "Local test provider"
-                if settings.AI_PROVIDER == "local"
-                else "Unverified LLM inference",
-            }
+            if not lead_data["website_research"]:
+                lead.research = {
+                    **output["research"],
+                    "source": "Local test provider"
+                    if settings.AI_PROVIDER == "local"
+                    else "Unverified LLM inference",
+                }
         run.status = "needs_review"
         run.stage = "human_review"
         service.activity("workflow_ready", run, "Research and draft saved for human review")

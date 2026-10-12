@@ -3,6 +3,24 @@
   description="Set your business context and keep your outreach consistent."
   eyebrow="WORKSPACE SETTINGS"
 />
+<section class="card integrations" aria-label="Service connections">
+  <h2>Service connections</h2>
+  @if (integrations(); as status) {
+    <div class="integration-grid">
+      <div><h3>AI drafts</h3><p>{{ status.ai.provider }} · {{ status.ai.configured ? 'Configured' : 'Credentials needed' }}</p></div>
+      <div><h3>Outgoing email</h3><p>{{ status.email.provider }} · {{ status.email.configured ? 'Configured' : 'Credentials needed' }}</p><p>{{ status.email.delivery_enabled ? 'Delivery enabled — review and Send required' : 'Live delivery disabled' }}</p></div>
+      <div><h3>Calendar</h3><p>{{ status.calendar.provider }} · {{ status.calendar.configured ? 'Configured' : 'Credentials needed' }}</p>@if(status.calendar.provider === 'local') { <p>Meetings saved locally. Google Calendar is not connected.</p> }</div>
+      <div><h3>Incoming replies</h3><p>{{ status.inbox.provider }} · {{ status.inbox.status }}</p><p>{{ status.inbox.automatic_sync ? 'Automatic inbox sync active' : 'Automatic mailbox sync is not enabled' }}</p>@if(status.inbox.last_checked_at) { <p>Last checked: {{ status.inbox.last_checked_at }}</p> }@if(status.inbox.error) { <p role="alert">{{ status.inbox.error }}</p> }</div>
+    </div>
+    <div class="form-actions">
+      <button type="button" [disabled]="checking()" (click)="checkSmtp()">{{ checking() ? 'Checking SMTP…' : 'Check SMTP connection' }}</button>
+      @if(status.inbox.provider === 'imap') { <button type="button" [disabled]="syncing()" (click)="syncInbox()">{{ syncing() ? 'Syncing inbox…' : 'Sync replies now' }}</button> }
+      <button type="button" (click)="loadIntegrations()">Refresh connections</button>
+    </div>
+  } @else { <p>Loading service connections…</p> }
+  @if(smtpResult()) { <p class="notice" role="status">{{ smtpResult() }}</p> }
+  @if(integrationError()) { <p class="error" role="alert">{{ integrationError() }}</p> }
+</section>
 <form ngNativeValidate class="card" (ngSubmit)="save()">
   <h2>Business & sending preferences</h2>
   <div class="form-grid">

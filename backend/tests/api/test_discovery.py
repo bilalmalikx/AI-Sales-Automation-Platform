@@ -100,6 +100,19 @@ def test_discovery_to_evidence_contact_and_review_draft(client, drain, providers
     assert client.get("/api/v1/campaigns").json()["items"][0]["status"] == "draft"
     d = client.get("/api/v1/emails").json()["items"][0]
     assert d["status"] == "needs_review"
+    from uuid import UUID
+
+    from app.models.domain import Lead
+    from app.tasks.worker import sessions
+
+    async def research():
+        async with sessions()() as db:
+            lead = await db.get(Lead, UUID(p["lead_id"]))
+            return lead.research
+
+    saved = client.portal.call(research)
+    assert saved["evidence"]["website"]["pages"]
+    assert saved["source"] != "Local test provider"
     assert client.post("/api/v1/emails/" + d["id"] + "/send").status_code == 409
 
 

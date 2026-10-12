@@ -11,7 +11,7 @@ from uuid import uuid4
 import httpx
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--url", default="http://localhost:8000")
+parser.add_argument("--url", default="http://localhost:8002")
 parser.add_argument("--token", default="")
 parser.add_argument("--webhook-secret", default="local-development-webhook-secret")
 args = parser.parse_args()

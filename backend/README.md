@@ -1,5 +1,9 @@
 # Salesway backend
 
+Local system commands (from repository root): `bash scripts/local.sh start|stop|status|backup`. See [15 October local completion and credential setup](docs/local-completion-2026-10-15.md).
+
+Latest [email end-to-end retest](docs/email-e2e-retest-2026-10-15.md): 94 backend tests, live self-addressed SMTP acceptance, and legacy draft-content checks.
+
 FastAPI backend for the existing Angular/prototype workspace. The Angular frontend uses the real API, including business discovery. This backend stores real records in PostgreSQL and runs durable jobs through Celery/Redis; local providers keep development self-contained.
 
 ## Run the complete local stack
@@ -100,4 +104,4 @@ Default pytest uses a temporary migrated SQLite database and local providers. Po
 
 `api/v1` routes → `schemas` validation → `services` business rules → `repositories` persistence → `models` entities. `workflows` contains LangGraph orchestration, `agents` contains AI agents, `providers` contains SMTP/Google adapters, `tasks` contains durable workers and Celery, `core` contains config/security/errors, and `alembic` contains versioned migrations.
 
-See [end-to-end verification](docs/end-to-end-verification.md) for current checks, live SMTP acceptance, and remaining credential-dependent verification. PostgreSQL tests reset application tables: never point `SALESWAY_TEST_DATABASE_URL` at your actual workspace database.
+Latest: [13 October delivery verification](docs/delivery-verification-2026-10-13.md). Earlier: [11 October verification](docs/end-to-end-verification.md). These reports distinguish tested workflows, live provider acceptance and remaining credential-dependent verification. PostgreSQL tests reset application tables: never point `SALESWAY_TEST_DATABASE_URL` at your actual workspace database.

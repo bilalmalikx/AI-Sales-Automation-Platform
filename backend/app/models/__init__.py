@@ -31,4 +31,4 @@ __all__ = [
     "WorkspaceSettings",
 ]
 
-from app.models.discovery import DiscoveryRun, Prospect  # noqa: F401
+from app.models.discovery import DiscoveryRun, DiscoverySchedule, Prospect  # noqa: F401

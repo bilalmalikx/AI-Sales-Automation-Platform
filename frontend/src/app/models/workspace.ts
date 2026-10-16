@@ -45,6 +45,8 @@ export interface EmailDraft {
   revision?: number;
   requiresReview?: boolean;
   failure?: string | null;
+  reviewIssues?: string[];
+  hasPlaceholders?: boolean;
   subject: string;
   body: string;
   sentDate?: string;

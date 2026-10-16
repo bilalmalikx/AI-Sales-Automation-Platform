@@ -116,6 +116,22 @@ def test_discovery_to_evidence_contact_and_review_draft(client, drain, providers
     assert client.post("/api/v1/emails/" + d["id"] + "/send").status_code == 409
 
 
+def test_paid_start_uses_reserved_cap_after_configuration_changes(client, drain, providers):
+    providers.setattr(settings, "DISCOVERY_RUN_BUDGET_USD", 0.5)
+    response = start(client)
+    assert response.status_code == 202
+    seen = []
+
+    async def capture(parameters):
+        seen.append(parameters["_budget_usd"])
+        return {"id": "test-run", "defaultDatasetId": "test-dataset"}
+
+    providers.setattr(apify, "start", capture)
+    providers.setattr(settings, "DISCOVERY_RUN_BUDGET_USD", 5)
+    drain()
+    assert seen == [0.5]
+
+
 def test_missing_website_and_email_remain_visible(client, drain, providers):
     async def rows(*args):
         return [

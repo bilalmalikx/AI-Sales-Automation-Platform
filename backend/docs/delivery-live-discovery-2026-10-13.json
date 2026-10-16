@@ -1,0 +1,45 @@
+{
+  "verified_date": "2026-10-13",
+  "run_id": "9928197b-bc1e-483f-b298-cbec3707ea89",
+  "run_status": "completed",
+  "total": 5,
+  "processed": 5,
+  "ai_calls": 4,
+  "reported_apify_cost_usd": 0.0002,
+  "businesses_with_email": 3,
+  "crm_contacts": 3,
+  "review_drafts": 3,
+  "customer_emails_sent": 0,
+  "prospects": [
+    {
+      "company": "Cow & Sow (Queen Square)",
+      "status": "missing_email",
+      "app_status": "uncertain",
+      "reason": "No public business email found; outreach is blocked"
+    },
+    {
+      "company": "COR Restaurant",
+      "status": "needs_review",
+      "app_status": "uncertain",
+      "reason": "Review app absence evidence before outreach"
+    },
+    {
+      "company": "Curry House",
+      "status": "needs_review",
+      "app_status": "uncertain",
+      "reason": "Review app absence evidence before outreach"
+    },
+    {
+      "company": "Captain Cod - Avongrill",
+      "status": "excluded",
+      "app_status": "app_found",
+      "reason": "Existing mobile app found"
+    },
+    {
+      "company": "Ruby Jeans The Parade Cafe & Restaurant Bristol",
+      "status": "needs_review",
+      "app_status": "uncertain",
+      "reason": "Review app absence evidence before outreach"
+    }
+  ]
+}

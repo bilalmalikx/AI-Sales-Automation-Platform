@@ -7,11 +7,13 @@ from fastapi import APIRouter, Depends, Header
 from app.api.v1.sales import DB, PageNumber, PageSize
 from app.core.config import settings
 from app.core.security import require_auth
-from app.models.discovery import DiscoveryRun, Prospect
+from app.models.discovery import DiscoveryRun, DiscoverySchedule, Prospect
 from app.repositories.sales import SalesRepository
 from app.schemas.discovery import (
     DiscoveryInput,
     DiscoveryResponse,
+    DiscoveryScheduleInput,
+    DiscoveryScheduleResponse,
     ProspectOutreachInput,
     ProspectResponse,
 )
@@ -67,13 +69,17 @@ async def cancel(identifier: UUID, db: DB):
     repo = SalesRepository(db)
     await repo.settings(lock=True)
     r = await repo.get(DiscoveryRun, identifier, lock=True)
+    if r.status in {"completed", "completed_with_errors", "failed", "cancelled"}:
+        return r
+    if r.status == "queued" and not r.provider_run_id:
+        r.budget_reserved_usd = 0
     r.status = "cancelled"
     await db.commit()
     return r
 
 
 @router.get("/configuration")
-async def configuration():
+async def configuration(db: DB):
     return {
         "apify_configured": bool(settings.APIFY_API_TOKEN),
         "dataset_configured": bool(settings.APIFY_DATASET_ID),
@@ -84,7 +90,36 @@ async def configuration():
         "ai_endpoint": urlsplit(settings.LLM_BASE_URL).hostname,
         "ai_model": settings.OPENAI_MODEL,
         "ai_calls_per_run": settings.DISCOVERY_AI_MAX_CALLS,
+        "monthly_budget": await discovery.monthly_budget(db),
     }
+
+
+@router.get("/schedules", response_model=Page[DiscoveryScheduleResponse])
+async def schedules(db: DB, page: PageNumber = 1, page_size: PageSize = 50):
+    return await SalesRepository(db).page(
+        DiscoverySchedule, DiscoveryScheduleResponse, page, page_size
+    )
+
+
+@router.post("/schedules", response_model=DiscoveryScheduleResponse, status_code=201)
+async def create_schedule(value: DiscoveryScheduleInput, db: DB):
+    await SalesRepository(db).settings(lock=True)
+    schedule = DiscoverySchedule(**value.model_dump())
+    db.add(schedule)
+    await db.commit()
+    return schedule
+
+
+@router.put("/schedules/{identifier}", response_model=DiscoveryScheduleResponse)
+async def update_schedule(identifier: UUID, value: DiscoveryScheduleInput, db: DB):
+    repo = SalesRepository(db)
+    await repo.settings(lock=True)
+    schedule = await repo.get(DiscoverySchedule, identifier, lock=True)
+    for field, item in value.model_dump().items():
+        setattr(schedule, field, item)
+    schedule.error = None
+    await db.commit()
+    return schedule
 
 
 @router.post("/prospects/{identifier}/retry", response_model=ProspectResponse)

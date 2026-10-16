@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "workflow_id": "60491001-7024-469a-a6de-d624ed087a98",
+  "draft_id": "ba1ef31a-bafc-4066-8414-55b83c3cd45d",
+  "meeting_id": "1675e537-fba9-44b3-a8a2-ebd6f1b7ff14",
+  "checks": [
+    "readiness",
+    "lead",
+    "campaign",
+    "durable AI workflow",
+    "review approval",
+    "worker email",
+    "signed reply",
+    "followup cancellation",
+    "meeting create/reschedule/cancel",
+    "analytics",
+    "unsubscribe"
+  ]
+}

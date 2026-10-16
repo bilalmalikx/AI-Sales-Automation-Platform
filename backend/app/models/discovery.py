@@ -1,8 +1,9 @@
 """Discovery records preserve businesses without inventing contact emails."""
 
+from datetime import datetime
 from uuid import UUID
 
-from sqlalchemy import JSON, Boolean, ForeignKey, Integer, String, Text, UniqueConstraint
+from sqlalchemy import JSON, Boolean, DateTime, ForeignKey, Integer, String, Text, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db.base import Base, TimestampMixin, UUIDPrimaryKeyMixin
@@ -21,6 +22,20 @@ class DiscoveryRun(Base, UUIDPrimaryKeyMixin, TimestampMixin):
     processed: Mapped[int] = mapped_column(Integer, default=0)
     ai_calls: Mapped[int] = mapped_column(Integer, default=0)
     error: Mapped[str | None] = mapped_column(Text)
+    budget_reserved_usd: Mapped[float] = mapped_column(default=0)
+
+
+class DiscoverySchedule(Base, UUIDPrimaryKeyMixin, TimestampMixin):
+    __tablename__ = "discovery_schedules"
+    name: Mapped[str] = mapped_column(String(200))
+    parameters: Mapped[dict] = mapped_column(JSON)
+    enabled: Mapped[bool] = mapped_column(Boolean, default=False)
+    due_at: Mapped[datetime] = mapped_column(DateTime, index=True)
+    last_run_id: Mapped[UUID | None] = mapped_column(
+        ForeignKey("discovery_runs.id", ondelete="SET NULL")
+    )
+    last_checked_at: Mapped[datetime | None] = mapped_column(DateTime)
+    error: Mapped[str | None] = mapped_column(String(300))
 
 
 class Prospect(Base, UUIDPrimaryKeyMixin, TimestampMixin):

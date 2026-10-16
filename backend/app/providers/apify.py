@@ -39,7 +39,12 @@ async def start(parameters):
         await request(
             "POST",
             f"/acts/{identifier(settings.APIFY_ACTOR_ID)}/runs",
-            params={"timeout": 300, "maxTotalChargeUsd": settings.DISCOVERY_RUN_BUDGET_USD},
+            params={
+                "timeout": 300,
+                "maxTotalChargeUsd": parameters.get(
+                    "_budget_usd", settings.DISCOVERY_RUN_BUDGET_USD
+                ),
+            },
             json={
                 "searchStringsArray": [parameters["industry"]],
                 "locationQuery": parameters["location"]

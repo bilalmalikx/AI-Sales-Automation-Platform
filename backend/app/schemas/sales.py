@@ -5,7 +5,7 @@ from typing import Generic, Literal, TypeVar
 from uuid import UUID
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
-from pydantic import BaseModel, ConfigDict, Field, field_serializer, field_validator
+from pydantic import BaseModel, ConfigDict, Field, computed_field, field_serializer, field_validator
 
 T = TypeVar("T")
 
@@ -106,6 +106,21 @@ class DraftResponse(Record):
     failure: str | None
     delivered_at: datetime | None
     opened_at: datetime | None
+
+    @computed_field
+    @property
+    def review_issues(self) -> list[str]:
+        from app.services.email_quality import content_issues
+
+        # Warnings are conservative; approval/send checks the actual campaign offer as well.
+        return content_issues(self.subject, self.body)
+
+    @computed_field
+    @property
+    def has_unresolved_placeholders(self) -> bool:
+        from app.services.email_quality import PLACEHOLDER
+
+        return bool(PLACEHOLDER.search(self.subject + "\n" + self.body))
 
 
 class ReplyInput(Input):

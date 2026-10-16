@@ -1,0 +1,73 @@
+[
+  {
+    "page": "Overview",
+    "heading": "Room for better conversations.",
+    "loaded": true
+  },
+  {
+    "page": "Business discovery",
+    "heading": "Find the next mobile app opportunity.",
+    "tables": 1,
+    "unavailable": false
+  },
+  {
+    "page": "Leads",
+    "heading": "Every opportunity starts here.",
+    "tables": 1,
+    "unavailable": false
+  },
+  {
+    "page": "Campaigns",
+    "heading": "Outreach with intention.",
+    "tables": 0,
+    "unavailable": false
+  },
+  {
+    "page": "AI workflow",
+    "heading": "A thoughtful first impression.",
+    "tables": 0,
+    "unavailable": false
+  },
+  {
+    "page": "Email review",
+    "heading": "Your voice. Ready for review.",
+    "tables": 0,
+    "unavailable": false
+  },
+  {
+    "page": "Inbox",
+    "heading": "Keep the conversation going.",
+    "tables": 0,
+    "unavailable": false
+  },
+  {
+    "page": "Meetings",
+    "heading": "Make time for what matters.",
+    "tables": 0,
+    "unavailable": false
+  },
+  {
+    "page": "Follow-ups",
+    "heading": "A timely, thoughtful nudge.",
+    "tables": 0,
+    "unavailable": false
+  },
+  {
+    "page": "CRM pipeline",
+    "heading": "See the next step clearly.",
+    "tables": 0,
+    "unavailable": false
+  },
+  {
+    "page": "Analytics",
+    "heading": "Understand your momentum.",
+    "tables": 1,
+    "unavailable": false
+  },
+  {
+    "page": "Settings",
+    "heading": "Make this workspace yours.",
+    "tables": 0,
+    "unavailable": false
+  }
+]

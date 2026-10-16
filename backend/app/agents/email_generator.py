@@ -11,6 +11,7 @@ import json
 from app.agents.base import AgentConfig, AgentExecutionContext, BaseAgent
 from app.agents.schemas import EmailGeneratorInput, EmailGeneratorOutput
 from app.core.config import settings
+from app.services.email_quality import content_issues, personalization_issues
 from app.services.llm import LLMService
 
 
@@ -40,8 +41,8 @@ class EmailGeneratorAgent(BaseAgent[EmailGeneratorInput, EmailGeneratorOutput]):
         # Initialize LLM service with creative temperature
         self.llm_service = LLMService(
             model=settings.OPENAI_MODEL,
-            temperature=0.8,  # More creative for email writing
-            max_tokens=1000,
+            temperature=0.2,
+            max_tokens=min(settings.LLM_MAX_TOKENS, 2000),
         )
 
     async def prepare_impl(
@@ -95,7 +96,11 @@ Provide your response in JSON format:
 Best practices:
 - Start with personalized hook related to recipient/company
 - Keep it concise and value-focused
-- Use specific examples, not generic claims
+- Use only facts explicitly supplied in the input. Never invent examples or customer results.
+- Never invent growth metrics, percentages, client names, testimonials, case studies, portfolio or prices.
+- Never claim you have followed the business, attended events, or researched news unless provided.
+- Never leave [Name], [Your Name] or other template placeholders. Use the company team if no person is known.
+- Use the exact supplied sender name and company in the signature.
 - Clear call-to-action
 - Professional but conversational
 - Avoid buzzwords and hype"""
@@ -153,6 +158,25 @@ Best practices:
             estimated_readability_score=email_data.get("estimated_readability_score", 70.0),
             confidence_score=email_data.get("confidence_score", 0.7),
         )
+        verified_offer = (input_data.product_value_prop or "").split(
+            "\nEvidence-based opportunity:"
+        )[0]
+        issues = content_issues(output.subject_line, output.email_body, verified_offer)
+        issues += personalization_issues(
+            output.email_body, bool(input_data.company_description or input_data.recent_news)
+        )
+        if issues:
+            # Keep the workflow usable without retrying invented proof or silently accepting it.
+            cta = f"Would it be useful to discuss whether this fits {input_data.recipient_company}'s needs?"
+            output = EmailGeneratorOutput(
+                subject_line=f"A conversation with {input_data.recipient_company}"[:200],
+                email_body=f"Hi {input_data.recipient_company} team,\n\nI'm reaching out from {input_data.sender_company}. {verified_offer}\n\n{cta}\n\nBest,\n{input_data.sender_name}",
+                call_to_action=cta,
+                personalization_elements=[input_data.recipient_company],
+                estimated_readability_score=70,
+                confidence_score=0.3,
+            )
+            context.metadata["unsafe_draft_replaced"] = issues
 
         # Track metadata
         context.metadata["confidence"] = output.confidence_score

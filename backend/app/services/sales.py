@@ -27,6 +27,7 @@ from app.models.sales import (
 )
 from app.repositories.sales import SalesRepository
 from app.schemas.sales import CampaignResponse
+from app.services.email_quality import content_issues
 
 STOPPED = {"unsubscribed", "lost", "won", "unresponsive"}
 
@@ -181,6 +182,12 @@ class SalesService:
         await self.session.commit()
         return draft
 
+    async def check_draft_content(self, draft):
+        campaign = await self.repo.get(Campaign, draft.campaign_id)
+        issues = content_issues(draft.subject, draft.body, campaign.offer)
+        if issues:
+            raise ConflictException("Draft needs editing: " + " ".join(issues))
+
     async def approve(self, identifier: UUID, value):
         await self.repo.settings(lock=True)
         draft = await self.repo.get(EmailDraft, identifier, lock=True)
@@ -188,6 +195,7 @@ class SalesService:
             raise ConflictException("Draft cannot be approved in its current state")
         if draft.revision != value.expected_revision:
             raise ConflictException("Draft changed; reload before approving")
+        await self.check_draft_content(draft)
         if draft.requires_review and not value.acknowledge_low_confidence:
             raise ValidationException(
                 "Explicit acknowledgement is required for low-confidence or unverified research"
@@ -207,6 +215,7 @@ class SalesService:
             return draft
         if draft.status != "approved" or draft.approved_revision != draft.revision:
             raise ConflictException("Approve the current draft before sending")
+        await self.check_draft_content(draft)
         if settings.EMAIL_PROVIDER == "smtp" and not settings.LIVE_DELIVERY_ENABLED:
             raise ConflictException(
                 "Live SMTP delivery is disabled; enable delivery before requesting Send"

@@ -72,6 +72,27 @@
     ><small>Runs on the server. No Maps tab required. No automatic email sends.</small>
   </div>
 </form>
+<section class="card schedule-card">
+  <h2>Daily discovery</h2>
+  <p>Use the category, city, country and maximum above. Each enabled schedule repeats every 24 hours. Searches use provider credits; emails still require review.</p>
+  @if(discovery.config()?.monthly_budget; as budget) {
+    <div class="notice">Apify budget · {{ budget.month }} UTC: ${{ budget.reported_usd | number:'1.2-4' }} reported · ${{ budget.committed_usd | number:'1.2-4' }} spent or reserved · ${{ budget.limit_usd }} monthly cap. AI usage is separate.</div>
+  }
+  <form class="form-grid" (ngSubmit)="createSchedule()" ngNativeValidate>
+    <div class="field"><label for="schedule-name">Schedule name</label><input id="schedule-name" name="schedule-name" [(ngModel)]="scheduleName" required maxlength="200" placeholder="Codelps · London restaurants" /></div>
+    <div class="field"><label for="schedule-date">First run (your browser's local time)</label><input id="schedule-date" name="schedule-date" type="datetime-local" [(ngModel)]="scheduleDate" required /></div>
+    <div class="form-actions span2"><button [disabled]="discovery.scheduleBusy()">Save paused schedule</button></div>
+  </form>
+  @if(scheduleNotice()) { <p class="notice" role="status">{{ scheduleNotice() }}</p> }
+  @if(discovery.scheduleError()) { <p class="error" role="alert">{{ discovery.scheduleError() }}</p> }
+  @for(schedule of discovery.schedules(); track schedule.id) {
+    <div class="schedule-row">
+      <div><strong>{{ schedule.name }}</strong><p>{{ schedule.parameters.industry }} · {{ schedule.parameters.location }} · {{ schedule.parameters.country }} · up to {{ schedule.parameters.limit }} businesses</p><p>{{ schedule.enabled ? 'Enabled' : 'Paused' }} · Next slot {{ schedule.due_at | date:'medium' }}</p>@if(schedule.error) { <p class="error">{{ schedule.error }}</p> }</div>
+      <div class="row-actions"><button type="button" [disabled]="discovery.scheduleBusy()" (click)="discovery.toggleSchedule(schedule)">{{ schedule.enabled ? 'Pause' : 'Enable daily search' }}</button>@if(schedule.last_run_id) { <button type="button" (click)="discovery.select(schedule.last_run_id)">View last run</button> }</div>
+    </div>
+  } @empty { <p>No automatic searches configured.</p> }
+  <small>Daily and monthly limits apply across manual and scheduled runs. Pausing stops future searches; an existing run has its own Stop control.</small>
+</section>
 @if (discovery.error()) {
   <div class="notice error" role="alert">
     {{ discovery.error() }} <button (click)="discovery.refresh()">Retry connection</button>

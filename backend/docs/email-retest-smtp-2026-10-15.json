@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "email_status": "sent",
+  "failure": null,
+  "smtp_message_id_present": true,
+  "checks": [
+    "HTTP workflow",
+    "fixed test content",
+    "current revision approval",
+    "explicit send",
+    "real Celery worker",
+    "live SMTP acceptance"
+  ],
+  "recipient": "configured sender only",
+  "inbox_receipt_verified": false
+}

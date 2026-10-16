@@ -8,6 +8,7 @@ from sqlalchemy import or_, select
 from sqlalchemy.ext.asyncio import async_sessionmaker
 
 from app.core.config import settings
+from app.core.exceptions import ConflictException
 from app.core.logging import get_logger
 from app.db.engine import get_engine
 from app.models.domain import Lead
@@ -138,6 +139,15 @@ async def process_email(identifier: UUID, expected_revision: int | None = None) 
             await db.commit()
             return
         prefs = await service.repo.settings()
+        try:
+            await service.check_draft_content(draft)
+        except ConflictException as exc:
+            draft.status = "needs_review"
+            draft.approved_revision = None
+            draft.revision += 1
+            draft.failure = exc.message
+            await db.commit()
+            return
         draft.status = "sending"
         await db.commit()  # Persist ambiguity marker BEFORE the external SMTP operation.
         try:
@@ -326,6 +336,9 @@ async def process_next() -> bool:
 
 
 async def drain(max_jobs: int = 100) -> int:
+    from app.services.schedules import dispatch_due
+
+    await dispatch_due()
     await due_followups()
     count = 0
     while count < max_jobs and await process_next():

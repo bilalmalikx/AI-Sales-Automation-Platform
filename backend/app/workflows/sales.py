@@ -111,6 +111,11 @@ async def generate(lead: dict, campaign: dict, prefs: dict, checkpoint: dict, pe
                     recipient_company=lead["company"],
                     recipient_title=lead.get("title"),
                     company_industry=lead.get("industry"),
+                    company_description=(lead.get("website_research") or {})
+                    .get("evidence", {})
+                    .get("website", {})
+                    .get("text", "")[:1500]
+                    or None,
                     sender_name=prefs["sender"],
                     sender_company=prefs["company"],
                     product_value_prop=campaign["offer"]

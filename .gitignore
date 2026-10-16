@@ -42,3 +42,4 @@ backend/.env.*
 !backend/.env.production.example
 backend/var/
 backend/.venv/
+.local/

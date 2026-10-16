@@ -6,6 +6,7 @@ services:
       AI_PROVIDER: openai
       EMAIL_PROVIDER: smtp
       LIVE_DELIVERY_ENABLED: "false"
+      CALENDAR_PROVIDER: ${CALENDAR_PROVIDER:-local}
       CORS_ORIGINS: '["http://localhost:4202","http://localhost:4173"]'
   worker:
     env_file: .env
@@ -13,15 +14,18 @@ services:
       AI_PROVIDER: openai
       EMAIL_PROVIDER: smtp
       LIVE_DELIVERY_ENABLED: "false"
+      CALENDAR_PROVIDER: ${CALENDAR_PROVIDER:-local}
   beat:
     env_file: .env
     environment:
       AI_PROVIDER: openai
       EMAIL_PROVIDER: smtp
       LIVE_DELIVERY_ENABLED: "false"
+      CALENDAR_PROVIDER: ${CALENDAR_PROVIDER:-local}
   migrate:
     env_file: .env
     environment:
       AI_PROVIDER: openai
       EMAIL_PROVIDER: smtp
       LIVE_DELIVERY_ENABLED: "false"
+      CALENDAR_PROVIDER: ${CALENDAR_PROVIDER:-local}

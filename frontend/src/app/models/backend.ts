@@ -39,6 +39,8 @@ export interface DraftRecord {
   requires_review: boolean;
   sent_at: string | null;
   failure: string | null;
+  review_issues?: string[];
+  has_unresolved_placeholders?: boolean;
 }
 export interface MeetingRecord {
   id: string;
@@ -146,4 +148,16 @@ export interface DiscoveryConfiguration {
   ai_endpoint: string;
   ai_model: string;
   ai_calls_per_run: number;
+  monthly_budget: { month: string; limit_usd: number; reported_usd: number; committed_usd: number; remaining_usd: number };
+}
+
+export interface DiscoverySchedule {
+  id: string;
+  name: string;
+  parameters: DiscoveryInput;
+  enabled: boolean;
+  due_at: string;
+  last_run_id: string | null;
+  last_checked_at: string | null;
+  error: string | null;
 }

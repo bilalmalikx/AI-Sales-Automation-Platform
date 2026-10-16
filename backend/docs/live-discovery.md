@@ -27,7 +27,7 @@ Default Apify charge cap: $0.50 per fresh run, passed to Apify as `maxTotalCharg
 
 An ambiguous paid Actor start is never blindly repeated. Check the account run history before starting another search. GET polling and website inspections can retry. `Stop processing` prevents later CRM promotion but does not abort an already running external Actor or retract work completed before cancellation; the provider run remains subject to its charge cap.
 
-Incoming replies can use configured TLS IMAP polling or a provider bridge to the signed webhook. Meeting sync needs Google credentials. A scheduler for automatically starting new discovery searches is not enabled: discovery is click-triggered here, with durable polling and processing of each run.
+Incoming replies can use configured TLS IMAP polling or a provider bridge to the signed webhook. Meeting sync needs Google credentials. Discovery supports manual runs and optional daily schedules. New UI schedules are saved paused; enable them explicitly to start recurring paid searches. Missed days do not trigger a catch-up burst. Daily limits and the monthly Apify budget apply to both paths. AI cost is separate. See [local completion](local-completion-2026-10-15.md).
 
 ## Local verification
 

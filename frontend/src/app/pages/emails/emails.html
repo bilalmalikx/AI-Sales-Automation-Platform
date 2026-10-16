@@ -13,11 +13,14 @@
     </div>
     <h3>{{ d.subject }}</h3>
     <p class="email-body">{{ d.body }}</p> @if(d.failure) { <p class="error">{{ d.failure }}</p> }
+    @if(d.reviewIssues?.length && d.status !== 'Sent') {
+      <div class="notice" role="status"><strong>Content review required</strong>@for(issue of d.reviewIssues; track issue) { <p>{{ issue }}</p> }<small>Approval/send also checks the campaign offer. Original draft text is preserved for your review.</small></div>
+    }
     <div class="actions">
       <button [disabled]="!['Needs review', 'Approved', 'Failed', 'Cancelled'].includes(d.status)" (click)="dialog.open('draft', d.id)">
         Edit draft</button
-      ><button [disabled]="d.status !== 'Needs review'" (click)="approve(d.id)">Approve</button
-      ><button class="primary" [disabled]="d.status !== 'Approved' || (store.emailProvider() === 'smtp' && !store.deliveryEnabled())" (click)="send(d.id)">
+      ><button [disabled]="d.status !== 'Needs review' || d.hasPlaceholders" (click)="approve(d.id)">Approve</button
+      ><button class="primary" [disabled]="d.status !== 'Approved' || d.hasPlaceholders || (store.emailProvider() === 'smtp' && !store.deliveryEnabled())" (click)="send(d.id)">
         {{ d.status === 'Sent' ? 'Sent ✓' : 'Send email ↗' }}
       </button>
     </div>

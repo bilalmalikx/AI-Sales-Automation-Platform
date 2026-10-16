@@ -1,9 +1,10 @@
+from datetime import datetime
 from typing import Literal
 from uuid import UUID
 
 from pydantic import Field
 
-from app.schemas.sales import Input, Record
+from app.schemas.sales import Input, Record, TimeInput
 
 
 class DiscoveryInput(Input):
@@ -25,6 +26,24 @@ class DiscoveryResponse(Record):
     provider_run_id: str | None
     dataset_id: str | None
     provider_cost: float
+    error: str | None
+    budget_reserved_usd: float
+
+
+class DiscoveryScheduleInput(TimeInput):
+    name: str = Field(min_length=1, max_length=200)
+    parameters: DiscoveryInput
+    enabled: bool = False
+    due_at: datetime
+
+
+class DiscoveryScheduleResponse(Record):
+    name: str
+    parameters: dict
+    enabled: bool
+    due_at: datetime
+    last_run_id: UUID | None
+    last_checked_at: datetime | None
     error: str | None
 
 

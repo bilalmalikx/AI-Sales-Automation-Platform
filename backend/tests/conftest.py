@@ -19,6 +19,7 @@ os.environ["APIFY_API_TOKEN"] = "test-token"
 os.environ["EMAIL_PROVIDER"] = "local"
 os.environ["CALENDAR_PROVIDER"] = "local"
 os.environ["LIVE_DELIVERY_ENABLED"] = "false"
+os.environ["IMAP_ENABLED"] = "false"
 os.environ["LOCAL_MAIL_DIR"] = str(TEST_ROOT / "mail")
 os.environ["API_TOKEN"] = ""
 os.environ["WEBHOOK_SECRET"] = "local-webhook-test-secret"

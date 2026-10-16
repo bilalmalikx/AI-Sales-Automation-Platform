@@ -114,6 +114,7 @@ class Settings(BaseSettings):
     APIFY_ACTOR_ID: str = "compass/crawler-google-places"
     DISCOVERY_DAILY_LIMIT: int = Field(100, ge=1, le=1000)
     DISCOVERY_RUN_BUDGET_USD: float = Field(0.5, gt=0, le=5)
+    DISCOVERY_MONTHLY_BUDGET_USD: float = Field(5, ge=0, le=10000)
     DISCOVERY_AI_MAX_CALLS: int = Field(20, ge=0, le=100)
     WEBSITE_MAX_PAGES: int = Field(4, ge=1, le=8)
     WEBSITE_TIMEOUT_SECONDS: int = Field(12, ge=3, le=30)

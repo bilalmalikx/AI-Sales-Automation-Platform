@@ -1,4 +1,5 @@
 import { Component, inject, computed, signal } from '@angular/core';
+import { DatePipe, DecimalPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { PageHeader } from '../../shared/page-header/page-header';
@@ -9,7 +10,7 @@ import { DiscoveryInput, Prospect } from '../../models/backend';
 import { label } from '../../services/workspace';
 @Component({
   selector: 'app-discovery',
-  imports: [FormsModule, RouterLink, PageHeader, Badge, Dropdown],
+  imports: [FormsModule, RouterLink, PageHeader, Badge, Dropdown, DatePipe, DecimalPipe],
   templateUrl: './discovery.html',
   styleUrl: './discovery.css',
 })
@@ -49,6 +50,18 @@ export class Discovery {
     mode: 'fresh',
     generate_drafts: true,
   };
+  scheduleName = '';
+  scheduleDate = '';
+  scheduleNotice = signal('');
+  async createSchedule(): Promise<void> {
+    const date = new Date(this.scheduleDate);
+    if(!this.scheduleName.trim() || !Number.isFinite(date.getTime()) || date.getTime() <= Date.now()) {
+      this.scheduleNotice.set('Enter a schedule name and a future first-run time.'); return;
+    }
+    const saved = await this.discovery.saveSchedule({name:this.scheduleName.trim(),
+      parameters:{...this.form, limit:Number(this.form.limit)}, due_at:date.toISOString(), enabled:false});
+    if(saved) { this.scheduleName=''; this.scheduleDate=''; this.scheduleNotice.set('Schedule saved paused. Enable it when ready to start paid searches.'); }
+  }
   run = computed(() => this.discovery.runs().find((r) => r.id === this.discovery.selected()));
   active = computed(
     () =>

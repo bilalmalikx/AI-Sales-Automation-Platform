@@ -1,6 +1,6 @@
 import { Injectable, inject, signal, DestroyRef } from '@angular/core';
 import { Api } from './api';
-import { DiscoveryInput, DiscoveryRun, Prospect, DiscoveryConfiguration } from '../models/backend';
+import { DiscoveryInput, DiscoveryRun, Prospect, DiscoveryConfiguration, DiscoverySchedule } from '../models/backend';
 @Injectable({ providedIn: 'root' })
 export class Discovery {
   private api = inject(Api);
@@ -12,6 +12,9 @@ export class Discovery {
   readonly error = signal('');
   readonly selected = signal('');
   readonly submitting = signal(false);
+  readonly schedules = signal<DiscoverySchedule[]>([]);
+  readonly scheduleBusy = signal(false);
+  readonly scheduleError = signal('');
   private requestKey: string | null = null;
   private requestPayload = '';
   constructor() {
@@ -23,14 +26,16 @@ export class Discovery {
     if (this.loading()) return;
     this.loading.set(true);
     try {
-      const [runs, config, contacts] = await Promise.all([
+      const [runs, config, contacts, schedules] = await Promise.all([
         this.api.all<DiscoveryRun>('discovery/runs'),
         this.api.get<DiscoveryConfiguration>('discovery/configuration'),
         this.api.all<Prospect>('discovery/prospects?contact_only=true'),
+        this.api.all<DiscoverySchedule>('discovery/schedules'),
       ]);
       this.runs.set(runs);
       this.config.set(config);
       this.contacts.set(contacts);
+      this.schedules.set(schedules);
       if (!this.selected() && runs.length) this.selected.set(runs[0].id);
       this.prospects.set(
         await this.api.all<Prospect>(
@@ -43,6 +48,25 @@ export class Discovery {
     } finally {
       this.loading.set(false);
     }
+  }
+  async saveSchedule(value: {name: string; parameters: DiscoveryInput; due_at: string; enabled: boolean}, id?: string): Promise<boolean> {
+    if(this.scheduleBusy()) return false;
+    this.scheduleBusy.set(true);
+    this.scheduleError.set('');
+    try {
+      if(id) await this.api.put(`discovery/schedules/${id}`,value);
+      else await this.api.post('discovery/schedules',value);
+      await this.refresh();
+      return true;
+    } catch(e) { this.scheduleError.set((e as Error).message); return false; }
+    finally { this.scheduleBusy.set(false); }
+  }
+  async toggleSchedule(schedule: DiscoverySchedule): Promise<void> {
+    // Pausing changes future slots only. In-flight runs keep their own Stop control.
+    const due = !schedule.enabled && Date.parse(schedule.due_at) < Date.now()
+      ? new Date(Date.now()+60000).toISOString() : schedule.due_at;
+    await this.saveSchedule({name:schedule.name, parameters:schedule.parameters,
+      due_at:due, enabled:!schedule.enabled},schedule.id);
   }
   async start(value: DiscoveryInput): Promise<void> {
     if (this.submitting()) return;

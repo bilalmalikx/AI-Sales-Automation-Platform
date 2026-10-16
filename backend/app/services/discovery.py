@@ -22,7 +22,26 @@ from app.services.lead import LeadService
 from app.services.sales import SalesService, now
 
 
-async def start(db, value, key):
+async def monthly_budget(db):
+    month = now().replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+    rows = (await db.scalars(select(DiscoveryRun).where(DiscoveryRun.created_at >= month))).all()
+    reported = sum(r.provider_cost for r in rows)
+    reserved = sum(
+        max(r.provider_cost, r.budget_reserved_usd)
+        if r.status not in {"completed", "completed_with_errors"}
+        else r.provider_cost
+        for r in rows
+    )
+    return {
+        "month": month.strftime("%Y-%m"),
+        "limit_usd": settings.DISCOVERY_MONTHLY_BUDGET_USD,
+        "reported_usd": round(reported, 6),
+        "committed_usd": round(reserved, 6),
+        "remaining_usd": round(max(0, settings.DISCOVERY_MONTHLY_BUDGET_USD - reserved), 6),
+    }
+
+
+async def start(db, value, key, *, commit=True):
     repo = SalesRepository(db)
     await repo.settings(lock=True)
     existing = await db.scalar(select(DiscoveryRun).where(DiscoveryRun.idempotency_key == key))
@@ -38,13 +57,24 @@ async def start(db, value, key):
     runs = (await db.scalars(select(DiscoveryRun).where(DiscoveryRun.created_at >= midnight))).all()
     if sum(r.parameters["limit"] for r in runs) + value.limit > settings.DISCOVERY_DAILY_LIMIT:
         raise RateLimitException("Daily discovery limit reached; retry tomorrow (UTC)")
+    reservation = settings.DISCOVERY_RUN_BUDGET_USD if value.mode == "fresh" else 0
+    budget = await monthly_budget(db)
+    if value.mode == "fresh" and budget["committed_usd"] + reservation > budget["limit_usd"] + 1e-9:
+        raise RateLimitException(
+            "Monthly Apify budget reached; increase the configured cap or wait for next month (UTC)"
+        )
     run = DiscoveryRun(
-        parameters=value.model_dump(), idempotency_key=key, status="queued", stage="discovery"
+        parameters=value.model_dump(),
+        idempotency_key=key,
+        status="queued",
+        stage="discovery",
+        budget_reserved_usd=reservation,
     )
     db.add(run)
     await db.flush()
     await SalesService(db).enqueue("discovery", run, f"discovery:{run.id}:start")
-    await db.commit()
+    if commit:
+        await db.commit()
     return run
 
 
@@ -76,6 +106,7 @@ async def discover(identifier):
         }:
             return
         params = dict(run.parameters)
+        params["_budget_usd"] = run.budget_reserved_usd or settings.DISCOVERY_RUN_BUDGET_USD
         if not run.provider_run_id and params["mode"] == "fresh":
             if run.status == "starting":
                 run.status = "failed"

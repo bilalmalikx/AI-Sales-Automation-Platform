@@ -131,6 +131,8 @@ export class Workspace {
           revision: d.revision,
           requiresReview: d.requires_review,
           failure: d.failure,
+          reviewIssues: d.review_issues || [],
+          hasPlaceholders: d.has_unresolved_placeholders || false,
           sentDate: d.sent_at?.slice(0, 10),
         })),
         meetings: meetings.map((m) => {

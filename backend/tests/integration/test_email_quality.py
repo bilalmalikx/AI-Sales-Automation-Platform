@@ -16,7 +16,14 @@ from tests.api.test_sales import BASE, approve, campaign, lead, workflow
 
 @pytest.mark.parametrize(
     "body",
-    ["Hi [Name]", "Hi [Your Name]", "Our clients see a 30% lift", "I can share case studies."],
+    [
+        "Hi [Name]",
+        "Hi [Your Name]",
+        "Our clients see a 30% lift",
+        "I can share case studies.",
+        "I\u2019ve been enjoying your dishes.",
+        "We have been using your services.",
+    ],
 )
 def test_unfinished_or_unprovided_proof_is_flagged(body):
     assert content_issues("Hello", body)

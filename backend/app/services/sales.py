@@ -58,6 +58,8 @@ class SalesService:
         campaign = await self.repo.get(Campaign, campaign_id, lock=True)
         if lead.status in STOPPED:
             raise ConflictException("Outreach is stopped for this contact")
+        if (lead.research or {}).get("app_status") == "app_found":
+            raise ConflictException("Existing mobile app verified; mobile-app outreach is stopped")
         if active and campaign.status != "active":
             raise ConflictException("Activate the campaign before sending")
         membership = await self.session.get(CampaignLead, (campaign_id, lead_id))

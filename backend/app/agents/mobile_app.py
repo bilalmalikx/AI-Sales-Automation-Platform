@@ -1,7 +1,7 @@
 """Evidence tools and a structured, bounded qualification agent."""
 
 import json
-from urllib.parse import quote, urlsplit
+from urllib.parse import parse_qs, quote, urlsplit
 
 import httpx
 from langchain_core.messages import HumanMessage, SystemMessage
@@ -93,6 +93,40 @@ async def verify_app(company, website, evidence, country):
             )
     except (ValueError, httpx.HTTPError):
         limitations.append("Google Play search unavailable")
+    # A brand-name search result is never enough. Inspect bounded listing candidates
+    # and match an actual developer/support website link to the business domain.
+    for candidate in [
+        c
+        for c in candidates
+        if c.get("url", "").startswith("https://play.google.com/store/apps/details?")
+    ][:3]:
+        try:
+            _, listing = await fetch(candidate["url"])
+            parser = PageParser()
+            parser.feed(listing)
+            for link in parser.links:
+                parsed = urlsplit(link)
+                if parsed.hostname in {"www.google.com", "google.com"} and parsed.path == "/url":
+                    link = parse_qs(parsed.query).get("q", parse_qs(parsed.query).get("url", [""]))[
+                        0
+                    ]
+                    parsed = urlsplit(link)
+                if (
+                    parsed.scheme in {"http", "https"}
+                    and parsed.hostname
+                    and parsed.hostname.removeprefix("www.") == domain
+                ):
+                    matches.append(
+                        {
+                            "url": candidate["url"],
+                            "developer_url": link,
+                            "evidence": "Google Play listing website matches business domain",
+                        }
+                    )
+                    break
+            checks.append("Google Play developer website verification")
+        except (ValueError, httpx.HTTPError):
+            limitations.append("Google Play developer website could not be verified")
     status = (
         "app_found" if matches else "uncertain" if candidates or limitations else "app_not_found"
     )

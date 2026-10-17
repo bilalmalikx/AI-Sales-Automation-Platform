@@ -100,6 +100,10 @@ async def generate(lead: dict, campaign: dict, prefs: dict, checkpoint: dict, pe
                 "email_body": f"Hi {lead['name']},\n\n{campaign['offer']}\n\nWould a short conversation next week be useful?\n\nBest,\n{prefs['sender']}",
                 "confidence_score": 0.8,
             }
+        elif lead.get("website_research"):
+            from app.services.grounded_outreach import grounded_draft
+
+            result = grounded_draft(lead, campaign, prefs)
         else:
             from app.agents.email_generator import EmailGeneratorAgent
             from app.agents.schemas import EmailGeneratorInput

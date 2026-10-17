@@ -5,7 +5,7 @@ import ipaddress
 import re
 import socket
 from html.parser import HTMLParser
-from urllib.parse import urljoin, urlsplit, urlunsplit
+from urllib.parse import unquote, urljoin, urlsplit, urlunsplit
 from urllib.robotparser import RobotFileParser
 
 import httpx
@@ -74,7 +74,7 @@ async def public_address(host):
     ips = list(dict.fromkeys(a[4][0] for a in addresses))
     if not ips or any(not ipaddress.ip_address(ip).is_global for ip in ips):
         raise ValueError("Only public website addresses are allowed")
-    return ips[0]
+    return next((ip for ip in ips if ipaddress.ip_address(ip).version == 4), ips[0])
 
 
 async def fetch(url):
@@ -122,6 +122,14 @@ async def inspect(url):
     try:
         _, body = await fetch(urljoin(url, "/robots.txt"))
         robots.parse(body.splitlines())
+    except httpx.HTTPError:
+        return {
+            "pages": [],
+            "emails": [],
+            "app_links": [],
+            "text": "",
+            "error": "Website network request failed; retry later",
+        }
     except ValueError as exc:
         if "HTTP 404" not in str(exc):
             # Honor explicit crawler restrictions; absent robots files allow inspection.
@@ -200,8 +208,11 @@ async def inspect(url):
                 emails[email] = final
         for link in parser.links:
             if link.lower().startswith("tel:"):
-                phone = link[4:].split("?")[0].strip()
-                if 7 <= len(re.sub(r"\D", "", phone)) <= 15:
+                phone = unquote(link[4:].split("?")[0]).strip()
+                if (
+                    re.fullmatch(r"[+\d().\s-]+", phone)
+                    and 7 <= len(re.sub(r"\D", "", phone)) <= 15
+                ):
                     phones[phone] = final
             absolute = urljoin(final, link)
             p = urlsplit(absolute)

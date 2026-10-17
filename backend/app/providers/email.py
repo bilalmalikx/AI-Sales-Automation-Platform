@@ -3,13 +3,16 @@
 import asyncio
 import smtplib
 import ssl
+from datetime import UTC, datetime
 from email.message import EmailMessage
-from email.utils import formataddr
+from email.utils import formataddr, make_msgid
 from pathlib import Path
+from uuid import uuid4
 
 from app.core.config import settings
 from app.core.exceptions import ExternalServiceException
 from app.core.security import scoped_token
+from app.providers.email_template import render_email
 
 
 class DeliveryUncertainError(Exception):
@@ -32,6 +35,37 @@ def compose(draft, lead, sender: str) -> EmailMessage:
     message["List-Unsubscribe"] = f"<{unsubscribe}>"
     message["List-Unsubscribe-Post"] = "List-Unsubscribe=One-Click"
     message.set_content(draft.body + f"\n\n{sender}\nStop outreach: {unsubscribe}\n")
+    message.add_alternative(
+        render_email(draft.subject, draft.body, sender, unsubscribe=unsubscribe), subtype="html"
+    )
+    return message
+
+
+def compose_verification(recipient: str) -> EmailMessage:
+    sender = settings.DEFAULT_FROM_NAME or "Codelps team"
+    message = EmailMessage()
+    message["From"] = formataddr((sender, settings.DEFAULT_FROM_EMAIL or "salesway@localhost.test"))
+    message["To"] = recipient
+    message["Subject"] = "Your Codelps email delivery check"
+    message["Message-ID"] = make_msgid()
+    body = "Your test email is here.\n\nThis message checks the email connection for your Codelps Salesway workspace.\n\nThis is a verification message only. No customer outreach was sent."
+    stamp = datetime.now(UTC).strftime("%d %B %Y, %H:%M UTC")
+    reference = uuid4().hex[:12].upper()
+    message.set_content(body + f"\n\nSent at: {stamp}\nReference: {reference}\n")
+    message.add_alternative(
+        render_email(
+            "Your test email is here.",
+            body.split("\n\n", 1)[1],
+            sender,
+            label="EMAIL CONNECTION CHECK",
+            details=[
+                ("Purpose", "Delivery verification"),
+                ("Sent at", stamp),
+                ("Reference", reference),
+            ],
+        ),
+        subtype="html",
+    )
     return message
 
 

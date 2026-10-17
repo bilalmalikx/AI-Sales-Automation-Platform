@@ -13,7 +13,7 @@ from app.core.config import settings
 from app.core.exceptions import ConflictException, RateLimitException, ValidationException
 from app.models.discovery import DiscoveryRun, Prospect
 from app.models.domain import Lead
-from app.models.sales import Campaign, CampaignLead, Job, WorkflowRun
+from app.models.sales import Campaign, CampaignLead, EmailDraft, Followup, Job, WorkflowRun
 from app.providers import apify, website
 from app.repositories.sales import SalesRepository
 from app.schemas.lead import LeadCreate
@@ -250,6 +250,12 @@ async def inspect_prospect(identifier):
         p.status = "processing"
         await db.commit()
         evidence = dict(p.evidence)
+        evidence["inspection"] = {
+            "attempts": evidence.get("inspection", {}).get("attempts", 0) + 1,
+            "last_attempt_at": now().isoformat() + "Z",
+        }
+        p.evidence = deepcopy(evidence)
+        await db.commit()
         try:
             if "website" not in evidence:
                 site = await website.inspect(p.website)
@@ -276,6 +282,32 @@ async def inspect_prospect(identifier):
                 if p.app_status == "app_found":
                     p.status = "excluded"
                     p.reason = "Existing mobile app found"
+                    if p.lead_id:
+                        lead = await repo.get(Lead, p.lead_id, lock=True)
+                        lead.research = {
+                            **(lead.research or {}),
+                            "app_status": "app_found",
+                            "evidence": evidence,
+                        }
+                        drafts = await db.scalars(
+                            select(EmailDraft).where(
+                                EmailDraft.lead_id == lead.id,
+                                EmailDraft.status.in_(["needs_review", "approved", "queued"]),
+                            )
+                        )
+                        for draft in drafts:
+                            draft.status = "cancelled"
+                            draft.approved_revision = None
+                            draft.failure = (
+                                "Existing mobile app verified; mobile-app outreach stopped"
+                            )
+                        followups = await db.scalars(
+                            select(Followup).where(
+                                Followup.lead_id == lead.id, Followup.status == "scheduled"
+                            )
+                        )
+                        for followup in followups:
+                            followup.status = "cancelled"
                 else:
                     if not p.analysis:
                         await repo.settings(lock=True)

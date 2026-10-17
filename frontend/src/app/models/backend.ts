@@ -111,6 +111,8 @@ export interface DiscoveryRun {
   updated_at: string;
 }
 export interface Prospect {
+  retryable?: boolean;
+  next_action?: string;
   id: string;
   run_id: string;
   company: string;

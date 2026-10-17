@@ -43,3 +43,6 @@ backend/.env.*
 backend/var/
 backend/.venv/
 .local/
+# Downloaded Google OAuth client secrets
+backend/client_secret*.json
+backend/credentials.json

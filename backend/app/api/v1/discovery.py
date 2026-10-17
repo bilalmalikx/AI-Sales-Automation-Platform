@@ -134,6 +134,9 @@ async def retry(identifier: UUID, db: DB):
     p = await repo.get(Prospect, identifier, lock=True)
     if p.status != "inspection_failed":
         raise ConflictException("Only failed inspections can be retried")
+    eligibility = ProspectResponse.model_validate(p)
+    if not eligibility.retryable:
+        raise ConflictException(eligibility.next_action)
     r = await repo.get(DiscoveryRun, p.run_id, lock=True)
     if r.status == "cancelled":
         raise ConflictException("This discovery run was cancelled")
@@ -166,3 +169,43 @@ async def prepare_outreach(
     idempotency_key: Annotated[str, Header(min_length=1, max_length=100)],
 ):
     return await discovery.prepare_outreach(db, identifier, value.campaign_id, idempotency_key)
+
+
+@router.post("/prospects/{identifier}/recheck-app", response_model=ProspectResponse)
+async def recheck_app(identifier: UUID, db: DB):
+    from copy import deepcopy
+    from uuid import uuid4
+
+    from app.core.exceptions import ConflictException
+    from app.services.sales import SalesService, now
+
+    repo = SalesRepository(db)
+    await repo.settings(lock=True)
+    p = await repo.get(Prospect, identifier, lock=True)
+    r = await repo.get(DiscoveryRun, p.run_id, lock=True)
+    if (
+        p.stage != "complete"
+        or p.app_status != "uncertain"
+        or not p.evidence.get("website", {}).get("pages")
+    ):
+        raise ConflictException(
+            "Recheck requires a completed inspection with uncertain app evidence."
+        )
+    if r.status == "cancelled":
+        raise ConflictException("This discovery run was cancelled")
+    evidence = deepcopy(p.evidence)
+    history = evidence.get("app_history", [])
+    history.append({"checked_at": now().isoformat() + "Z", "result": evidence.pop("app", {})})
+    evidence["app_history"] = history[-3:]
+    p.evidence, p.status, p.stage, p.app_status = (
+        evidence,
+        "queued",
+        "app_verification",
+        "not_checked",
+    )
+    p.reason = None
+    r.status, r.stage = "inspecting", "app_verification"
+    r.processed = max(0, r.processed - 1)
+    await SalesService(db).enqueue("inspect", p, f"app-recheck:{p.id}:{uuid4()}")
+    await db.commit()
+    return p

@@ -7,7 +7,7 @@ import { Badge } from '../../shared/badge/badge';
 import { Dropdown } from '../../shared/dropdown/dropdown';
 import { Discovery as DiscoveryService } from '../../services/discovery';
 import { DiscoveryInput, Prospect } from '../../models/backend';
-import { label } from '../../services/workspace';
+import { label, Workspace } from '../../services/workspace';
 @Component({
   selector: 'app-discovery',
   imports: [FormsModule, RouterLink, PageHeader, Badge, Dropdown, DatePipe, DecimalPipe],
@@ -17,6 +17,22 @@ import { label } from '../../services/workspace';
 export class Discovery {
   discovery = inject(DiscoveryService);
   label = label;
+  workspace = inject(Workspace);
+  campaignChoice = '';
+  reviewedContact = false;
+  preparing = signal(false);
+  campaignOptions = computed(() => this.workspace.state().campaigns.map(c => ({value:c.id, label:c.name})));
+  async prepareSelected(): Promise<void> {
+    const prospect = this.selectedProspect();
+    if (!prospect || !this.reviewedContact || !this.campaignChoice || this.preparing()) return;
+    this.preparing.set(true);
+    try {
+      if (await this.discovery.prepareOutreach(prospect.id, this.campaignChoice)) {
+        this.reviewedContact = false;
+        await this.workspace.refresh();
+      }
+    } finally { this.preparing.set(false); }
+  }
   countries = [
     { value: 'GB', label: 'United Kingdom' },
     { value: 'US', label: 'United States' },

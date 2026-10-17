@@ -107,6 +107,24 @@ export class Discovery {
       this.error.set((e as Error).message);
     }
   }
+  private outreachKeys = new Map<string, string>();
+  async prepareOutreach(id: string, campaignId: string): Promise<boolean> {
+    const slot = id + ':' + campaignId;
+    const key = this.outreachKeys.get(slot) || crypto.randomUUID();
+    this.outreachKeys.set(slot, key);
+    try {
+      await this.api.post(`discovery/prospects/${id}/prepare-outreach`,
+        {campaign_id: campaignId, reviewed_contact: true}, {'Idempotency-Key': key});
+      await this.refresh();
+      return true;
+    } catch (e) { this.error.set((e as Error).message); return false; }
+  }
+  async recheckApp(id: string): Promise<void> {
+    try {
+      await this.api.post(`discovery/prospects/${id}/recheck-app`);
+      await this.refresh();
+    } catch (e) { this.error.set((e as Error).message); }
+  }
   select(id: string): void {
     this.selected.set(id);
     void this.refresh();

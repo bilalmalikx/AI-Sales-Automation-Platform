@@ -4,21 +4,33 @@ import argparse
 import asyncio
 import json
 import sys
-from datetime import UTC, datetime
-from email.message import EmailMessage
-from email.utils import formataddr, make_msgid
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from app.core.config import settings
-from app.providers.email import _smtp_send, check_connection
+from app.providers.email import _smtp_send, check_connection, compose_verification
 
 
 async def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--send-to-self", action="store_true")
+    parser.add_argument(
+        "--preview",
+        type=Path,
+        help="Save a redacted HTML preview; no connection required unless sending.",
+    )
     args = parser.parse_args()
+    if args.preview:
+        args.preview.parent.mkdir(parents=True, exist_ok=True)
+        args.preview.write_text(
+            compose_verification("owner@example.test")
+            .get_body(preferencelist=("html",))
+            .get_content()
+        )
+        if not args.send_to_self:
+            print(json.dumps({"status": "preview_saved", "path": str(args.preview)}))  # noqa: T201
+            return 0
     result = await check_connection()
     if result["status"] == "connected" and args.send_to_self:
         if not settings.DEFAULT_FROM_EMAIL:
@@ -28,16 +40,7 @@ async def main():
             settings.LIVE_DELIVERY_ENABLED = (
                 True  # This process only; no pending jobs are executed.
             )
-            message = EmailMessage()
-            message["From"] = formataddr(
-                (settings.DEFAULT_FROM_NAME or "Codelps Team", settings.DEFAULT_FROM_EMAIL)
-            )
-            message["To"] = settings.DEFAULT_FROM_EMAIL
-            message["Subject"] = "Codelps Salesway — SMTP verification"
-            message["Message-ID"] = make_msgid()
-            message.set_content(
-                f"This is your requested Salesway SMTP test.\nUTC time: {datetime.now(UTC).isoformat()}\nNo customer outreach was sent."
-            )
+            message = compose_verification(settings.DEFAULT_FROM_EMAIL)
             try:
                 await asyncio.to_thread(_smtp_send, message)
                 result = {

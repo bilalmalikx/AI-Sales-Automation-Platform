@@ -235,12 +235,16 @@
             <td>{{ p.analysis['score'] !== undefined ? p.score + ' / 100' : 'Pending' }}</td>
             <td>
               <app-badge [text]="label(p.status)" /><small>{{ p.reason || label(p.stage) }}</small>
+              @if (p.next_action) { <small>{{ p.next_action }}</small> }
             </td>
             <td>
               <div class="row-actions">
                 <button (click)="selected.set(p)">Evidence</button>
-                @if (p.status === 'inspection_failed') {
+                @if (p.retryable) {
                   <button (click)="discovery.retry(p.id)">Retry inspection</button>
+                }
+                @if (p.stage === 'complete' && p.app_status === 'uncertain') {
+                  <button (click)="discovery.recheckApp(p.id)">Recheck app</button>
                 }
                 @if (p.lead_id) {
                   <a routerLink="/leads">CRM ↗</a>
@@ -278,6 +282,16 @@
     @if (p.campaign_id) {
       <a routerLink="/campaigns">Review campaign ↗</a>
       <a routerLink="/emails">Review email drafts ↗</a>
+    }
+    @if (!p.campaign_id && p.stage === 'complete' && p.emails.length && p.app_status !== 'app_found' && p.status !== 'excluded' && p.status !== 'cancelled') {
+      <div class="manual-review">
+        <h3>Review contact for outreach</h3>
+        <p>AI scores are advisory. Check the source email and app evidence before selecting this contact. This creates a draft for review.</p>
+        <label>Campaign</label>
+        <app-dropdown label="Review campaign" [options]="campaignOptions()" [value]="campaignChoice" (changed)="campaignChoice = $event" />
+        <label class="check"><input type="checkbox" [(ngModel)]="reviewedContact" /> I reviewed the public contact source and the app uncertainty.</label>
+        <button class="primary" [disabled]="!reviewedContact || !campaignChoice || preparing()" (click)="prepareSelected()">{{ preparing() ? 'Preparing draft…' : 'Prepare review draft' }}</button>
+      </div>
     }
     <details>
       <summary>Collected sources and app checks</summary>

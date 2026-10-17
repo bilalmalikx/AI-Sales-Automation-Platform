@@ -15,6 +15,8 @@ PORTFOLIO = re.compile(
 def content_issues(subject: str, body: str, verified_offer: str = "") -> list[str]:
     text = subject + "\n" + body
     issues = []
+    if re.search(r"(?:I|we)(?:['\u2019]ve| have) been (?:following|enjoying|using)", text, re.I):
+        issues.append("Remove unverified claims of personal experience with the recipient.")
     if PLACEHOLDER.search(text):
         issues.append("Replace unresolved name/sender placeholders before approval or sending.")
     normalized = re.sub(r"\s+", "", verified_offer).casefold()

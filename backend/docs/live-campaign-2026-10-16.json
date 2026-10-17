@@ -1,0 +1,176 @@
+{
+  "run": {
+    "id": "deebd795-4687-4f4a-890d-27bde85ade62",
+    "created_at": "2026-10-16T09:48:37.881141Z",
+    "updated_at": "2026-10-16T09:55:33.603143Z",
+    "parameters": {
+      "industry": "restaurants",
+      "location": "Birmingham",
+      "country": "GB",
+      "limit": 50,
+      "mode": "fresh",
+      "generate_drafts": true
+    },
+    "status": "completed_with_errors",
+    "stage": "complete",
+    "total": 50,
+    "processed": 50,
+    "ai_calls": 20,
+    "provider_run_id": "RQbIT37cvLpRM1Ezj",
+    "dataset_id": "eRcXUbCnjezH6uGfF",
+    "provider_cost": 0.0002,
+    "error": null,
+    "budget_reserved_usd": 0.5
+  },
+  "counts": {
+    "discovered": 50,
+    "contact_found": 24,
+    "businesses_with_public_email": 11,
+    "crm_contacts": 4
+  },
+  "statuses": {
+    "missing_email": 13,
+    "inspection_failed": 21,
+    "missing_contact": 6,
+    "excluded": 2,
+    "needs_review": 8
+  },
+  "failures": {
+    "No accessible public website pages": 7,
+    "Website blocks crawler access": 12,
+    "Inspection failed (ConnectError); retry from saved evidence": 1,
+    "Inspection failed (OpenAIInvalidRequestError); retry from saved evidence": 1
+  },
+  "campaign_id": "fbde4364-99ea-404d-a029-0083baf3f005",
+  "campaign_status": "active",
+  "campaign_leads": 4,
+  "customer_sends": 4,
+  "drafts": [
+    {
+      "company": "Ponchokhana Restaurant and Catering | Bangladeshi Restaurant",
+      "website": "https://www.ponchokhana.com/"
+    },
+    {
+      "company": "Simla Spice",
+      "website": "https://simlaspice.co.uk/"
+    },
+    {
+      "company": "La Nonna",
+      "website": "https://lanonna-restaurant.co.uk/"
+    },
+    {
+      "company": "Cavallino italian restaurant",
+      "website": "https://cavallinorestaurant.co.uk/"
+    }
+  ],
+  "self_inbox_delivery": {
+    "smtp_accepted": true,
+    "recipient": "configured workspace sender only",
+    "review_drafts": 4,
+    "inbox_receipt_verified": true,
+    "customer_emails_sent": 0
+  },
+  "external_delivery": {
+    "status": "sent",
+    "approved_by_user": true,
+    "results": [
+      {
+        "company": "Ponchokhana Restaurant and Catering | Bangladeshi Restaurant",
+        "draft_id": "4f47970f-a0d2-4acc-a4ae-576032a21e99",
+        "status": "sent",
+        "provider_message_id_present": true,
+        "failure": null
+      },
+      {
+        "company": "Simla Spice",
+        "draft_id": "4dfcc5c6-da81-4493-9885-161c4cefebcb",
+        "status": "sent",
+        "provider_message_id_present": true,
+        "failure": null
+      },
+      {
+        "company": "La Nonna",
+        "draft_id": "755619c6-c9dc-4627-af95-f25fdc5e945b",
+        "status": "sent",
+        "provider_message_id_present": true,
+        "failure": null
+      },
+      {
+        "company": "Cavallino italian restaurant",
+        "draft_id": "e559d921-184c-4511-bd48-246e1ef390c0",
+        "status": "sent",
+        "provider_message_id_present": true,
+        "failure": null
+      }
+    ]
+  },
+  "backend_tests_passed": 98,
+  "followups": [
+    {
+      "company": "Ponchokhana Restaurant and Catering | Bangladeshi Restaurant",
+      "id": "aa6d28dc-b038-4e25-bbcf-ad796c3145d1",
+      "status": "scheduled",
+      "due_at": "2026-10-19T10:05:05.442338Z"
+    },
+    {
+      "company": "Simla Spice",
+      "id": "5148c75d-076c-45ac-ab04-17127fd53615",
+      "status": "scheduled",
+      "due_at": "2026-10-19T10:05:07.363157Z"
+    },
+    {
+      "company": "La Nonna",
+      "id": "8d14e0db-9de2-4d14-b02d-3435d5556230",
+      "status": "scheduled",
+      "due_at": "2026-10-19T10:05:07.402239Z"
+    },
+    {
+      "company": "Cavallino italian restaurant",
+      "id": "4d5a3022-275d-490f-bc2f-4046aaa66f45",
+      "status": "scheduled",
+      "due_at": "2026-10-19T10:05:07.421566Z"
+    }
+  ],
+  "live_owned_inbox_test": {
+    "scope": "Owned inbox only; customer replies are never simulated",
+    "checks": [
+      "API workflow \u2192 edited review \u2192 approval \u2192 real Celery SMTP send",
+      "Actual SMTP self-reply \u2192 IMAP ingestion \u2192 CRM replied \u2192 scheduled follow-up cancelled",
+      "Repeated IMAP sync does not duplicate the reply",
+      "API booking \u2192 real worker \u2192 Google Calendar event and Meet link",
+      "Application reschedule synchronized to Google",
+      "Application cancellation synchronized to Google",
+      "Self-test lead suppressed and self-test campaign paused"
+    ],
+    "status": "passed",
+    "meeting_id": "ec58f9e6-2737-45e1-94ec-4f2863ac5e43",
+    "test_meeting_cancelled": true
+  },
+  "endpoint_checks": {
+    "/campaigns": 200,
+    "/emails": 200,
+    "/inbox": 200,
+    "/meetings": 200,
+    "/followups": 200,
+    "/analytics": 200,
+    "/pipeline": 200,
+    "/integrations": 200,
+    "/discovery/runs": 200,
+    "/leads": 200
+  },
+  "customer_replies": 0,
+  "automatic_inbox_sync": {
+    "provider": "imap",
+    "configured": true,
+    "automatic_sync": true,
+    "status": "synced",
+    "last_checked_at": "2026-10-16T10:08:03.281513Z",
+    "error": null
+  },
+  "remaining": [
+    "No actual customer reply received yet; customer meeting times require availability.",
+    "21 discovery inspections failed due to inaccessible/blocked websites, network error, or one AI request error.",
+    "An initial synthetic-lead enrichment workflow failed without website context; a separate explicitly labeled self-test fixture then passed the full live flow.",
+    "SMTP acceptance does not prove delivery to customer inboxes."
+  ]
+}

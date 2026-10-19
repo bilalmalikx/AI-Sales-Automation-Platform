@@ -28,6 +28,10 @@ class Settings(BaseSettings):
     # ── Security ─────────────────────────────────────────────────────────────
     # MUST be overridden in staging/production with a 64-char random string.
     SECRET_KEY: str = "change-me-in-production-use-a-64-char-random-secret-key!!"
+    AUTH_ENABLED: bool = True
+    AUTH_OWNER_EMAIL: str = ""
+    AUTH_FRONTEND_URL: str = "http://localhost:4202"
+    AUTH_EMAIL_ENABLED: bool = True
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
     ALGORITHM: str = "HS256"
 

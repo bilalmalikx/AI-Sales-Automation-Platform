@@ -4,6 +4,7 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { Settings } from './settings';
 import { Workspace } from '../../services/workspace';
 import { Api } from '../../services/api';
+import { Auth } from '../../services/auth';
 import { Dialog } from '../../services/dialog';
 import { Notification } from '../../services/notification';
 
@@ -21,7 +22,8 @@ describe('Service connection controls', () => {
     refresh = vi.fn().mockResolvedValue(undefined);
     TestBed.configureTestingModule({providers: [
       {provide: Api, useValue: api},
-      {provide: Workspace, useValue: {ready: signal(true), state: signal({settings: {company: 'Codelps', sender: 'Team', offer: 'Mobile apps', timezone: 'Asia/Karachi', limit: 10}}), refresh}},
+      {provide: Auth, useValue: {user: signal(null)}},
+      {provide: Workspace, useValue: {ready: signal(true), state: signal({settings: {company: 'Skilledhat', sender: 'Team', offer: 'Mobile apps', timezone: 'Asia/Karachi', limit: 10}}), refresh}},
       {provide: Dialog, useValue: {}},
       {provide: Notification, useValue: {show: vi.fn()}},
     ]});

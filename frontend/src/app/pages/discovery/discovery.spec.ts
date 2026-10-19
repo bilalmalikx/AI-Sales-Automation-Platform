@@ -14,7 +14,7 @@ describe('Daily discovery safety', () => {
   });
   it('creates a paused schedule using the visible search settings', async () => {
     const page = TestBed.runInInjectionContext(() => new Discovery());
-    page.scheduleName='Codelps daily';
+    page.scheduleName='Skilledhat daily';
     page.scheduleDate=new Date(Date.now()+86400000).toISOString();
     page.form.location='Manchester';
     await page.createSchedule();

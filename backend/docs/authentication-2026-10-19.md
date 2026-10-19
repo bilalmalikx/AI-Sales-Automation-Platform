@@ -1,0 +1,15 @@
+# Skilledhat accounts — 19 October 2026
+
+Login, signup, single-use email verification, resend, private workspace guards, logout and owner-only team invitations are implemented. This remains a single-company workspace: registration does not create separate tenant workspaces.
+
+The first owner must use AUTH_OWNER_EMAIL, or the configured DEFAULT_FROM_EMAIL when that option is empty. The owner chooses their own password at /#/signup; no live account or password has been created by the implementation. After verification, the owner can allow team signup through Settings. Invited members must verify their own email before accessing the shared workspace. Uninvited addresses receive a generic response and cannot join.
+
+Passwords use a random salt and scrypt. Verification tokens and opaque session cookies are stored only as SHA-256 digests. Verification links expire after 30 minutes, cannot be reused and rotate on resend; resends have a 60-second cooldown. Sessions expire after 12 hours and logout revokes the session server-side. Cookies are HttpOnly and SameSite=Lax, with Secure outside development. State-changing cookie requests must originate at AUTH_FRONTEND_URL. Five failed password attempts lock the account for 15 minutes. A configured API_TOKEN remains supported for trusted machine clients. AUTH_ENABLED defaults to true; legacy test fixtures explicitly disable it.
+
+Verification emails use the configured SMTP connection, Skilledhat branding, an HTML verification button and a plain-text alternative. Transactional verification delivery is controlled by AUTH_EMAIL_ENABLED independently of outreach's LIVE_DELIVERY_ENABLED. Local-provider test messages are saved with private file permissions. No real signup verification message was sent during implementation because the owner has not chosen a password or registered yet.
+
+The database was backed up before migration 007. Current workspace company/sender, campaign/schedule names and eligible unsent drafts were rebranded. Changed unsent drafts require review again. Sent email contents and historical message bodies remain unchanged. Existing SMTP credentials and sender email address remain unchanged; only the display name is Skilledhat team.
+
+Validation: 112 backend tests passed on SQLite and isolated PostgreSQL, including real local SMTP protocol delivery of the verification MIME message, token expiry/replay, resending, verified-only access, login lockout, owner-only invitations, CSRF-origin rejection and session revocation. Fifteen Angular tests and the production build passed. Browser verification confirmed private routes redirect to the login page and the signup page displays the account and verification requirements. Live readiness returns 200; anonymous workspace and session endpoints return 401.
+
+Deployment remains excluded. Set AUTH_FRONTEND_URL to the actual HTTPS frontend origin before deploying so verification links and origin checks agree. A valid email recipient and SMTP delivery are required for registration; a forgotten-password recovery flow is not included in this change.

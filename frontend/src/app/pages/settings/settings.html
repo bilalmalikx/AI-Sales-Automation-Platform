@@ -62,3 +62,15 @@
     ><button class="primary">Save preferences</button>
   </div>
 </form>
+
+@if (auth.user()?.role === 'owner') {
+  <section class="card" style="margin-top:24px">
+    <h2>Invite a team member</h2>
+    <p>Allow a colleague to sign up for this Skilledhat workspace. They must verify their email before logging in.</p>
+    <form (ngSubmit)="inviteMember()" #invitation="ngForm">
+      <label for="invite-email">Team email</label><input id="invite-email" name="inviteEmail" type="email" [(ngModel)]="inviteEmail" email required />
+      <button class="primary" [disabled]="invitation.invalid || inviteBusy()">Allow signup</button>
+    </form>
+    <p role="status">{{ inviteNotice() }}</p>
+  </section>
+}

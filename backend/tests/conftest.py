@@ -14,6 +14,7 @@ os.environ["DATABASE_URL"] = os.environ.get(
     "SALESWAY_TEST_DATABASE_URL", f"sqlite+aiosqlite:///{TEST_ROOT}/tests.db"
 )
 os.environ["WORKER_MODE"] = "manual"
+os.environ["AUTH_ENABLED"] = "false"
 os.environ["AI_PROVIDER"] = "local"
 os.environ["APIFY_API_TOKEN"] = "test-token"
 os.environ["EMAIL_PROVIDER"] = "local"

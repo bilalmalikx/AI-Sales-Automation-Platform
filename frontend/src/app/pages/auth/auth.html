@@ -1,0 +1,25 @@
+<main class="auth-page">
+  <a class="brand" routerLink="/login"><span>S</span><div>Skilledhat<small>YOUR SALES, CONNECTED</small></div></a>
+  <section class="auth-layout">
+    <div class="intro"><span class="eyebrow">SKILLEDHAT WORKSPACE</span><h1>Good conversations.<br>A secure beginning.</h1><p>Your leads, outreach and meetings, together in one thoughtful workspace.</p><div class="orbit" aria-hidden="true"><div>S</div><i></i><b></b></div><small>Verified accounts. Reviewed outreach. Meaningful connections.</small></div>
+    <section class="auth-card">
+      <span class="eyebrow">{{ mode === 'signup' ? 'GET STARTED' : mode === 'verify-email' ? 'ONE LAST STEP' : 'WELCOME BACK' }}</span>
+      <h2>{{ mode === 'signup' ? 'Create your account.' : mode === 'verify-email' ? 'Verify your email.' : 'Make yourself at home.' }}</h2>
+      <p>{{ mode === 'signup' ? 'Register with your owner or invited team email. Verify your inbox before logging in.' : mode === 'verify-email' ? 'Confirm your address to activate your Skilledhat account.' : 'Log in to your Skilledhat sales workspace.' }}</p>
+      @if (error()) { <div class="notice error" role="alert">{{ error() }}</div> }
+      @if (message()) { <div class="notice" role="status">{{ message() }}</div> }
+      <form (ngSubmit)="submit()" #form="ngForm">
+        @if (mode !== 'verify-email') {
+          @if (mode === 'signup') { <label for="account-name">Full name</label><input id="account-name" name="name" [(ngModel)]="name" required maxlength="100" autocomplete="name" /> }
+          <label for="account-email">Email address</label><input id="account-email" name="email" type="email" [(ngModel)]="email" required email autocomplete="email" />
+          <label for="account-password">Password</label><input id="account-password" name="password" type="password" [(ngModel)]="password" required minlength="12" maxlength="128" [autocomplete]="mode === 'signup' ? 'new-password' : 'current-password'" />
+          @if (mode === 'signup') { <small>Use at least 12 characters. Your account needs an invitation, unless you are the configured workspace owner.</small> }
+        }
+        <button class="primary" type="submit" [disabled]="busy() || form.invalid || verified()">{{ busy() ? 'Please wait…' : mode === 'signup' ? 'Create account ↗' : mode === 'verify-email' ? (verified() ? 'Email verified ✓' : 'Verify email ↗') : 'Log in ↗' }}</button>
+      </form>
+      @if (mode === 'login') { <p class="switch">New here? <a routerLink="/signup">Create an account</a></p> }
+      @else { <p class="switch">Already verified? <a routerLink="/login">Log in</a></p> }
+      <details><summary>Need another verification email?</summary><label for="resend-email">Account email</label><input id="resend-email" type="email" [(ngModel)]="email" autocomplete="email" /><button type="button" (click)="resend()" [disabled]="busy() || !email.trim()">Resend verification</button></details>
+    </section>
+  </section><footer>Skilledhat · A calmer way to grow.</footer>
+</main>

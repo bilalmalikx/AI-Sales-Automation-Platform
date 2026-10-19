@@ -180,3 +180,9 @@ td button {
 
 .manual-review { padding: 20px; margin: 20px 0; border: 1px solid var(--border); border-radius: 14px; display: grid; gap: 12px; }
 .manual-review .check { display: flex; gap: 10px; align-items: center; }
+
+.manual-review .check { justify-content: flex-start; }
+.manual-review .check input { width: 16px; min-width: 16px; flex: 0 0 16px; margin: 0; }
+.manual-review .check span { flex: 1; }
+.contact-sources { margin: 0; padding-left: 18px; overflow-wrap: anywhere; }
+.contact-sources li { margin: 6px 0; }

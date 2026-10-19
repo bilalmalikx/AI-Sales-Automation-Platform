@@ -7,7 +7,7 @@ import { Leads } from './services/leads';
 import { Api } from './services/api';
 const uuid = '5e90a4db-4816-4da9-b1cb-69e6096cb176';
 const prefs = {
-  company: 'Codelps',
+  company: 'Skilledhat',
   sender: 'Team',
   offer: 'Mobile apps',
   timezone: 'Asia/Karachi',
@@ -60,7 +60,7 @@ describe('Real backend integration', () => {
     expect(store.ready()).toBe(true);
     expect(store.state().leads[0].id).toBe(uuid);
     expect(store.state().leads[0].confidence).toBe(80);
-    expect(store.state().settings.company).toBe('Codelps');
+    expect(store.state().settings.company).toBe('Skilledhat');
   });
   it('saves edits to the UUID endpoint and refreshes persisted records', async () => {
     const leads = TestBed.inject(Leads);

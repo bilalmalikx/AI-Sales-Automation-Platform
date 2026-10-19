@@ -432,12 +432,12 @@ async def promote(db, p, params):
         prefs = await repo.settings(lock=True)
         c = await db.scalar(
             select(Campaign).where(
-                Campaign.name == "Codelps mobile app opportunities " + str(run.id)[:8]
+                Campaign.name == "Skilledhat mobile app opportunities " + str(run.id)[:8]
             )
         )
         if not c:
             c = Campaign(
-                name="Codelps mobile app opportunities " + str(run.id)[:8],
+                name="Skilledhat mobile app opportunities " + str(run.id)[:8],
                 audience=params["industry"] + " in " + params["location"],
                 offer=prefs.offer,
                 tone="professional",

@@ -18,6 +18,7 @@ import { WorkspaceDialog } from '../workspace-dialog/workspace-dialog';
 import { Theme } from '../../services/theme';
 import { Dialog } from '../../services/dialog';
 import { Workspace } from '../../services/workspace';
+import { Auth } from '../../services/auth';
 import { Storage } from '../../services/storage';
 import { NAVIGATION } from '../../models/workspace';
 @Component({
@@ -28,6 +29,7 @@ import { NAVIGATION } from '../../models/workspace';
   styleUrl: './app-shell.css',
 })
 export class AppShell {
+  auth = inject(Auth);
   theme = inject(Theme);
   dialog = inject(Dialog);
   store = inject(Workspace);

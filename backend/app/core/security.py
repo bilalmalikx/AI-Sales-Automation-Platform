@@ -5,20 +5,36 @@ import hmac
 import time
 from uuid import UUID
 
-from fastapi import Depends
+from fastapi import Depends, Request
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.config import settings
 from app.core.exceptions import UnauthorizedException
+from app.db.session import get_db
 
 bearer = HTTPBearer(auto_error=False)
 
 
-async def require_auth(credentials: HTTPAuthorizationCredentials | None = Depends(bearer)) -> None:
+async def require_auth(
+    request: Request,
+    credentials: HTTPAuthorizationCredentials | None = Depends(bearer),
+    db: AsyncSession = Depends(get_db),
+) -> None:
+    if (
+        settings.API_TOKEN
+        and credentials
+        and hmac.compare_digest(credentials.credentials, settings.API_TOKEN)
+    ):
+        return
+    if settings.AUTH_ENABLED:
+        from app.services.auth import current_user
+
+        await current_user(request, db)
+        return
     if not settings.API_TOKEN and settings.is_development:
         return
-    if not credentials or not hmac.compare_digest(credentials.credentials, settings.API_TOKEN):
-        raise UnauthorizedException()
+    raise UnauthorizedException()
 
 
 def scoped_token(resource: UUID, purpose: str) -> str:

@@ -1,7 +1,7 @@
 <app-page-header
   title="Find the next mobile app opportunity."
   description="Discover UK and US businesses, inspect their websites, and review app evidence before outreach."
-  eyebrow="CODELPS · BUSINESS DISCOVERY"
+  eyebrow="SKILLEDHAT · BUSINESS DISCOVERY"
 />
 <form class="card discovery-form" (ngSubmit)="start()" ngNativeValidate>
   <div class="form-grid">
@@ -79,7 +79,7 @@
     <div class="notice">Apify budget · {{ budget.month }} UTC: ${{ budget.reported_usd | number:'1.2-4' }} reported · ${{ budget.committed_usd | number:'1.2-4' }} spent or reserved · ${{ budget.limit_usd }} monthly cap. AI usage is separate.</div>
   }
   <form class="form-grid" (ngSubmit)="createSchedule()" ngNativeValidate>
-    <div class="field"><label for="schedule-name">Schedule name</label><input id="schedule-name" name="schedule-name" [(ngModel)]="scheduleName" required maxlength="200" placeholder="Codelps · London restaurants" /></div>
+    <div class="field"><label for="schedule-name">Schedule name</label><input id="schedule-name" name="schedule-name" [(ngModel)]="scheduleName" required maxlength="200" placeholder="Skilledhat · London restaurants" /></div>
     <div class="field"><label for="schedule-date">First run (your browser's local time)</label><input id="schedule-date" name="schedule-date" type="datetime-local" [(ngModel)]="scheduleDate" required /></div>
     <div class="form-actions span2"><button [disabled]="discovery.scheduleBusy()">Save paused schedule</button></div>
   </form>
@@ -287,9 +287,14 @@
       <div class="manual-review">
         <h3>Review contact for outreach</h3>
         <p>AI scores are advisory. Check the source email and app evidence before selecting this contact. This creates a draft for review.</p>
+        <ul class="contact-sources">
+          @for (contact of p.emails; track contact.email) {
+            <li>{{ contact.email }} @if (safeUrl(contact.source_url); as source) { <a [href]="source" target="_blank" rel="noopener noreferrer">Source ↗</a> }</li>
+          }
+        </ul>
         <label>Campaign</label>
         <app-dropdown label="Review campaign" [options]="campaignOptions()" [value]="campaignChoice" (changed)="campaignChoice = $event" />
-        <label class="check"><input type="checkbox" [(ngModel)]="reviewedContact" /> I reviewed the public contact source and the app uncertainty.</label>
+        <label class="check"><input type="checkbox" [(ngModel)]="reviewedContact" /><span>I reviewed the public contact source and the app uncertainty.</span></label>
         <button class="primary" [disabled]="!reviewedContact || !campaignChoice || preparing()" (click)="prepareSelected()">{{ preparing() ? 'Preparing draft…' : 'Prepare review draft' }}</button>
       </div>
     }

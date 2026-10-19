@@ -18,7 +18,7 @@
       <div class="card-head">
         <app-person [lead]="leads.get(m.lead)" /><app-badge [text]="m.type" />
       </div>
-      <small>Fictional incoming reply · Demo conversation</small>
+      <small>Incoming email · Synced conversation</small>
       <div class="message">{{ m.text }}</div>
       @for (r of m.replies; track $index) {
         <div class="message"><small>You · Sent reply</small><br />{{ r }}</div>

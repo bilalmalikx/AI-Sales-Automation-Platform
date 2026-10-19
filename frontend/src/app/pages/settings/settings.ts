@@ -5,6 +5,7 @@ import { Workspace } from '../../services/workspace';
 import { Dialog } from '../../services/dialog';
 import { Notification } from '../../services/notification';
 import { Api } from '../../services/api';
+import { Auth } from '../../services/auth';
 interface IntegrationStatus {
   ai: { provider: string; configured: boolean };
   email: { provider: string; configured: boolean; delivery_enabled: boolean };
@@ -19,6 +20,17 @@ interface IntegrationStatus {
   styleUrl: './settings.css',
 })
 export class Settings {
+  auth = inject(Auth);
+  inviteEmail = '';
+  inviteNotice = signal('');
+  inviteBusy = signal(false);
+  async inviteMember(): Promise<void> {
+    if(this.inviteBusy()) return;
+    this.inviteBusy.set(true);
+    try { this.inviteNotice.set((await this.auth.invite(this.inviteEmail.trim())).message); this.inviteEmail=''; }
+    catch(e) { this.inviteNotice.set((e as Error).message); }
+    finally { this.inviteBusy.set(false); }
+  }
   store = inject(Workspace);
   dialog = inject(Dialog);
   notify = inject(Notification);

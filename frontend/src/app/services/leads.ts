@@ -50,7 +50,7 @@ export class Leads {
   }
   export(): void {
     downloadFile(
-      'codelps-leads.csv',
+      'skilledhat-leads.csv',
       'name,email,company,title,industry,status\n' +
         this.items()
           .map((l) =>

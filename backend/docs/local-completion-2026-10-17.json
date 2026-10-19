@@ -1,0 +1,208 @@
+{
+  "date": "2026-10-17",
+  "backend_tests": {
+    "sqlite": 105,
+    "postgresql": 105
+  },
+  "angular_tests": 12,
+  "angular_production_build": "passed",
+  "live_readiness": {
+    "smtp": "connected",
+    "google_calendar_access": true,
+    "inbox": {
+      "provider": "imap",
+      "configured": true,
+      "automatic_sync": true,
+      "status": "synced",
+      "last_checked_at": "2026-10-17T10:51:24.018061Z",
+      "error": null
+    },
+    "campaign_sent": 4,
+    "campaign_replies": 0,
+    "readiness_http": 200,
+    "new_customer_emails_sent_this_run": 0
+  },
+  "recovery": {
+    "run": {
+      "id": "deebd795-4687-4f4a-890d-27bde85ade62",
+      "created_at": "2026-10-16T09:48:37.881141Z",
+      "updated_at": "2026-10-17T10:48:55.104222Z",
+      "parameters": {
+        "industry": "restaurants",
+        "location": "Birmingham",
+        "country": "GB",
+        "limit": 50,
+        "mode": "fresh",
+        "generate_drafts": true
+      },
+      "status": "completed_with_errors",
+      "stage": "complete",
+      "total": 50,
+      "processed": 50,
+      "ai_calls": 20,
+      "provider_run_id": "RQbIT37cvLpRM1Ezj",
+      "dataset_id": "eRcXUbCnjezH6uGfF",
+      "provider_cost": 0.0002,
+      "error": null,
+      "budget_reserved_usd": 0.5
+    },
+    "statuses": {
+      "missing_email": 13,
+      "needs_review": 10,
+      "missing_contact": 6,
+      "excluded": 2,
+      "inspection_failed": 19
+    },
+    "remaining_failures": [
+      {
+        "id": "fc6d8096-ddde-4377-983d-9bf50633ce73",
+        "company": "Bader Restaurant",
+        "reason": "Website blocks crawler access",
+        "retryable": false,
+        "next_action": "Website restricts automated access. Review its public contact page manually."
+      },
+      {
+        "id": "a249522b-500e-4087-8d8c-c8e9d36e15d4",
+        "company": "Full House",
+        "reason": "Website blocks crawler access",
+        "retryable": false,
+        "next_action": "Website restricts automated access. Review its public contact page manually."
+      },
+      {
+        "id": "d920003b-63f1-4a61-a729-cd8bb312cf2e",
+        "company": "Sea King Fish Bar",
+        "reason": "Website blocks crawler access",
+        "retryable": false,
+        "next_action": "Website restricts automated access. Review its public contact page manually."
+      },
+      {
+        "id": "43645865-acf3-480a-9a8f-ddb9dd09843c",
+        "company": "Golden Rice Bowl",
+        "reason": "Website blocks crawler access",
+        "retryable": false,
+        "next_action": "Website restricts automated access. Review its public contact page manually."
+      },
+      {
+        "id": "a9a0112f-b03f-43b2-8548-05df8df47439",
+        "company": "Dar Al Assil",
+        "reason": "Website network request failed; retry later",
+        "retryable": true,
+        "next_action": "Retry temporary network failures; inaccessible websites may still require manual review."
+      },
+      {
+        "id": "47701437-97d1-4bf3-883b-f1557f78d9f5",
+        "company": "Karwan Restaurant Birmingham",
+        "reason": "No accessible public website pages",
+        "retryable": true,
+        "next_action": "Retry temporary network failures; inaccessible websites may still require manual review."
+      },
+      {
+        "id": "40fcece7-8d81-46e6-977b-cb9a878086a8",
+        "company": "Yaadgaar Desserts & Mithai Birmingham",
+        "reason": "No accessible public website pages",
+        "retryable": true,
+        "next_action": "Retry temporary network failures; inaccessible websites may still require manual review."
+      },
+      {
+        "id": "19da95f0-8e25-4f37-8215-ffee8a036d3e",
+        "company": "Chris' Fish Bar",
+        "reason": "No accessible public website pages",
+        "retryable": true,
+        "next_action": "Retry temporary network failures; inaccessible websites may still require manual review."
+      },
+      {
+        "id": "95a6baf3-873a-4161-b30d-72d5e7fd845e",
+        "company": "Harleys Fish Bar",
+        "reason": "No accessible public website pages",
+        "retryable": true,
+        "next_action": "Retry temporary network failures; inaccessible websites may still require manual review."
+      },
+      {
+        "id": "49e20b39-f2ac-4721-874b-8a041f227ce4",
+        "company": "The Drakes Drum",
+        "reason": "Website blocks crawler access",
+        "retryable": false,
+        "next_action": "Website restricts automated access. Review its public contact page manually."
+      },
+      {
+        "id": "bab2cea2-cd0b-45cc-a168-83426acba419",
+        "company": "The Old Horns",
+        "reason": "Website blocks crawler access",
+        "retryable": false,
+        "next_action": "Website restricts automated access. Review its public contact page manually."
+      },
+      {
+        "id": "5f8e8656-0dbd-4a5f-ab85-3386250b407c",
+        "company": "Grillz Restaurant",
+        "reason": "Website blocks crawler access",
+        "retryable": false,
+        "next_action": "Website restricts automated access. Review its public contact page manually."
+      },
+      {
+        "id": "6a3c2020-1677-418e-bff4-bcc7d6538957",
+        "company": "Royal shinwari",
+        "reason": "Website blocks crawler access",
+        "retryable": false,
+        "next_action": "Website restricts automated access. Review its public contact page manually."
+      },
+      {
+        "id": "c21626ff-8a5c-4872-99ce-6ec17b839988",
+        "company": "Original Sajid Shahi Restaurant & Takwaway",
+        "reason": "Website blocks crawler access",
+        "retryable": false,
+        "next_action": "Website restricts automated access. Review its public contact page manually."
+      },
+      {
+        "id": "02abcc77-86d9-4ef3-a928-914624afec33",
+        "company": "Lasani Karahi",
+        "reason": "No accessible public website pages",
+        "retryable": true,
+        "next_action": "Retry temporary network failures; inaccessible websites may still require manual review."
+      },
+      {
+        "id": "639d1fab-d71d-4f24-8952-6c59ef8553f2",
+        "company": "Bhoj Raj Indian Licensed Restaurant and Takeaway",
+        "reason": "Website blocks crawler access",
+        "retryable": false,
+        "next_action": "Website restricts automated access. Review its public contact page manually."
+      },
+      {
+        "id": "2c5574c1-111a-4c09-9b4d-100d7b511504",
+        "company": "Afghan Imperial Restaurant",
+        "reason": "No accessible public website pages",
+        "retryable": true,
+        "next_action": "Retry temporary network failures; inaccessible websites may still require manual review."
+      },
+      {
+        "id": "a97890c7-a6bd-4113-9c46-69f43b1cf961",
+        "company": "Farro's",
+        "reason": "Website blocks crawler access",
+        "retryable": false,
+        "next_action": "Website restricts automated access. Review its public contact page manually."
+      },
+      {
+        "id": "9b98092b-f739-4ffa-b15a-3ad1c9fb5000",
+        "company": "Kamal Da Dera",
+        "reason": "Website blocks crawler access",
+        "retryable": false,
+        "next_action": "Website restricts automated access. Review its public contact page manually."
+      }
+    ]
+  },
+  "manual_review_test": {
+    "company": "Shahi Masala Buffet Restaurant",
+    "draft_id": "a4678bdf-9093-41b9-8edc-f0fda9b3f0af",
+    "status": "needs_review",
+    "subject": "A mobile app conversation for Shahi Masala Buffet Restaurant",
+    "body": "Hi Shahi Masala Buffet Restaurant team,\n\nI'm reaching out from Codelps. We build mobile applications for businesses, including customer booking, ordering, memberships and loyalty experiences. We can discuss whether an app fits your business.\n\nWould you be open to a short conversation about whether this is relevant for Shahi Masala Buffet Restaurant?\n\nBest,\nCodelps team",
+    "review_issues": [],
+    "campaign_leads": 5,
+    "campaign_sent": 4,
+    "campaign_replies": 0
+  },
+  "legacy_drafts_corrected": 7,
+  "remaining_unsafe_unsent_drafts": 0,
+  "campaign_sent": 4,
+  "campaign_replies": 0,
+  "ready_http": 200
+}

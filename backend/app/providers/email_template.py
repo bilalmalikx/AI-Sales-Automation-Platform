@@ -9,7 +9,7 @@ def render_email(
     sender: str,
     *,
     unsubscribe: str | None = None,
-    label: str = "A MESSAGE FROM CODELPS",
+    label: str = "A MESSAGE FROM SKILLEDHAT",
     details: list[tuple[str, str]] | None = None,
 ) -> str:
     paragraphs = "".join(
@@ -52,7 +52,7 @@ def render_email(
 <div style="display:none;max-height:0;overflow:hidden;opacity:0;">{escape(subject)}</div>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f1f3f9;"><tr><td align="center" style="padding:40px 16px;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="width:100%;max-width:600px;table-layout:fixed;">
-<tr><td style="padding:0 6px 24px;"><table role="presentation" cellpadding="0" cellspacing="0"><tr><td style="width:42px;height:42px;background:#5b57c9;border-radius:12px;color:#ffffff;text-align:center;font-size:22px;font-weight:bold;">C</td><td style="padding-left:12px;"><strong style="font-size:20px;letter-spacing:-.5px;color:#252c43;">Codelps</strong><br><span style="font-size:10px;letter-spacing:1.7px;color:#8088a1;">SALESWAY WORKSPACE</span></td></tr></table></td></tr>
+<tr><td style="padding:0 6px 24px;"><table role="presentation" cellpadding="0" cellspacing="0"><tr><td style="width:42px;height:42px;background:#5b57c9;border-radius:12px;color:#ffffff;text-align:center;font-size:22px;font-weight:bold;">S</td><td style="padding-left:12px;"><strong style="font-size:20px;letter-spacing:-.5px;color:#252c43;">Skilledhat</strong><br><span style="font-size:10px;letter-spacing:1.7px;color:#8088a1;">SALESWAY WORKSPACE</span></td></tr></table></td></tr>
 <tr><td style="height:4px;background:#5b57c9;border-radius:16px 16px 0 0;"></td></tr>
 <tr><td style="padding:32px 28px;background:#ffffff;border:1px solid #e0e4ef;border-top:0;border-radius:0 0 16px 16px;overflow-wrap:anywhere;">
 <p style="margin:0 0 14px;font-size:11px;font-weight:bold;letter-spacing:1.5px;color:#5b57c9;">{escape(label)}</p>
@@ -60,5 +60,5 @@ def render_email(
 {paragraphs}{panel}
 <p style="margin:26px 0 0;padding-top:22px;border-top:1px solid #e9ebf3;font-size:13px;color:#747d94;">Sent by {escape(sender)}</p>
 </td></tr>
-<tr><td align="center" style="padding:22px 14px;color:#8088a1;font-size:12px;line-height:1.7;">Codelps · Thoughtfully connected.{preference}</td></tr>
+<tr><td align="center" style="padding:22px 14px;color:#8088a1;font-size:12px;line-height:1.7;">Skilledhat · Thoughtfully connected.{preference}</td></tr>
 </table></td></tr></table></body></html>"""

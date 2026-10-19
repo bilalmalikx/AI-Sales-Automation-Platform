@@ -1,5 +1,10 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './services/auth';
 export const routes: Routes = [
+  {path:'login', loadComponent:()=>import('./pages/auth/auth').then(m=>m.AuthPage)},
+  {path:'signup', loadComponent:()=>import('./pages/auth/auth').then(m=>m.AuthPage)},
+  {path:'verify-email', loadComponent:()=>import('./pages/auth/auth').then(m=>m.AuthPage)},
+  {path:'', canActivate:[authGuard], canActivateChild:[authGuard], loadComponent:()=>import('./components/app-shell/app-shell').then(m=>m.AppShell), children:[
   { path: '', pathMatch: 'full', redirectTo: 'overview' },
   {
     path: 'overview',
@@ -38,4 +43,5 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/settings/settings').then((m) => m.Settings),
   },
   { path: '**', redirectTo: 'overview' },
+]}
 ];

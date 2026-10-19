@@ -42,13 +42,13 @@ def compose(draft, lead, sender: str) -> EmailMessage:
 
 
 def compose_verification(recipient: str) -> EmailMessage:
-    sender = settings.DEFAULT_FROM_NAME or "Codelps team"
+    sender = settings.DEFAULT_FROM_NAME or "Skilledhat team"
     message = EmailMessage()
     message["From"] = formataddr((sender, settings.DEFAULT_FROM_EMAIL or "salesway@localhost.test"))
     message["To"] = recipient
-    message["Subject"] = "Your Codelps email delivery check"
+    message["Subject"] = "Your Skilledhat email delivery check"
     message["Message-ID"] = make_msgid()
-    body = "Your test email is here.\n\nThis message checks the email connection for your Codelps Salesway workspace.\n\nThis is a verification message only. No customer outreach was sent."
+    body = "Your test email is here.\n\nThis message checks the email connection for your Skilledhat Salesway workspace.\n\nThis is a verification message only. No customer outreach was sent."
     stamp = datetime.now(UTC).strftime("%d %B %Y, %H:%M UTC")
     reference = uuid4().hex[:12].upper()
     message.set_content(body + f"\n\nSent at: {stamp}\nReference: {reference}\n")
@@ -130,9 +130,9 @@ async def check_connection() -> dict:
     return await asyncio.to_thread(check)
 
 
-def _smtp_send(message: EmailMessage) -> str:
-    if not settings.LIVE_DELIVERY_ENABLED:
-        raise ExternalServiceException("Live email delivery is disabled")
+def _smtp_send(message: EmailMessage, *, transactional: bool = False) -> str:
+    if not (settings.AUTH_EMAIL_ENABLED if transactional else settings.LIVE_DELIVERY_ENABLED):
+        raise ExternalServiceException("Email delivery is disabled")
     smtp = None
     data_started = False
     try:

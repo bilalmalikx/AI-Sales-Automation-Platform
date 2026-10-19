@@ -28,8 +28,8 @@ export class Workspace {
     messages: [],
     activity: [],
     settings: {
-      company: 'Codelps',
-      sender: 'Codelps team',
+      company: 'Skilledhat',
+      sender: 'Skilledhat team',
       offer:
         'Mobile application development for businesses: booking, ordering, membership and customer loyalty.',
       timezone: 'Asia/Karachi',

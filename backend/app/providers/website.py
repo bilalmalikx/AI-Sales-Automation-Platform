@@ -13,7 +13,7 @@ from pydantic import EmailStr, TypeAdapter
 
 from app.core.config import settings
 
-USER_AGENT = "CodelpsResearch/1.0"
+USER_AGENT = "SkilledhatResearch/1.0"
 PUBLIC_MAIL_DOMAINS = {
     "gmail.com",
     "outlook.com",
